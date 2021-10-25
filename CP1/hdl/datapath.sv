@@ -34,20 +34,21 @@ logic [1:0] mask_bits;
 rv32i_word alumux1_out; 
 rv32i_word cmpmux_out; 
 
-
+assign  inst_read = 1'b1; 
+assign  inst_addr = pc_out;
 /******************* IF Stage *******************/
-assign inst_read = 1'b1; 
-assign inst_addr = pc_out; 
-assign IF_ID_i.DataWord.pc = pc_out; 
-assign IF_ID_i.DataWord.rs1 = inst_rdata[19:15]; 
-assign IF_ID_i.DataWord.rs2 = inst_rdata[24:20]; 
-assign IF_ID_i.DataWord.rd = inst_rdata[11:7]; 
-assign IF_ID_i.DataWord.rs1_out = 32'd0; 
-assign IF_ID_i.DataWord.rs2_out = 32'd0;
-assign IF_ID_i.DataWord.alu_out = 32'd0; 
-assign IF_ID_i.DataWord.data_mdr = 32'd0;
+always_comb begin : DECODE_INSTR
+    IF_ID_i.DataWord.pc = pc_out; 
+    IF_ID_i.DataWord.rs1 = inst_rdata[19:15]; 
+    IF_ID_i.DataWord.rs2 = inst_rdata[24:20]; 
+    IF_ID_i.DataWord.rd = inst_rdata[11:7]; 
+    IF_ID_i.DataWord.rs1_out = 32'd0; 
+    IF_ID_i.DataWord.rs2_out = 32'd0;
+    IF_ID_i.DataWord.alu_out = 32'd0; 
+    IF_ID_i.DataWord.data_mdr = 32'd0;
+end : DECODE_INSTR
 /***** Determine what immediate will be used in the execute stage *****/
-always_comb begin : DECODE_IMMEDIATE 
+always_comb begin : DECODE_IMM
     case(IF_ID_i.ControlWord.opcode) 
         op_jalr, op_load, op_imm:
             IF_ID_i.DataWord.imm = {{21{inst_rdata[31]}}, inst_rdata[30:20]};
@@ -62,7 +63,7 @@ always_comb begin : DECODE_IMMEDIATE
         default:
             IF_ID_i.DataWord.imm = 32'd0;
     endcase 
-end 
+end : DECODE_IMM
 /***** Modules *****/
 control_rom ctrl_rom(.opcode(rv32i_opcode'(inst_rdata[6:0])), .funct3(inst_rdata[14:12]), 
                      .funct7(inst_rdata[31:25]), .ctrl_word(IF_ID_i.ControlWord));
@@ -71,14 +72,16 @@ pc_register pc_reg(.clk(clk), .rst(rst), .load(1'b1), .in(pcmux_out), .out(pc_ou
 /***** MUXES *****/
 always_comb begin : IF_MUXES 
     unique case(EX_MEM_o.ControlWord.br_en)
-        pcmux::pc_plus4: pcmux_out = pc_out + 4; 
-        pcmux::alu_out: pcmux_out = modmux_out; 
+        1'b0: pcmux_out = pc_out + 4; 
+        1'b1: pcmux_out = modmux_out; 
+        default: pcmux_out = pc_out + 4;
     endcase 
     unique case(EX_MEM_o.ControlWord.modmux_sel)
         modmux::alu_out: modmux_out = EX_MEM_o.DataWord.alu_out; 
         modmux::alu_mod2: modmux_out = {EX_MEM_o.DataWord.alu_out[31:1], 1'b0}; 
+        default: modmux_out = 32'd0;
     endcase 
-end 
+end : IF_MUXES
 
 /******************* IF_ID *******************/
 pipeline_stage IF_ID_stage (.clk(clk), .rst(rst), .load(1'b1), 
@@ -87,15 +90,17 @@ pipeline_stage IF_ID_stage (.clk(clk), .rst(rst), .load(1'b1),
 
 /******************* ID Stage *******************/
 /****** Create Connection between stages ******/
-assign ID_EX_i.ControlWord = IF_ID_o.ControlWord;
-assign ID_EX_i.DataWord.pc = IF_ID_o.DataWord.pc; 
-assign ID_EX_i.DataWord.rs1 = IF_ID_o.DataWord.rs1;
-assign ID_EX_i.DataWord.rs2 = IF_ID_o.DataWord.rs2;  
-assign ID_EX_i.DataWord.rd = IF_ID_o.DataWord.rd; 
-assign ID_EX_i.DataWord.alu_out = IF_ID_o.DataWord.alu_out;
-assign ID_EX_i.DataWord.imm = IF_ID_o.DataWord.imm;  
-assign ID_EX_i.DataWord.data_mdr = IF_ID_o.DataWord.data_mdr; 
-assign mask_bits = MEM_WB_o.DataWord.alu_out[1:0];
+always_comb begin : CONNECT_ID_EX
+    ID_EX_i.ControlWord = IF_ID_o.ControlWord;
+    ID_EX_i.DataWord.pc = IF_ID_o.DataWord.pc; 
+    ID_EX_i.DataWord.rs1 = IF_ID_o.DataWord.rs1;
+    ID_EX_i.DataWord.rs2 = IF_ID_o.DataWord.rs2;  
+    ID_EX_i.DataWord.rd = IF_ID_o.DataWord.rd; 
+    ID_EX_i.DataWord.alu_out = IF_ID_o.DataWord.alu_out;
+    ID_EX_i.DataWord.imm = IF_ID_o.DataWord.imm;  
+    ID_EX_i.DataWord.data_mdr = IF_ID_o.DataWord.data_mdr; 
+    mask_bits = MEM_WB_o.DataWord.alu_out[1:0];
+end : CONNECT_ID_EX
 /***** Modules *****/
 regfile regfile (.clk(clk), .rst(rst), .load(MEM_WB_o.ControlWord.load_regfile), .in(regfilemux_out),
                  .src_a(IF_ID_o.DataWord.rs1), .src_b(IF_ID_o.DataWord.rs2), .dest(MEM_WB_o.DataWord.rd),
@@ -141,7 +146,7 @@ always_comb begin : ID_MUXES
             endcase 
         end                      
     endcase 
-end
+end : ID_MUXES
 /******************* ID_EX *******************/
 pipeline_stage ID_EX_stage (.clk(clk), .rst(rst), .load(1'b1), 
                             .stage_ctrl_i(ID_EX_i.ControlWord), .stage_ctrl_o(ID_EX_o.ControlWord),
@@ -149,26 +154,29 @@ pipeline_stage ID_EX_stage (.clk(clk), .rst(rst), .load(1'b1),
 
 /******************* EX *******************/
 /****** Create Connection between stages ******/
-assign EX_MEM_i.ControlWord.load_regfile = ID_EX_o.ControlWord.load_regfile;
-assign EX_MEM_i.ControlWord.regfilemux_sel = ID_EX_o.ControlWord.regfilemux_sel;
-assign EX_MEM_i.ControlWord.cmpmux_sel = ID_EX_o.ControlWord.cmpmux_sel;
-assign EX_MEM_i.ControlWord.alumux1_sel = ID_EX_o.ControlWord.alumux1_sel;
-assign EX_MEM_i.ControlWord.modmux_sel = ID_EX_o.ControlWord.modmux_sel;
-assign EX_MEM_i.ControlWord.aluop = ID_EX_o.ControlWord.aluop;
-assign EX_MEM_i.ControlWord.cmpop = ID_EX_o.ControlWord.cmpop;
-assign EX_MEM_i.ControlWord.dmem_read = ID_EX_o.ControlWord.dmem_read;
-assign EX_MEM_i.ControlWord.dmem_write = ID_EX_o.ControlWord.dmem_write;
-assign EX_MEM_i.ControlWord.opcode = ID_EX_o.ControlWord.opcode;
-assign EX_MEM_i.ControlWord.funct3 = ID_EX_o.ControlWord.funct3;
+always_comb begin : CONNECT_EX_MEM
+    EX_MEM_i.ControlWord.load_regfile = ID_EX_o.ControlWord.load_regfile;
+    EX_MEM_i.ControlWord.regfilemux_sel = ID_EX_o.ControlWord.regfilemux_sel;
+    EX_MEM_i.ControlWord.cmpmux_sel = ID_EX_o.ControlWord.cmpmux_sel;
+    EX_MEM_i.ControlWord.alumux1_sel = ID_EX_o.ControlWord.alumux1_sel;
+    EX_MEM_i.ControlWord.modmux_sel = ID_EX_o.ControlWord.modmux_sel;
+    EX_MEM_i.ControlWord.aluop = ID_EX_o.ControlWord.aluop;
+    EX_MEM_i.ControlWord.cmpop = ID_EX_o.ControlWord.cmpop;
+    EX_MEM_i.ControlWord.dmem_read = ID_EX_o.ControlWord.dmem_read;
+    EX_MEM_i.ControlWord.dmem_write = ID_EX_o.ControlWord.dmem_write;
+    EX_MEM_i.ControlWord.opcode = ID_EX_o.ControlWord.opcode;
+    EX_MEM_i.ControlWord.funct3 = ID_EX_o.ControlWord.funct3;
 
-assign EX_MEM_i.DataWord.pc = ID_EX_o.DataWord.pc; 
-assign EX_MEM_i.DataWord.rs1 = ID_EX_o.DataWord.rs1;
-assign EX_MEM_i.DataWord.rs2 = ID_EX_o.DataWord.rs2;  
-assign EX_MEM_i.DataWord.rd = ID_EX_o.DataWord.rd; 
-assign EX_MEM_i.DataWord.rs1_out = ID_EX_o.DataWord.rs1_out;
-assign EX_MEM_i.DataWord.rs2_out = ID_EX_o.DataWord.rs2_out;
-assign EX_MEM_i.DataWord.imm = ID_EX_o.DataWord.imm;  
-assign EX_MEM_i.DataWord.data_mdr = ID_EX_o.DataWord.data_mdr; 
+    EX_MEM_i.DataWord.pc = ID_EX_o.DataWord.pc; 
+    EX_MEM_i.DataWord.rs1 = ID_EX_o.DataWord.rs1;
+    EX_MEM_i.DataWord.rs2 = ID_EX_o.DataWord.rs2;  
+    EX_MEM_i.DataWord.rd = ID_EX_o.DataWord.rd; 
+    EX_MEM_i.DataWord.rs1_out = ID_EX_o.DataWord.rs1_out;
+    EX_MEM_i.DataWord.rs2_out = ID_EX_o.DataWord.rs2_out;
+    EX_MEM_i.DataWord.imm = ID_EX_o.DataWord.imm;  
+    EX_MEM_i.DataWord.data_mdr = ID_EX_o.DataWord.data_mdr; 
+end : CONNECT_EX_MEM
+
 always_comb begin : CALC_MEM_BYTE_ENABLE
     case(store_funct3_t'(ID_EX_o.ControlWord.funct3))
         sw: EX_MEM_i.ControlWord.mem_byte_enable = 4'b1111;
@@ -176,7 +184,8 @@ always_comb begin : CALC_MEM_BYTE_ENABLE
         sb: EX_MEM_i.ControlWord.mem_byte_enable = 4'b0001 << EX_MEM_i.DataWord.alu_out[1:0];
         default: EX_MEM_i.ControlWord.mem_byte_enable = 4'b1111; 
     endcase 
-end 
+end : CALC_MEM_BYTE_ENABLE
+
 /***** Modules *****/
 alu ALU (
     .aluop(ID_EX_o.ControlWord.aluop),
@@ -200,7 +209,7 @@ always_comb begin : EX_MUXES
         cmpmux::rs2_out: cmpmux_out = ID_EX_o.DataWord.rs2_out; 
         cmpmux::i_imm: cmpmux_out = ID_EX_o.DataWord.imm; 
     endcase 
-end 
+end : EX_MUXES
 /******************* EX_MEM *******************/
 pipeline_stage EX_MEM_stage(.clk(clk), .rst(rst), .load(1'b1),
                             .stage_ctrl_i(EX_MEM_i.ControlWord), .stage_ctrl_o(EX_MEM_o.ControlWord),
@@ -208,36 +217,37 @@ pipeline_stage EX_MEM_stage(.clk(clk), .rst(rst), .load(1'b1),
 
 /******************* MEM *******************/
 /****** Create Connection between stages ******/
-assign MEM_WB_i.ControlWord.load_regfile = EX_MEM_o.ControlWord.load_regfile;
-assign MEM_WB_i.ControlWord.regfilemux_sel = EX_MEM_o.ControlWord.regfilemux_sel;
-assign MEM_WB_i.ControlWord.cmpmux_sel = EX_MEM_o.ControlWord.cmpmux_sel;
-assign MEM_WB_i.ControlWord.alumux1_sel = EX_MEM_o.ControlWord.alumux1_sel;
-assign MEM_WB_i.ControlWord.modmux_sel = EX_MEM_o.ControlWord.modmux_sel;
-assign MEM_WB_i.ControlWord.aluop = EX_MEM_o.ControlWord.aluop;
-assign MEM_WB_i.ControlWord.cmpop = EX_MEM_o.ControlWord.cmpop;
-assign MEM_WB_i.ControlWord.dmem_read = EX_MEM_o.ControlWord.dmem_read;
-assign MEM_WB_i.ControlWord.dmem_write = EX_MEM_o.ControlWord.dmem_write;
-assign MEM_WB_i.ControlWord.mem_byte_enable = EX_MEM_o.ControlWord.mem_byte_enable;
-assign MEM_WB_i.ControlWord.opcode = EX_MEM_o.ControlWord.opcode;
-assign MEM_WB_i.ControlWord.funct3 = EX_MEM_o.ControlWord.funct3;
-assign MEM_WB_i.ControlWord.br_en = EX_MEM_o.ControlWord.br_en;
+always_comb begin : CONNECT_MEM_WB
+    MEM_WB_i.ControlWord.load_regfile = EX_MEM_o.ControlWord.load_regfile;
+    MEM_WB_i.ControlWord.regfilemux_sel = EX_MEM_o.ControlWord.regfilemux_sel;
+    MEM_WB_i.ControlWord.cmpmux_sel = EX_MEM_o.ControlWord.cmpmux_sel;
+    MEM_WB_i.ControlWord.alumux1_sel = EX_MEM_o.ControlWord.alumux1_sel;
+    MEM_WB_i.ControlWord.modmux_sel = EX_MEM_o.ControlWord.modmux_sel;
+    MEM_WB_i.ControlWord.aluop = EX_MEM_o.ControlWord.aluop;
+    MEM_WB_i.ControlWord.cmpop = EX_MEM_o.ControlWord.cmpop;
+    MEM_WB_i.ControlWord.dmem_read = EX_MEM_o.ControlWord.dmem_read;
+    MEM_WB_i.ControlWord.dmem_write = EX_MEM_o.ControlWord.dmem_write;
+    MEM_WB_i.ControlWord.mem_byte_enable = EX_MEM_o.ControlWord.mem_byte_enable;
+    MEM_WB_i.ControlWord.opcode = EX_MEM_o.ControlWord.opcode;
+    MEM_WB_i.ControlWord.funct3 = EX_MEM_o.ControlWord.funct3;
+    MEM_WB_i.ControlWord.br_en = EX_MEM_o.ControlWord.br_en;
 
-assign MEM_WB_i.DataWord.pc = EX_MEM_o.DataWord.pc; 
-assign MEM_WB_i.DataWord.rs1 = EX_MEM_o.DataWord.rs1;
-assign MEM_WB_i.DataWord.rs2 = EX_MEM_o.DataWord.rs2;  
-assign MEM_WB_i.DataWord.rd = EX_MEM_o.DataWord.rd; 
-assign MEM_WB_i.DataWord.rs1_out = EX_MEM_o.DataWord.rs1_out;
-assign MEM_WB_i.DataWord.rs2_out = EX_MEM_o.DataWord.rs2_out;
-assign MEM_WB_i.DataWord.alu_out = EX_MEM_o.DataWord.alu_out;
-assign MEM_WB_i.DataWord.imm = EX_MEM_o.DataWord.imm;  
+    MEM_WB_i.DataWord.pc = EX_MEM_o.DataWord.pc; 
+    MEM_WB_i.DataWord.rs1 = EX_MEM_o.DataWord.rs1;
+    MEM_WB_i.DataWord.rs2 = EX_MEM_o.DataWord.rs2;  
+    MEM_WB_i.DataWord.rd = EX_MEM_o.DataWord.rd; 
+    MEM_WB_i.DataWord.rs1_out = EX_MEM_o.DataWord.rs1_out;
+    MEM_WB_i.DataWord.rs2_out = EX_MEM_o.DataWord.rs2_out;
+    MEM_WB_i.DataWord.alu_out = EX_MEM_o.DataWord.alu_out;
+    MEM_WB_i.DataWord.imm = EX_MEM_o.DataWord.imm;  
 
-assign MEM_WB_i.DataWord.data_mdr = data_rdata; 
+    MEM_WB_i.DataWord.data_mdr = data_rdata; 
+end : CONNECT_MEM_WB
 assign data_read = EX_MEM_o.ControlWord.dmem_read;
 assign data_write = EX_MEM_o.ControlWord.dmem_write;  
 assign data_mbe = EX_MEM_o.ControlWord.mem_byte_enable;
 assign data_addr = EX_MEM_o.DataWord.alu_out;  
 assign data_wdata = EX_MEM_o.DataWord.rs2_out; 
-
 /******************* MEM_WB *******************/
 pipeline_stage MEM_WB_stage(.clk(clk), .rst(rst), .load(1'b1),
                             .stage_ctrl_i(MEM_WB_i.ControlWord), .stage_ctrl_o(MEM_WB_o.ControlWord),

@@ -146,7 +146,19 @@ begin
             endcase 
         end
         default: begin
-            ctrl_word = 0;   /* Unknown opcode, set control word to zero */
+            ctrl_word.load_regfile = 1'b0;
+            ctrl_word.regfilemux_sel = regfilemux::alu_out; 
+            ctrl_word.cmpmux_sel = cmpmux::rs2_out; 
+            ctrl_word.alumux1_sel = alumux::rs1_out; 
+            ctrl_word.modmux_sel = modmux::alu_out; 
+            ctrl_word.cmpop = branch_funct3; 
+            ctrl_word.aluop = alu_add; /* changed this to alu_add */
+            ctrl_word.dmem_read = 1'b0;
+            ctrl_word.dmem_write = 1'b0; 
+            ctrl_word.mem_byte_enable = 4'b1111; 
+            ctrl_word.opcode = opcode; 
+            ctrl_word.funct3 = funct3; 
+            ctrl_word.br_en = 1'b0;    /* Unknown opcode, set control word to zero */
         end
     endcase
 end
