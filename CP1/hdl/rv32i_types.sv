@@ -71,40 +71,30 @@ typedef enum bit [2:0] {
 } alu_ops;
 
 typedef struct packed {
-    // load signals
     logic load_regfile;
-    // mux selects 
     regfilemux_sel_t regfilemux_sel; 
     cmpmux_sel_t cmpmux_sel; 
     alumux1_sel_t alumux1_sel; 
     modmux_sel_t modmux_sel; 
-    // ops 
     alu_ops aluop; 
     branch_funct3_t cmpop; 
-    // memory interface 
     logic dmem_read; 
     logic dmem_write; 
     logic [3:0] mem_byte_enable; 
-    // misc. 
     rv32i_opcode opcode; 
     logic [2:0] funct3; 
     logic br_en; 
 } rv32i_control_word; 
 
 typedef struct packed {
-    // PC 
     rv32i_word pc; 
-    // register index 
     rv32i_reg rs1; 
     rv32i_reg rs2; 
     rv32i_reg rd; 
-    // outputs and addresses
     rv32i_word rs1_out; 
     rv32i_word rs2_out; 
     rv32i_word alu_out; 
-    // immediates 
     rv32i_word imm; 
-    // data regs 
     rv32i_word data_mdr; 
 } rv32i_data_word; 
 
