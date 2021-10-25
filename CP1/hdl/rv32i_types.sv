@@ -7,6 +7,7 @@ import marmux::*;
 import cmpmux::*;
 import alumux::*;
 import regfilemux::*;
+import modmux::*;
 
 typedef logic [31:0] rv32i_word;
 typedef logic [4:0] rv32i_reg;
@@ -100,7 +101,7 @@ typedef struct packed {
 
 typedef struct packed {
     rv32i_control_word ControlWord;
-    rv32i_control_word DataWord;
+    rv32i_data_word DataWord;
 } rv32i_stage; 
 
 endpackage : rv32i_types

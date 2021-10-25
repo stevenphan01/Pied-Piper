@@ -1,5 +1,7 @@
 import rv32i_types::*; 
-module mp4 (
+module mp4_cp1 (
+	 input clk,
+	 input rst,
     /* Instruction memory interface */ 
     input  inst_resp,
     input  rv32i_word inst_rdata, 
@@ -19,4 +21,4 @@ module mp4 (
 /* Declare Datapath */
 datapath datapath(.*);
 
-endmodule : mp4
+endmodule : mp4_cp1

@@ -8,8 +8,8 @@ endpackage
 
 package modmux;
 typedef enum bit {
-    alu_out  = 2'b01
-    ,alu_mod2 = 2'b10
+    alu_out  = 1'b0
+    ,alu_mod2 = 1'b1
 } modmux_sel_t;
 endpackage
 

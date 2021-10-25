@@ -4,31 +4,38 @@ module pipeline_stage (
     input clk, 
     input rst, 
     input load, 
-    input rv32i_stage stage_i,
-    output rv32i_stage stage_o; 
+    input rv32i_control_word stage_ctrl_i, 
+    input rv32i_data_word stage_data_i,
+    output rv32i_control_word stage_ctrl_o,
+    output rv32i_data_word stage_data_o
 );
 
-rv32i_stage data = 0;
+rv32i_control_word ctrl_data = 0;
+rv32i_data_word data_data = 0; 
 
 always_ff @(posedge clk)
 begin
     if (rst)
     begin
-        data <= '0;
+        ctrl_data <= '0;
+        data_data <= '0;
     end
     else if (load)
     begin
-        data <= stage_i;
+        ctrl_data <= stage_ctrl_i;
+        data_data <= stage_data_i;
     end
     else
     begin
-        data <= data;
+        ctrl_data <= ctrl_data;
+        data_data <= data_data;
     end
 end
 
 always_comb
 begin
-    stage_o = data;
+    stage_ctrl_o = ctrl_data;
+    stage_data_o = data_data; 
 end
 
 endmodule : pipeline_stage
