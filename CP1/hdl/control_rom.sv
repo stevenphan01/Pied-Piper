@@ -44,7 +44,6 @@ begin
     ctrl_word.regfilemux_sel = regfilemux::alu_out; 
     ctrl_word.cmpmux_sel = cmpmux::rs2_out; 
     ctrl_word.alumux1_sel = alumux::rs1_out; 
-    ctrl_word.modmux_sel = modmux::alu_out; 
     ctrl_word.cmpop = beq; 
     ctrl_word.aluop = alu_add; /* changed this to alu_add */
     ctrl_word.dmem_read = 1'b0;
@@ -65,12 +64,10 @@ begin
         op_jal: begin 
             loadRegfile(regfilemux::pc_plus4);
             setALU(alumux::pc_out, 1'b1, alu_add);
-            ctrl_word.modmux_sel = modmux::alu_mod2; 
         end 
         op_jalr: begin 
             loadRegfile(regfilemux::pc_plus4);
             setALU(alumux::rs1_out, 1'b1, alu_add);
-            ctrl_word.modmux_sel = modmux::alu_mod2; 
         end 
         op_br: begin 
             setALU(alumux::pc_out, 1'b1, alu_add); 
@@ -150,7 +147,6 @@ begin
             ctrl_word.regfilemux_sel = regfilemux::alu_out; 
             ctrl_word.cmpmux_sel = cmpmux::rs2_out; 
             ctrl_word.alumux1_sel = alumux::rs1_out; 
-            ctrl_word.modmux_sel = modmux::alu_out; 
             ctrl_word.cmpop = beq; 
             ctrl_word.aluop = alu_add; /* changed this to alu_add */
             ctrl_word.dmem_read = 1'b0;

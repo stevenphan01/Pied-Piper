@@ -6,13 +6,6 @@ typedef enum bit [1:0] {
 } pcmux_sel_t;
 endpackage
 
-package modmux;
-typedef enum bit {
-    alu_out  = 1'b0
-    ,alu_mod2 = 1'b1
-} modmux_sel_t;
-endpackage
-
 package marmux;
 typedef enum bit {
     pc_out = 1'b0

@@ -7,7 +7,6 @@ import marmux::*;
 import cmpmux::*;
 import alumux::*;
 import regfilemux::*;
-import modmux::*;
 
 typedef logic [31:0] rv32i_word;
 typedef logic [4:0] rv32i_reg;
@@ -76,7 +75,6 @@ typedef struct packed {
     regfilemux_sel_t regfilemux_sel; 
     cmpmux_sel_t cmpmux_sel; 
     alumux1_sel_t alumux1_sel; 
-    modmux_sel_t modmux_sel; 
     alu_ops aluop; 
     branch_funct3_t cmpop; 
     logic dmem_read; 
