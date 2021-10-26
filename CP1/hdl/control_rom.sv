@@ -45,7 +45,7 @@ begin
     ctrl_word.cmpmux_sel = cmpmux::rs2_out; 
     ctrl_word.alumux1_sel = alumux::rs1_out; 
     ctrl_word.modmux_sel = modmux::alu_out; 
-    ctrl_word.cmpop = branch_funct3; 
+    ctrl_word.cmpop = beq; 
     ctrl_word.aluop = alu_add; /* changed this to alu_add */
     ctrl_word.dmem_read = 1'b0;
     ctrl_word.dmem_write = 1'b0; 
@@ -151,7 +151,7 @@ begin
             ctrl_word.cmpmux_sel = cmpmux::rs2_out; 
             ctrl_word.alumux1_sel = alumux::rs1_out; 
             ctrl_word.modmux_sel = modmux::alu_out; 
-            ctrl_word.cmpop = branch_funct3; 
+            ctrl_word.cmpop = beq; 
             ctrl_word.aluop = alu_add; /* changed this to alu_add */
             ctrl_word.dmem_read = 1'b0;
             ctrl_word.dmem_write = 1'b0; 

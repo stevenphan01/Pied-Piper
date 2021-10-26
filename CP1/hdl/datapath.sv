@@ -32,6 +32,7 @@ rv32i_word modmux_out;
 rv32i_word regfilemux_out; 
 logic [1:0] mask_bits; 
 rv32i_word alumux1_out; 
+rv32i_word alumux2_out; 
 rv32i_word cmpmux_out; 
 
 assign  inst_read = 1'b1; 
@@ -69,18 +70,18 @@ control_rom ctrl_rom(.opcode(rv32i_opcode'(inst_rdata[6:0])), .funct3(inst_rdata
                      .funct7(inst_rdata[31:25]), .ctrl_word(IF_ID_i.ControlWord));
                                          // Change load to pc later
 pc_register pc_reg(.clk(clk), .rst(rst), .load(1'b1), .in(pcmux_out), .out(pc_out));
+
 /***** MUXES *****/
 always_comb begin : IF_MUXES 
     unique case(EX_MEM_o.ControlWord.br_en)
         1'b0: pcmux_out = pc_out + 4; 
-        1'b1: pcmux_out = modmux_out; 
+        1'b1: pcmux_out = ((EX_MEM_o.ControlWord.opcode != op_jal) && (EX_MEM_o.ControlWord.opcode != op_jalr)) ? EX_MEM_o.DataWord.alu_out : {EX_MEM_o.DataWord.alu_out[31:1], 1'b0}; 
         default: pcmux_out = pc_out + 4;
     endcase 
-    unique case(EX_MEM_o.ControlWord.modmux_sel)
-        modmux::alu_out: modmux_out = EX_MEM_o.DataWord.alu_out; 
-        modmux::alu_mod2: modmux_out = {EX_MEM_o.DataWord.alu_out[31:1], 1'b0}; 
-        default: modmux_out = 32'd0;
-    endcase 
+    // unique case(EX_MEM_o.ControlWord.modmux_sel)
+    //     modmux::alu_out: modmux_out = EX_MEM_o.DataWord.alu_out; 
+    //     modmux::alu_mod2: modmux_out = {EX_MEM_o.DataWord.alu_out[31:1], 1'b0}; 
+    // endcase 
 end : IF_MUXES
 
 /******************* IF_ID *******************/
@@ -177,6 +178,13 @@ always_comb begin : CONNECT_EX_MEM
     EX_MEM_i.DataWord.data_mdr = ID_EX_o.DataWord.data_mdr; 
 end : CONNECT_EX_MEM
 
+always_comb begin : alumux2
+    unique case(ID_EX_o.ControlWord.opcode) 
+        op_reg: alumux2_out = ID_EX_o.DataWord.rs2_out;
+        default: alumux2_out = ID_EX_o.DataWord.imm; 
+    endcase 
+end : alumux2 
+
 always_comb begin : CALC_MEM_BYTE_ENABLE
     case(store_funct3_t'(ID_EX_o.ControlWord.funct3))
         sw: EX_MEM_i.ControlWord.mem_byte_enable = 4'b1111;
@@ -187,17 +195,19 @@ always_comb begin : CALC_MEM_BYTE_ENABLE
 end : CALC_MEM_BYTE_ENABLE
 
 /***** Modules *****/
+logic compute_br_en;
+assign EX_MEM_i.ControlWord.br_en = compute_br_en && (ID_EX_o.ControlWord.opcode == 7'b1100011);
 alu ALU (
     .aluop(ID_EX_o.ControlWord.aluop),
     .a(alumux1_out),
-    .b(ID_EX_o.DataWord.imm),
+    .b(alumux2_out),
     .f(EX_MEM_i.DataWord.alu_out)
 );
 cmp CMP (
     .cmpop(ID_EX_o.ControlWord.cmpop),
     .rs1_out(ID_EX_o.DataWord.rs1_out),
     .cmpmux_out(cmpmux_out),
-	.br_en(EX_MEM_i.ControlWord.br_en)
+	.br_en(compute_br_en)
 );
 /***** MUXES *****/
 always_comb begin : EX_MUXES 
@@ -246,7 +256,7 @@ end : CONNECT_MEM_WB
 assign data_read = EX_MEM_o.ControlWord.dmem_read;
 assign data_write = EX_MEM_o.ControlWord.dmem_write;  
 assign data_mbe = EX_MEM_o.ControlWord.mem_byte_enable;
-assign data_addr = EX_MEM_o.DataWord.alu_out;  
+assign data_addr = {EX_MEM_o.DataWord.alu_out[31:2], 2'b00};  
 assign data_wdata = EX_MEM_o.DataWord.rs2_out; 
 /******************* MEM_WB *******************/
 pipeline_stage MEM_WB_stage(.clk(clk), .rst(rst), .load(1'b1),
