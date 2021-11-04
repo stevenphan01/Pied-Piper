@@ -1,5 +1,5 @@
 Flow report for mp4
-Tue Oct 26 11:27:45 2021
+Thu Nov  4 18:03:00 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -40,28 +40,28 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------------+
 ; Flow Summary                                                                        ;
 +-----------------------------------+-------------------------------------------------+
-; Flow Status                       ; Successful - Tue Oct 26 11:27:45 2021           ;
+; Flow Status                       ; Successful - Thu Nov  4 18:03:00 2021           ;
 ; Quartus Prime Version             ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
 ; Revision Name                     ; mp4                                             ;
 ; Top-level Entity Name             ; mp4                                             ;
 ; Family                            ; Arria II GX                                     ;
 ; Device                            ; EP2AGX45DF25I3                                  ;
 ; Timing Models                     ; Final                                           ;
-; Logic utilization                 ; 7 %                                             ;
-;     Combinational ALUTs           ; 1,389 / 36,100 ( 4 % )                          ;
-;     Memory ALUTs                  ; 0 / 18,050 ( 0 % )                              ;
-;     Dedicated logic registers     ; 1,576 / 36,100 ( 4 % )                          ;
-; Total registers                   ; 1576                                            ;
-; Total pins                        ; 171 / 292 ( 59 % )                              ;
+; Logic utilization                 ; N/A                                             ;
+;     Combinational ALUTs           ; 3,468                                           ;
+;     Memory ALUTs                  ; 0                                               ;
+;     Dedicated logic registers     ; 6,104                                           ;
+; Total registers                   ; 6104                                            ;
+; Total pins                        ; 165                                             ;
 ; Total virtual pins                ; 0                                               ;
-; Total block memory bits           ; 0 / 2,939,904 ( 0 % )                           ;
-; DSP block 18-bit elements         ; 0 / 232 ( 0 % )                                 ;
-; Total GXB Receiver Channel PCS    ; 0 / 8 ( 0 % )                                   ;
-; Total GXB Receiver Channel PMA    ; 0 / 8 ( 0 % )                                   ;
-; Total GXB Transmitter Channel PCS ; 0 / 8 ( 0 % )                                   ;
-; Total GXB Transmitter Channel PMA ; 0 / 8 ( 0 % )                                   ;
-; Total PLLs                        ; 0 / 4 ( 0 % )                                   ;
-; Total DLLs                        ; 0 / 2 ( 0 % )                                   ;
+; Total block memory bits           ; 384                                             ;
+; DSP block 18-bit elements         ; 0                                               ;
+; Total GXB Receiver Channel PCS    ; 0                                               ;
+; Total GXB Receiver Channel PMA    ; 0                                               ;
+; Total GXB Transmitter Channel PCS ; 0                                               ;
+; Total GXB Transmitter Channel PMA ; 0                                               ;
+; Total PLLs                        ; 0                                               ;
+; Total DLLs                        ; 0                                               ;
 +-----------------------------------+-------------------------------------------------+
 
 
@@ -70,7 +70,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/26/2021 11:26:44 ;
+; Start date & time ; 11/04/2021 18:02:32 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; mp4                 ;
 +-------------------+---------------------+
@@ -81,7 +81,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                      ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +--------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID                ; 26830023891905.163526560411980         ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                ; 26830023891905.163606695231932         ; --            ; --          ; --             ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --          ; mp4_tb         ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; mp4_tb                                 ; --            ; --          ; eda_simulation ;
 ; EDA_OUTPUT_DATA_FORMAT               ; Systemverilog Hdl                      ; --            ; --          ; eda_simulation ;
@@ -114,12 +114,8 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:16     ; 1.0                     ; 1134 MB             ; 00:00:24                           ;
-; Fitter               ; 00:00:29     ; 1.1                     ; 1995 MB             ; 00:00:38                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 1049 MB             ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:04     ; 1.1                     ; 1127 MB             ; 00:00:03                           ;
-; EDA Netlist Writer   ; 00:00:04     ; 1.0                     ; 1280 MB             ; 00:00:04                           ;
-; Total                ; 00:00:55     ; --                      ; --                  ; 00:01:12                           ;
+; Analysis & Synthesis ; 00:00:28     ; 1.0                     ; 1212 MB             ; 00:00:29                           ;
+; Total                ; 00:00:28     ; --                      ; --                  ; 00:00:29                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -129,10 +125,6 @@ refer to the applicable agreement for further details.
 ; Module Name          ; Machine Hostname             ; OS Name      ; OS Version   ; Processor type ;
 +----------------------+------------------------------+--------------+--------------+----------------+
 ; Analysis & Synthesis ; gelib-4c-39.ews.illinois.edu ; CentOS Linux ; CentOS Linux ; x86_64         ;
-; Fitter               ; gelib-4c-39.ews.illinois.edu ; CentOS Linux ; CentOS Linux ; x86_64         ;
-; Assembler            ; gelib-4c-39.ews.illinois.edu ; CentOS Linux ; CentOS Linux ; x86_64         ;
-; Timing Analyzer      ; gelib-4c-39.ews.illinois.edu ; CentOS Linux ; CentOS Linux ; x86_64         ;
-; EDA Netlist Writer   ; gelib-4c-39.ews.illinois.edu ; CentOS Linux ; CentOS Linux ; x86_64         ;
 +----------------------+------------------------------+--------------+--------------+----------------+
 
 
@@ -140,10 +132,6 @@ refer to the applicable agreement for further details.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off mp4 -c mp4
-quartus_fit --read_settings_files=off --write_settings_files=off mp4 -c mp4
-quartus_asm --read_settings_files=off --write_settings_files=off mp4 -c mp4
-quartus_sta mp4 -c mp4
-quartus_eda --read_settings_files=off --write_settings_files=off mp4 -c mp4
 
 
 

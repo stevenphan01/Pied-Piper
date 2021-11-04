@@ -1,10 +1,10 @@
 `ifndef SOURCE_TB
 `define SOURCE_TB
 
-`define MAGIC_MEM 1
-`define PARAM_MEM 0
+`define MAGIC_MEM 0
+`define PARAM_MEM 1
 // `define MEMORY `PARAM_MEM
-`define MEMORY `MAGIC_MEM
+`define MEMORY `PARAM_MEM
 
 
 // Set these to 1 to enable the feature

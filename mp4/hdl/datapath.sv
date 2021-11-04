@@ -4,18 +4,18 @@ module datapath (
     input clk, 
     input rst, 
     /* Instruction memory interface */ 
-    input  inst_resp,
-    input  rv32i_word inst_rdata, 
-    output inst_read, 
-    output rv32i_word inst_addr, 
+    input  inst_resp_dp,
+    input  rv32i_word inst_rdata_dp, 
+    output inst_read_dp, 
+    output rv32i_word inst_addr_dp, 
     /* Data memory interface */
-    input data_resp, 
-    input rv32i_word data_rdata, 
-    output data_read,
-    output data_write, 
-    output [3:0] data_mbe, 
-    output rv32i_word data_addr, 
-    output rv32i_word data_wdata
+    input data_resp_dp, 
+    input rv32i_word data_rdata_dp, 
+    output data_read_dp,
+    output data_write_dp, 
+    output [3:0] data_mbe_dp, 
+    output rv32i_word data_addr_dp, 
+    output rv32i_word data_wdata_dp
 );
 /****************************************************** Variables *****************************************************/
 rv32i_stage IF_ID_i; 
@@ -37,17 +37,17 @@ logic br_en_temp;
 /*********************************************************************************************************************/
 
 /************************************************* Instruction Fetch *************************************************/
-assign  inst_read = 1'b1;
-assign  inst_addr = pc_out; 
-control_rom ctrl_rom(.opcode(rv32i_opcode'(inst_rdata[6:0])), .funct3(inst_rdata[14:12]), 
-                     .funct7(inst_rdata[31:25]), .ctrl_word(IF_ID_i.ControlWord));
-pc_register pc_reg(.clk(clk), .rst(rst), .load(1'b1), .in(pcmux_out), .out(pc_out));
+assign  inst_read_dp = 1'b1;
+assign  inst_addr_dp = pc_out; 
+control_rom ctrl_rom(.opcode(rv32i_opcode'(inst_rdata_dp[6:0])), .funct3(inst_rdata_dp[14:12]), 
+                     .funct7(inst_rdata_dp[31:25]), .ctrl_word(IF_ID_i.ControlWord));
+pc_register pc_reg(.clk(clk), .rst(rst), .load(inst_resp_dp), .in(pcmux_out), .out(pc_out));
 always_comb begin : IF_comb
     // Init. the dataword 
     IF_ID_i.DataWord.pc = pc_out; 
-    IF_ID_i.DataWord.rs1 = inst_rdata[19:15]; 
-    IF_ID_i.DataWord.rs2 = inst_rdata[24:20]; 
-    IF_ID_i.DataWord.rd = inst_rdata[11:7]; 
+    IF_ID_i.DataWord.rs1 = inst_rdata_dp[19:15]; 
+    IF_ID_i.DataWord.rs2 = inst_rdata_dp[24:20]; 
+    IF_ID_i.DataWord.rd = inst_rdata_dp[11:7]; 
     IF_ID_i.DataWord.rs1_out = 32'd0; 
     IF_ID_i.DataWord.rs2_out = 32'd0; 
     IF_ID_i.DataWord.alu_out = 32'd0; 
@@ -55,15 +55,15 @@ always_comb begin : IF_comb
     // Decode the immediate 
     case(IF_ID_i.ControlWord.opcode) 
         op_jalr, op_load, op_imm:
-            IF_ID_i.DataWord.imm = {{21{inst_rdata[31]}}, inst_rdata[30:20]};
+            IF_ID_i.DataWord.imm = {{21{inst_rdata_dp[31]}}, inst_rdata_dp[30:20]};
         op_store:
-            IF_ID_i.DataWord.imm = {{21{inst_rdata[31]}}, inst_rdata[30:25], inst_rdata[11:7]};
+            IF_ID_i.DataWord.imm = {{21{inst_rdata_dp[31]}}, inst_rdata_dp[30:25], inst_rdata_dp[11:7]};
         op_br:
-            IF_ID_i.DataWord.imm = {{20{inst_rdata[31]}}, inst_rdata[7], inst_rdata[30:25], inst_rdata[11:8], 1'b0};
+            IF_ID_i.DataWord.imm = {{20{inst_rdata_dp[31]}}, inst_rdata_dp[7], inst_rdata_dp[30:25], inst_rdata_dp[11:8], 1'b0};
         op_lui, op_auipc:
-            IF_ID_i.DataWord.imm = {inst_rdata[31:12], 12'h000};
+            IF_ID_i.DataWord.imm = {inst_rdata_dp[31:12], 12'h000};
         op_jal:
-            IF_ID_i.DataWord.imm = {{12{inst_rdata[31]}}, inst_rdata[19:12], inst_rdata[20], inst_rdata[30:21], 1'b0};
+            IF_ID_i.DataWord.imm = {{12{inst_rdata_dp[31]}}, inst_rdata_dp[19:12], inst_rdata_dp[20], inst_rdata_dp[30:21], 1'b0};
         default:
             IF_ID_i.DataWord.imm = 32'd0;
     endcase 
@@ -196,11 +196,11 @@ pipeline_stage EX_MEM_stage(.clk(clk), .rst(rst), .load(1'b1), .stage_i(EX_MEM_i
 
 /**********************************************************MEM********************************************************/
 // interface with data memory 
-assign data_read = EX_MEM_o.ControlWord.dmem_read;
-assign data_write = EX_MEM_o.ControlWord.dmem_write;  
-assign data_mbe = EX_MEM_o.ControlWord.mem_byte_enable;
-assign data_addr = {EX_MEM_o.DataWord.alu_out[31:2], 2'b00};  
-assign data_wdata = EX_MEM_o.DataWord.rs2_out; 
+assign data_read_dp = EX_MEM_o.ControlWord.dmem_read;
+assign data_write_dp = EX_MEM_o.ControlWord.dmem_write;  
+assign data_mbe_dp = EX_MEM_o.ControlWord.mem_byte_enable;
+assign data_addr_dp = {EX_MEM_o.DataWord.alu_out[31:2], 2'b00};  
+assign data_wdata_dp = EX_MEM_o.DataWord.rs2_out; 
 always_comb begin : MEM_comb
     // Pass the pipeline data
     MEM_WB_i.ControlWord.load_regfile = EX_MEM_o.ControlWord.load_regfile;
@@ -223,7 +223,7 @@ always_comb begin : MEM_comb
     MEM_WB_i.DataWord.rs2_out = EX_MEM_o.DataWord.rs2_out;
     MEM_WB_i.DataWord.alu_out = EX_MEM_o.DataWord.alu_out;
     MEM_WB_i.DataWord.imm = EX_MEM_o.DataWord.imm;  
-    MEM_WB_i.DataWord.data_mdr = data_rdata; 
+    MEM_WB_i.DataWord.data_mdr = data_rdata_dp; 
 end : MEM_comb
 /*********************************************************************************************************************/
 
