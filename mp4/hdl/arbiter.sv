@@ -94,11 +94,11 @@ begin: next_state_logic
     next_state = state;
     case(state)
         idle: begin
-            if(inst_pmem_read) begin
-                next_state = instr_mem;
-            end 
-            else if (data_pmem_read || data_pmem_write) begin
+            if(data_pmem_read || data_pmem_write) begin
                 next_state = data_mem;
+            end 
+            else if (inst_pmem_read) begin
+                next_state = instr_mem;
             end 
             else begin
                 next_state = idle;

@@ -16,6 +16,8 @@ vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-P
 vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/pc_reg.sv}
 vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache {/home/sphan5/Pied-Piper/mp4/hdl/given_cache/cache.sv}
 vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/rv32i_types.sv}
+vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/forwarding_unit.sv}
+vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/hazard_detection.sv}
 vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/arbiter.sv}
 vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/pipeline_stage.sv}
 vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/datapath.sv}

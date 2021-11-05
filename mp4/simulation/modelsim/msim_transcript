@@ -11,67 +11,67 @@
 # 
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/cacheline_adaptor.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:14 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/cacheline_adaptor.sv 
 # -- Compiling module cacheline_adaptor
 # 
 # Top level modules:
 # 	cacheline_adaptor
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:01
+# End time: 18:53:34 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache {/home/sphan5/Pied-Piper/mp4/hdl/given_cache/line_adapter.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache" /home/sphan5/Pied-Piper/mp4/hdl/given_cache/line_adapter.sv 
 # -- Compiling module line_adapter
 # 
 # Top level modules:
 # 	line_adapter
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:34 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache {/home/sphan5/Pied-Piper/mp4/hdl/given_cache/data_array.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache" /home/sphan5/Pied-Piper/mp4/hdl/given_cache/data_array.sv 
 # -- Compiling module data_array
 # 
 # Top level modules:
 # 	data_array
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:34 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache {/home/sphan5/Pied-Piper/mp4/hdl/given_cache/cache_datapath.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache" /home/sphan5/Pied-Piper/mp4/hdl/given_cache/cache_datapath.sv 
 # -- Compiling module cache_datapath
 # 
 # Top level modules:
 # 	cache_datapath
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:34 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache {/home/sphan5/Pied-Piper/mp4/hdl/given_cache/cache_control.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache" /home/sphan5/Pied-Piper/mp4/hdl/given_cache/cache_control.sv 
 # -- Compiling module cache_control
 # 
 # Top level modules:
 # 	cache_control
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:34 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache {/home/sphan5/Pied-Piper/mp4/hdl/given_cache/array.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache" /home/sphan5/Pied-Piper/mp4/hdl/given_cache/array.sv 
 # -- Compiling module array
 # 
 # Top level modules:
 # 	array
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:34 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/rv32i_mux_types.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/rv32i_mux_types.sv 
 # -- Compiling package pcmux
 # -- Compiling package marmux
@@ -81,41 +81,41 @@
 # 
 # Top level modules:
 # 	--none--
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:34 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/regfile.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/regfile.sv 
 # -- Compiling module regfile
 # 
 # Top level modules:
 # 	regfile
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:34 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/pc_reg.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/pc_reg.sv 
 # -- Compiling module pc_register
 # 
 # Top level modules:
 # 	pc_register
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:34 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache {/home/sphan5/Pied-Piper/mp4/hdl/given_cache/cache.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl/given_cache" /home/sphan5/Pied-Piper/mp4/hdl/given_cache/cache.sv 
 # -- Compiling module cache
 # 
 # Top level modules:
 # 	cache
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:34 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/rv32i_types.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:34 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/rv32i_types.sv 
 # -- Compiling package rv32i_types
 # -- Importing package pcmux
@@ -126,11 +126,45 @@
 # 
 # Top level modules:
 # 	--none--
-# End time: 18:03:15 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/forwarding_unit.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 18:53:35 on Nov 05,2021
+# vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/forwarding_unit.sv 
+# -- Compiling package forwarding_unit_sv_unit
+# -- Importing package rv32i_types
+# -- Importing package pcmux
+# -- Importing package marmux
+# -- Importing package cmpmux
+# -- Importing package alumux
+# -- Importing package regfilemux
+# -- Compiling module forwarding_unit
+# 
+# Top level modules:
+# 	forwarding_unit
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/hazard_detection.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 18:53:35 on Nov 05,2021
+# vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/hazard_detection.sv 
+# -- Compiling package hazard_detection_sv_unit
+# -- Importing package rv32i_types
+# -- Importing package pcmux
+# -- Importing package marmux
+# -- Importing package cmpmux
+# -- Importing package alumux
+# -- Importing package regfilemux
+# -- Compiling module hazard_detection_unit
+# 
+# Top level modules:
+# 	hazard_detection_unit
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/arbiter.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:15 on Nov 04,2021
+# Start time: 18:53:35 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/arbiter.sv 
 # -- Compiling package arbiter_sv_unit
 # -- Importing package rv32i_types
@@ -143,11 +177,11 @@
 # 
 # Top level modules:
 # 	arbiter
-# End time: 18:03:16 on Nov 04,2021, Elapsed time: 0:00:01
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/pipeline_stage.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:16 on Nov 04,2021
+# Start time: 18:53:35 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/pipeline_stage.sv 
 # -- Compiling package pipeline_stage_sv_unit
 # -- Importing package rv32i_types
@@ -160,11 +194,11 @@
 # 
 # Top level modules:
 # 	pipeline_stage
-# End time: 18:03:16 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/datapath.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:16 on Nov 04,2021
+# Start time: 18:53:35 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/datapath.sv 
 # -- Compiling package datapath_sv_unit
 # -- Importing package rv32i_types
@@ -177,11 +211,11 @@
 # 
 # Top level modules:
 # 	datapath
-# End time: 18:03:16 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/control_rom.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:16 on Nov 04,2021
+# Start time: 18:53:35 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/control_rom.sv 
 # -- Compiling package control_rom_sv_unit
 # -- Importing package rv32i_types
@@ -194,11 +228,11 @@
 # 
 # Top level modules:
 # 	control_rom
-# End time: 18:03:16 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/cmp.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:16 on Nov 04,2021
+# Start time: 18:53:35 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/cmp.sv 
 # -- Compiling package cmp_sv_unit
 # -- Importing package rv32i_types
@@ -211,11 +245,11 @@
 # 
 # Top level modules:
 # 	cmp
-# End time: 18:03:16 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/alu.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:16 on Nov 04,2021
+# Start time: 18:53:35 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/alu.sv 
 # -- Compiling package alu_sv_unit
 # -- Importing package rv32i_types
@@ -228,11 +262,11 @@
 # 
 # Top level modules:
 # 	alu
-# End time: 18:03:16 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hdl {/home/sphan5/Pied-Piper/mp4/hdl/mp4.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:16 on Nov 04,2021
+# Start time: 18:53:35 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hdl" /home/sphan5/Pied-Piper/mp4/hdl/mp4.sv 
 # -- Compiling package mp4_sv_unit
 # -- Importing package rv32i_types
@@ -245,22 +279,22 @@
 # 
 # Top level modules:
 # 	mp4
-# End time: 18:03:16 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hvl {/home/sphan5/Pied-Piper/mp4/hvl/magic_dual_port.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:16 on Nov 04,2021
+# Start time: 18:53:35 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hvl" /home/sphan5/Pied-Piper/mp4/hvl/magic_dual_port.sv 
 # -- Compiling module magic_memory_dp
 # 
 # Top level modules:
 # 	magic_memory_dp
-# End time: 18:03:16 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hvl {/home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:16 on Nov 04,2021
+# Start time: 18:53:35 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hvl" /home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv 
 # -- Compiling module ParamMemory
 # ** Warning: /home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv(25): (vlog-2244) Variable 'iteration' is implicitly static. You must either explicitly declare it as static or automatic
@@ -268,21 +302,21 @@
 # 
 # Top level modules:
 # 	ParamMemory
-# End time: 18:03:16 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 1
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hvl {/home/sphan5/Pied-Piper/mp4/hvl/rvfi_itf.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:16 on Nov 04,2021
+# Start time: 18:53:35 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hvl" /home/sphan5/Pied-Piper/mp4/hvl/rvfi_itf.sv 
 # -- Compiling interface rvfi_itf
 # 
 # Top level modules:
 # 	--none--
-# End time: 18:03:16 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:35 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/sphan5/Pied-Piper/mp4/hvl {/home/sphan5/Pied-Piper/mp4/hvl/rvfimon.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:16 on Nov 04,2021
+# Start time: 18:53:36 on Nov 05,2021
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hvl" /home/sphan5/Pied-Piper/mp4/hvl/rvfimon.v 
 # -- Compiling module riscv_formal_monitor_rv32imc
 # -- Compiling module riscv_formal_monitor_rv32imc_rob
@@ -360,53 +394,53 @@
 # 
 # Top level modules:
 # 	riscv_formal_monitor_rv32imc
-# End time: 18:03:17 on Nov 04,2021, Elapsed time: 0:00:01
+# End time: 18:53:36 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hvl {/home/sphan5/Pied-Piper/mp4/hvl/shadow_memory.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:17 on Nov 04,2021
+# Start time: 18:53:36 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hvl" /home/sphan5/Pied-Piper/mp4/hvl/shadow_memory.sv 
 # -- Compiling module shadow_memory
 # 
 # Top level modules:
 # 	shadow_memory
-# End time: 18:03:17 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:36 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hvl {/home/sphan5/Pied-Piper/mp4/hvl/source_tb.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:17 on Nov 04,2021
+# Start time: 18:53:36 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hvl" /home/sphan5/Pied-Piper/mp4/hvl/source_tb.sv 
 # -- Compiling interface tb_itf
 # -- Compiling module source_tb
 # 
 # Top level modules:
 # 	source_tb
-# End time: 18:03:17 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:36 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hvl {/home/sphan5/Pied-Piper/mp4/hvl/tb_itf.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:17 on Nov 04,2021
+# Start time: 18:53:36 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hvl" /home/sphan5/Pied-Piper/mp4/hvl/tb_itf.sv 
 # -- Compiling interface tb_itf
 # 
 # Top level modules:
 # 	--none--
-# End time: 18:03:17 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:36 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/sphan5/Pied-Piper/mp4/hvl {/home/sphan5/Pied-Piper/mp4/hvl/top.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 18:03:17 on Nov 04,2021
+# Start time: 18:53:36 on Nov 05,2021
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/sphan5/Pied-Piper/mp4/hvl" /home/sphan5/Pied-Piper/mp4/hvl/top.sv 
 # -- Compiling module mp4_tb
 # 
 # Top level modules:
 # 	mp4_tb
-# End time: 18:03:17 on Nov 04,2021, Elapsed time: 0:00:00
+# End time: 18:53:36 on Nov 05,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L arriaii_hssi_ver -L arriaii_pcie_hip_ver -L arriaii_ver -L rtl_work -L work -voptargs="+acc"  mp4_tb
 # vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L arriaii_hssi_ver -L arriaii_pcie_hip_ver -L arriaii_ver -L rtl_work -L work -voptargs=""+acc"" mp4_tb 
-# Start time: 18:03:17 on Nov 04,2021
+# Start time: 18:53:36 on Nov 05,2021
 # Loading sv_std.std
 # Loading work.mp4_tb
 # Loading work.tb_itf
@@ -428,10 +462,14 @@
 # Loading work.pipeline_stage_sv_unit
 # Loading work.pipeline_stage
 # Loading work.regfile
+# Loading work.hazard_detection_sv_unit
+# Loading work.hazard_detection_unit
 # Loading work.alu_sv_unit
 # Loading work.alu
 # Loading work.cmp_sv_unit
 # Loading work.cmp
+# Loading work.forwarding_unit_sv_unit
+# Loading work.forwarding_unit
 # Loading work.arbiter_sv_unit
 # Loading work.arbiter
 # Loading work.cacheline_adaptor
@@ -450,18 +488,17 @@
 # .main_pane.objects.interior.cs.body.tree
 # run -all
 # Compilation Successful
+# ** Warning: (vsim-8315) /home/sphan5/Pied-Piper/mp4/hdl/datapath.sv(227): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Instance: /mp4_tb/dut/datapath
+# ** Warning: (vsim-8315) /home/sphan5/Pied-Piper/mp4/hdl/datapath.sv(238): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Instance: /mp4_tb/dut/datapath
 # Reset Memory
-# ** Warning: (vsim-3829) /home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv(95): Non-existent associative array entry. Returning default value.
-# ** Warning: (vsim-3829) /home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv(95): Non-existent associative array entry. Returning default value.
-# ** Warning: (vsim-3829) /home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv(95): Non-existent associative array entry. Returning default value.
-# ** Warning: (vsim-3829) /home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv(95): Non-existent associative array entry. Returning default value.
-# ** Warning: (vsim-3829) /home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv(95): Non-existent associative array entry. Returning default value.
-# ** Warning: (vsim-3829) /home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv(95): Non-existent associative array entry. Returning default value.
-# ** Warning: (vsim-3829) /home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv(95): Non-existent associative array entry. Returning default value.
-# ** Warning: (vsim-3829) /home/sphan5/Pied-Piper/mp4/hvl/param_memory.sv(95): Non-existent associative array entry. Returning default value.
-do wave.do
-restart -f; run 1000ns
+restart -f; run -all
 # Compilation Successful
+# ** Warning: (vsim-8315) /home/sphan5/Pied-Piper/mp4/hdl/datapath.sv(227): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Instance: /mp4_tb/dut/datapath
+# ** Warning: (vsim-8315) /home/sphan5/Pied-Piper/mp4/hdl/datapath.sv(238): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Instance: /mp4_tb/dut/datapath
 # Reset Memory
-# End time: 18:05:23 on Nov 04,2021, Elapsed time: 0:02:06
-# Errors: 0, Warnings: 8
+# End time: 18:56:07 on Nov 05,2021, Elapsed time: 0:02:31
+# Errors: 0, Warnings: 4

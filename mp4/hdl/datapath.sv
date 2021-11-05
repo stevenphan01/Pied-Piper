@@ -34,14 +34,33 @@ rv32i_word alumux1_out;
 rv32i_word alumux2_out; 
 rv32i_word cmpmux_out; 
 logic br_en_temp;
+logic jump_en; 
+logic load_pc;
+logic load_IF_ID; 
+logic load_ID_EX;
+logic load_EX_MEM;
+logic load_MEM_WB;
+logic rst_IF_ID;
+logic rst_ID_EX;
+logic rst_EX_MEM; 
+logic rst_MEM_WB;
+rv32i_word ex_mem_forwarding_out1;
+rv32i_word mem_wb_forwarding_out1;
+rv32i_word ex_mem_forwarding_out2;
+rv32i_word mem_wb_forwarding_out2;
+logic forwarding_load1;
+logic forwarding_load2;
+logic forwarding_mux1;
+logic forwarding_mux2;
+logic alumux2_sel;
 /*********************************************************************************************************************/
 
 /************************************************* Instruction Fetch *************************************************/
-assign  inst_read_dp = 1'b1;
+// assign  inst_read_dp = 1'b1;
 assign  inst_addr_dp = pc_out; 
 control_rom ctrl_rom(.opcode(rv32i_opcode'(inst_rdata_dp[6:0])), .funct3(inst_rdata_dp[14:12]), 
                      .funct7(inst_rdata_dp[31:25]), .ctrl_word(IF_ID_i.ControlWord));
-pc_register pc_reg(.clk(clk), .rst(rst), .load(inst_resp_dp), .in(pcmux_out), .out(pc_out));
+pc_register pc_reg(.clk(clk), .rst(rst), .load(load_pc), .in(pcmux_out), .out(pc_out));
 always_comb begin : IF_comb
     // Init. the dataword 
     IF_ID_i.DataWord.pc = pc_out; 
@@ -68,22 +87,44 @@ always_comb begin : IF_comb
             IF_ID_i.DataWord.imm = 32'd0;
     endcase 
     // Handle Branching 
-    unique case(EX_MEM_o.ControlWord.br_en)
-        1'b0: pcmux_out = pc_out + 4; 
-        1'b1: pcmux_out = ((EX_MEM_o.ControlWord.opcode != op_jal) && (EX_MEM_o.ControlWord.opcode != op_jalr)) ? EX_MEM_o.DataWord.alu_out : {EX_MEM_o.DataWord.alu_out[31:1], 1'b0}; 
-        default: pcmux_out = pc_out + 4;
+    jump_en = (EX_MEM_o.ControlWord.opcode == op_jal || EX_MEM_o.ControlWord.opcode == op_jalr);
+    case({jump_en, EX_MEM_o.ControlWord.br_en})
+        2'b00: pcmux_out = pc_out + 4; 
+        2'b01: pcmux_out = EX_MEM_o.DataWord.alu_out; 
+        2'b10: pcmux_out = {EX_MEM_o.DataWord.alu_out[31:1], 1'b0};
+        2'b11: pcmux_out = pc_out + 4;
     endcase 
 end : IF_comb
 /*********************************************************************************************************************/
 
 /********************************************************IF_ID********************************************************/
-pipeline_stage IF_ID_stage (.clk(clk), .rst(rst), .load(1'b1), .stage_i(IF_ID_i), .stage_o(IF_ID_o)); 
+pipeline_stage IF_ID_stage (.clk(clk), .rst(rst_IF_ID), .load(load_IF_ID), .stage_i(IF_ID_i), .stage_o(IF_ID_o)); 
 /*********************************************************************************************************************/
 
 /************************************************ Instruction Decode *************************************************/
 regfile regfile (.clk(clk), .rst(rst), .load(MEM_WB_o.ControlWord.load_regfile), .in(regfilemux_out),
                  .src_a(IF_ID_o.DataWord.rs1), .src_b(IF_ID_o.DataWord.rs2), .dest(MEM_WB_o.DataWord.rd),
                  .reg_a(ID_EX_i.DataWord.rs1_out), .reg_b(ID_EX_i.DataWord.rs2_out));
+hazard_detection_unit hdu (
+    .dmem_read(EX_MEM_o.ControlWord.dmem_read),
+    .data_resp_dp(data_resp_dp),
+    .inst_resp_dp(inst_resp_dp),
+    .dest(EX_MEM_o.DataWord.rd),
+    .src1(ID_EX_o.DataWord.rs1),
+    .src2(ID_EX_o.DataWord.rs2),
+    .br_en(EX_MEM_o.ControlWord.br_en),
+    .jump_en(jump_en),
+    .inst_read(inst_read_dp),
+    .rst_IF_ID(rst_IF_ID),
+    .rst_ID_EX(rst_ID_EX),
+    .rst_EX_MEM(rst_EX_MEM),
+    .rst_MEM_WB(rst_MEM_WB),
+    .load_IF_ID(load_IF_ID),
+    .load_ID_EX(load_ID_EX),
+    .load_EX_MEM(load_EX_MEM),
+    .load_MEM_WB(load_MEM_WB),
+    .load_pc(load_pc)
+);
 always_comb begin : ID_comb 
     // Pass the pipeline data
     ID_EX_i.ControlWord = IF_ID_o.ControlWord;
@@ -139,12 +180,21 @@ end : ID_comb
 /*********************************************************************************************************************/
 
 /********************************************************ID_EX********************************************************/
-pipeline_stage ID_EX_stage (.clk(clk), .rst(rst), .load(1'b1), .stage_i(ID_EX_i), .stage_o(ID_EX_o));  
+pipeline_stage ID_EX_stage (.clk(clk), .rst(rst_ID_EX), .load(load_ID_EX), .stage_i(ID_EX_i), .stage_o(ID_EX_o));  
 /*********************************************************************************************************************/
 
 /****************************************************** Execute ******************************************************/
 alu ALU (.aluop(ID_EX_o.ControlWord.aluop), .a(alumux1_out), .b(alumux2_out), .f(EX_MEM_i.DataWord.alu_out));
 cmp CMP (.cmpop(ID_EX_o.ControlWord.cmpop), .rs1_out(ID_EX_o.DataWord.rs1_out), .cmpmux_out(cmpmux_out), .br_en(br_en_temp));
+forwarding_unit fu(.dest_ex_mem(EX_MEM_o.DataWord.rd), .dest_mem_wb(MEM_WB_o.DataWord.rd), .src1(ID_EX_o.DataWord.rs1),
+                   .src2(ID_EX_o.DataWord.rs2), .data_ex_mem(EX_MEM_o.DataWord.alu_out), .data_mem_wb(MEM_WB_o.DataWord.alu_out),
+                   .ld_regfile_ex_mem(EX_MEM_o.ControlWord.load_regfile), .ld_regfile_mem_wb(MEM_WB_o.ControlWord.load_regfile),
+                   .alumux1_sel(ID_EX_o.ControlWord.alumux1_sel), .alumux2_sel(alumux2_sel),
+                   .ex_mem_forwarding_out1(ex_mem_forwarding_out1), .mem_wb_forwarding_out1(mem_wb_forwarding_out1),
+                   .ex_mem_forwarding_out2(ex_mem_forwarding_out2), .mem_wb_forwarding_out2(mem_wb_forwarding_out2),
+                   .forwarding_load1(forwarding_load1), .forwarding_load2(forwarding_load2),
+                   .forwarding_mux1(forwarding_mux1), .forwarding_mux2(forwarding_mux2));
+assign alumux2_sel = (ID_EX_o.ControlWord.opcode == op_reg) ? 1'b1 : 1'b0;
 always_comb begin : EX_comb
     // Pass the pipeline data
     EX_MEM_i.ControlWord.load_regfile = ID_EX_o.ControlWord.load_regfile;
@@ -166,11 +216,6 @@ always_comb begin : EX_comb
     EX_MEM_i.DataWord.rs2_out = ID_EX_o.DataWord.rs2_out;
     EX_MEM_i.DataWord.imm = ID_EX_o.DataWord.imm;  
     EX_MEM_i.DataWord.data_mdr = ID_EX_o.DataWord.data_mdr; 
-    // If it's a register register operation, use rs2 instead of immediate as input into ALU 
-    unique case(ID_EX_o.ControlWord.opcode) 
-        op_reg: alumux2_out = ID_EX_o.DataWord.rs2_out;
-        default: alumux2_out = ID_EX_o.DataWord.imm; 
-    endcase 
     // Calculate the mem_byte_enable to use in the mem stage to write to memory (store)
     case(store_funct3_t'(ID_EX_o.ControlWord.funct3))
         sw: EX_MEM_i.ControlWord.mem_byte_enable = 4'b1111;
@@ -179,10 +224,27 @@ always_comb begin : EX_comb
         default: EX_MEM_i.ControlWord.mem_byte_enable = 4'b1111; 
     endcase 
     // alumux1
-    unique case(ID_EX_o.ControlWord.alumux1_sel) 
-        alumux::rs1_out: alumux1_out = ID_EX_o.DataWord.rs1_out;
-        alumux::pc_out: alumux1_out = ID_EX_o.DataWord.pc;
-    endcase 
+    unique case({forwarding_mux1, forwarding_load1, ID_EX_o.ControlWord.alumux1_sel}) 
+        3'b000: alumux1_out = ID_EX_o.DataWord.rs1_out;
+        3'b001: alumux1_out = ID_EX_o.DataWord.pc;
+        3'b010: alumux1_out = ex_mem_forwarding_out1;  
+        3'b011: alumux1_out = ex_mem_forwarding_out1;
+        3'b100: alumux1_out = 32'hbadbad;
+        3'b101: alumux1_out = 32'hbadbad;
+        3'b110: alumux1_out = mem_wb_forwarding_out1;
+        3'b111: alumux1_out = mem_wb_forwarding_out1;
+    endcase
+    // alumux2
+    unique case({forwarding_mux2, forwarding_load2, alumux2_sel}) 
+        3'b000: alumux2_out = ID_EX_o.DataWord.imm;
+        3'b001: alumux2_out = ID_EX_o.DataWord.rs2_out;
+        3'b010: alumux2_out = 32'hbadbad;
+        3'b011: alumux2_out = ex_mem_forwarding_out2;
+        3'b100: alumux2_out = ID_EX_o.DataWord.imm;
+        3'b101: alumux2_out = ID_EX_o.DataWord.rs2_out;
+        3'b110: alumux2_out = 32'hbadbad;
+        3'b111: alumux2_out = mem_wb_forwarding_out2;
+    endcase  
     // cmpmux
     unique case(ID_EX_o.ControlWord.cmpmux_sel)
         cmpmux::rs2_out: cmpmux_out = ID_EX_o.DataWord.rs2_out; 
@@ -191,7 +253,7 @@ always_comb begin : EX_comb
 end : EX_comb
 
 /********************************************************EX_MEM*******************************************************/
-pipeline_stage EX_MEM_stage(.clk(clk), .rst(rst), .load(1'b1), .stage_i(EX_MEM_i), .stage_o(EX_MEM_o));
+pipeline_stage EX_MEM_stage(.clk(clk), .rst(rst_EX_MEM), .load(load_EX_MEM), .stage_i(EX_MEM_i), .stage_o(EX_MEM_o));
 /*********************************************************************************************************************/
 
 /**********************************************************MEM********************************************************/
@@ -228,6 +290,6 @@ end : MEM_comb
 /*********************************************************************************************************************/
 
 /********************************************************MEM_WB*******************************************************/
-pipeline_stage MEM_WB_stage(.clk(clk), .rst(rst), .load(1'b1), .stage_i(MEM_WB_i), .stage_o(MEM_WB_o));
+pipeline_stage MEM_WB_stage(.clk(clk), .rst(rst_MEM_WB), .load(load_MEM_WB), .stage_i(MEM_WB_i), .stage_o(MEM_WB_o));
 /*********************************************************************************************************************/
 endmodule : datapath 
