@@ -153,7 +153,8 @@ HALT:
     nop
 
 DONEa:
-pcrel_GOOD: auipc x16, %pcrel_hi(GOOD)
+ pcrel_GOOD: auipc x16, %pcrel_hi(GOOD)
+    add x17, x0, x6
     nop
     nop
     nop

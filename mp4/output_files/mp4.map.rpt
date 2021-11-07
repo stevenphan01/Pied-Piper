@@ -1,5 +1,5 @@
 Analysis & Synthesis report for mp4
-Fri Nov  5 18:50:21 2021
+Sat Nov  6 21:17:06 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -17,32 +17,33 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
   9. State Machine - |mp4|cache:data_cache|cache_control:control|state
  10. State Machine - |mp4|cache:instr_cache|cache_control:control|state
  11. State Machine - |mp4|arbiter:arbiter|state
- 12. Registers Removed During Synthesis
- 13. General Register Statistics
- 14. Inverted Register Statistics
- 15. Registers Added for RAM Pass-Through Logic
- 16. Multiplexer Restructuring Statistics (Restructuring Performed)
- 17. Source assignments for cache:data_cache|cache_datapath:datapath|array:tag|altsyncram:data_rtl_0|altsyncram_5km1:auto_generated
- 18. Source assignments for cache:instr_cache|cache_datapath:datapath|array:tag|altsyncram:data_rtl_0|altsyncram_5km1:auto_generated
- 19. Parameter Settings for User Entity Instance: datapath:datapath|pc_register:pc_reg
- 20. Parameter Settings for User Entity Instance: cache:instr_cache|cache_datapath:datapath|array:tag
- 21. Parameter Settings for User Entity Instance: cache:instr_cache|cache_datapath:datapath|array:valid
- 22. Parameter Settings for User Entity Instance: cache:instr_cache|cache_datapath:datapath|array:dirty
- 23. Parameter Settings for User Entity Instance: cache:data_cache|cache_datapath:datapath|array:tag
- 24. Parameter Settings for User Entity Instance: cache:data_cache|cache_datapath:datapath|array:valid
- 25. Parameter Settings for User Entity Instance: cache:data_cache|cache_datapath:datapath|array:dirty
- 26. Parameter Settings for Inferred Entity Instance: cache:data_cache|cache_datapath:datapath|array:tag|altsyncram:data_rtl_0
- 27. Parameter Settings for Inferred Entity Instance: cache:instr_cache|cache_datapath:datapath|array:tag|altsyncram:data_rtl_0
- 28. altsyncram Parameter Settings by Entity Instance
- 29. Port Connectivity Checks: "cache:instr_cache|cache_datapath:datapath|array:valid"
- 30. Port Connectivity Checks: "cache:instr_cache"
- 31. Port Connectivity Checks: "datapath:datapath|pipeline_stage:MEM_WB_stage"
- 32. Port Connectivity Checks: "datapath:datapath|pipeline_stage:EX_MEM_stage"
- 33. Port Connectivity Checks: "datapath:datapath|pipeline_stage:ID_EX_stage"
- 34. Port Connectivity Checks: "datapath:datapath|pipeline_stage:IF_ID_stage"
- 35. Post-Synthesis Netlist Statistics for Top Partition
- 36. Elapsed Time Per Partition
- 37. Analysis & Synthesis Messages
+ 12. Logic Cells Representing Combinational Loops
+ 13. Registers Removed During Synthesis
+ 14. General Register Statistics
+ 15. Inverted Register Statistics
+ 16. Registers Added for RAM Pass-Through Logic
+ 17. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 18. Source assignments for cache:data_cache|cache_datapath:datapath|array:tag|altsyncram:data_rtl_0|altsyncram_5km1:auto_generated
+ 19. Source assignments for cache:instr_cache|cache_datapath:datapath|array:tag|altsyncram:data_rtl_0|altsyncram_5km1:auto_generated
+ 20. Parameter Settings for User Entity Instance: datapath:datapath|pc_register:pc_reg
+ 21. Parameter Settings for User Entity Instance: cache:instr_cache|cache_datapath:datapath|array:tag
+ 22. Parameter Settings for User Entity Instance: cache:instr_cache|cache_datapath:datapath|array:valid
+ 23. Parameter Settings for User Entity Instance: cache:instr_cache|cache_datapath:datapath|array:dirty
+ 24. Parameter Settings for User Entity Instance: cache:data_cache|cache_datapath:datapath|array:tag
+ 25. Parameter Settings for User Entity Instance: cache:data_cache|cache_datapath:datapath|array:valid
+ 26. Parameter Settings for User Entity Instance: cache:data_cache|cache_datapath:datapath|array:dirty
+ 27. Parameter Settings for Inferred Entity Instance: cache:data_cache|cache_datapath:datapath|array:tag|altsyncram:data_rtl_0
+ 28. Parameter Settings for Inferred Entity Instance: cache:instr_cache|cache_datapath:datapath|array:tag|altsyncram:data_rtl_0
+ 29. altsyncram Parameter Settings by Entity Instance
+ 30. Port Connectivity Checks: "cache:instr_cache|cache_datapath:datapath|array:valid"
+ 31. Port Connectivity Checks: "cache:instr_cache"
+ 32. Port Connectivity Checks: "datapath:datapath|pipeline_stage:MEM_WB_stage"
+ 33. Port Connectivity Checks: "datapath:datapath|pipeline_stage:EX_MEM_stage"
+ 34. Port Connectivity Checks: "datapath:datapath|pipeline_stage:ID_EX_stage"
+ 35. Port Connectivity Checks: "datapath:datapath|pipeline_stage:IF_ID_stage"
+ 36. Post-Synthesis Netlist Statistics for Top Partition
+ 37. Elapsed Time Per Partition
+ 38. Analysis & Synthesis Messages
 
 
 
@@ -68,16 +69,16 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +-----------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status       ; Successful - Fri Nov  5 18:50:20 2021           ;
+; Analysis & Synthesis Status       ; Successful - Sat Nov  6 21:17:06 2021           ;
 ; Quartus Prime Version             ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
 ; Revision Name                     ; mp4                                             ;
 ; Top-level Entity Name             ; mp4                                             ;
 ; Family                            ; Arria II GX                                     ;
 ; Logic utilization                 ; N/A                                             ;
-;     Combinational ALUTs           ; 3,595                                           ;
+;     Combinational ALUTs           ; 3,630                                           ;
 ;     Memory ALUTs                  ; 0                                               ;
-;     Dedicated logic registers     ; 6,114                                           ;
-; Total registers                   ; 6114                                            ;
+;     Dedicated logic registers     ; 6,108                                           ;
+; Total registers                   ; 6108                                            ;
 ; Total pins                        ; 165                                             ;
 ; Total virtual pins                ; 0                                               ;
 ; Total block memory bits           ; 384                                             ;
@@ -241,34 +242,34 @@ refer to the applicable agreement for further details.
 +-----------------------------------------------+-----------+
 ; Resource                                      ; Usage     ;
 +-----------------------------------------------+-----------+
-; Estimated ALUTs Used                          ; 3595      ;
-;     -- Combinational ALUTs                    ; 3595      ;
+; Estimated ALUTs Used                          ; 3630      ;
+;     -- Combinational ALUTs                    ; 3630      ;
 ;     -- Memory ALUTs                           ; 0         ;
 ;     -- LUT_REGs                               ; 0         ;
-; Dedicated logic registers                     ; 6114      ;
+; Dedicated logic registers                     ; 6108      ;
 ;                                               ;           ;
-; Estimated ALUTs Unavailable                   ; 66        ;
-;     -- Due to unpartnered combinational logic ; 66        ;
+; Estimated ALUTs Unavailable                   ; 48        ;
+;     -- Due to unpartnered combinational logic ; 48        ;
 ;     -- Due to Memory ALUTs                    ; 0         ;
 ;                                               ;           ;
-; Total combinational functions                 ; 3595      ;
+; Total combinational functions                 ; 3630      ;
 ; Combinational ALUT usage by number of inputs  ;           ;
-;     -- 7 input functions                      ; 66        ;
-;     -- 6 input functions                      ; 2446      ;
-;     -- 5 input functions                      ; 625       ;
-;     -- 4 input functions                      ; 160       ;
-;     -- <=3 input functions                    ; 298       ;
+;     -- 7 input functions                      ; 48        ;
+;     -- 6 input functions                      ; 2508      ;
+;     -- 5 input functions                      ; 636       ;
+;     -- 4 input functions                      ; 159       ;
+;     -- <=3 input functions                    ; 279       ;
 ;                                               ;           ;
 ; Combinational ALUTs by mode                   ;           ;
-;     -- normal mode                            ; 3436      ;
-;     -- extended LUT mode                      ; 66        ;
+;     -- normal mode                            ; 3489      ;
+;     -- extended LUT mode                      ; 48        ;
 ;     -- arithmetic mode                        ; 93        ;
 ;     -- shared arithmetic mode                 ; 0         ;
 ;                                               ;           ;
-; Estimated ALUT/register pairs used            ; 8707      ;
+; Estimated ALUT/register pairs used            ; 8737      ;
 ;                                               ;           ;
-; Total registers                               ; 6114      ;
-;     -- Dedicated logic registers              ; 6114      ;
+; Total registers                               ; 6108      ;
+;     -- Dedicated logic registers              ; 6108      ;
 ;     -- I/O registers                          ; 0         ;
 ;     -- LUT_REGs                               ; 0         ;
 ;                                               ;           ;
@@ -280,9 +281,9 @@ refer to the applicable agreement for further details.
 ; DSP block 18-bit elements                     ; 0         ;
 ;                                               ;           ;
 ; Maximum fan-out node                          ; clk~input ;
-; Maximum fan-out                               ; 6162      ;
-; Total fan-out                                 ; 40551     ;
-; Average fan-out                               ; 4.02      ;
+; Maximum fan-out                               ; 6156      ;
+; Total fan-out                                 ; 40804     ;
+; Average fan-out                               ; 4.03      ;
 +-----------------------------------------------+-----------+
 
 
@@ -291,14 +292,14 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------+---------------------+---------------------------+-------------------+--------------+---------+-----------+-----------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------+-----------------------+--------------+
 ; Compilation Hierarchy Node                      ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 12x12 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                           ; Entity Name           ; Library Name ;
 +-------------------------------------------------+---------------------+---------------------------+-------------------+--------------+---------+-----------+-----------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------+-----------------------+--------------+
-; |mp4                                            ; 3595 (0)            ; 6114 (0)                  ; 384               ; 0            ; 0       ; 0         ; 0         ; 0         ; 165  ; 0            ; |mp4                                                                                                          ; mp4                   ; work         ;
-;    |arbiter:arbiter|                            ; 136 (40)            ; 296 (3)                   ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|arbiter:arbiter                                                                                          ; arbiter               ; work         ;
-;       |cacheline_adaptor:cacheline_adaptor|     ; 96 (96)             ; 293 (293)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor                                                      ; cacheline_adaptor     ; work         ;
-;    |cache:data_cache|                           ; 1048 (0)            ; 2120 (0)                  ; 192               ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache                                                                                         ; cache                 ; work         ;
-;       |cache_control:control|                   ; 28 (28)             ; 1 (1)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache|cache_control:control                                                                   ; cache_control         ; work         ;
-;       |cache_datapath:datapath|                 ; 923 (63)            ; 2119 (0)                  ; 192               ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache|cache_datapath:datapath                                                                 ; cache_datapath        ; work         ;
+; |mp4                                            ; 3630 (0)            ; 6108 (0)                  ; 384               ; 0            ; 0       ; 0         ; 0         ; 0         ; 165  ; 0            ; |mp4                                                                                                          ; mp4                   ; work         ;
+;    |arbiter:arbiter|                            ; 141 (41)            ; 296 (3)                   ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|arbiter:arbiter                                                                                          ; arbiter               ; work         ;
+;       |cacheline_adaptor:cacheline_adaptor|     ; 100 (100)           ; 293 (293)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor                                                      ; cacheline_adaptor     ; work         ;
+;    |cache:data_cache|                           ; 1064 (0)            ; 2120 (0)                  ; 192               ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache                                                                                         ; cache                 ; work         ;
+;       |cache_control:control|                   ; 26 (26)             ; 1 (1)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache|cache_control:control                                                                   ; cache_control         ; work         ;
+;       |cache_datapath:datapath|                 ; 941 (60)            ; 2119 (0)                  ; 192               ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache|cache_datapath:datapath                                                                 ; cache_datapath        ; work         ;
 ;          |array:dirty|                          ; 12 (12)             ; 8 (8)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache|cache_datapath:datapath|array:dirty                                                     ; array                 ; work         ;
-;          |array:tag|                            ; 30 (30)             ; 55 (55)                   ; 192               ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache|cache_datapath:datapath|array:tag                                                       ; array                 ; work         ;
+;          |array:tag|                            ; 51 (51)             ; 55 (55)                   ; 192               ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache|cache_datapath:datapath|array:tag                                                       ; array                 ; work         ;
 ;             |altsyncram:data_rtl_0|             ; 0 (0)               ; 0 (0)                     ; 192               ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache|cache_datapath:datapath|array:tag|altsyncram:data_rtl_0                                 ; altsyncram            ; work         ;
 ;                |altsyncram_5km1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 192               ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache|cache_datapath:datapath|array:tag|altsyncram:data_rtl_0|altsyncram_5km1:auto_generated  ; altsyncram_5km1       ; work         ;
 ;          |array:valid|                          ; 18 (18)             ; 8 (8)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:data_cache|cache_datapath:datapath|array:valid                                                     ; array                 ; work         ;
@@ -313,16 +314,16 @@ refer to the applicable agreement for further details.
 ;          |array:valid|                          ; 18 (18)             ; 8 (8)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:instr_cache|cache_datapath:datapath|array:valid                                                    ; array                 ; work         ;
 ;          |data_array:DM_cache|                  ; 768 (768)           ; 2048 (2048)               ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:instr_cache|cache_datapath:datapath|data_array:DM_cache                                            ; data_array            ; work         ;
 ;       |line_adapter:bus|                        ; 97 (97)             ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|cache:instr_cache|line_adapter:bus                                                                       ; line_adapter          ; work         ;
-;    |datapath:datapath|                          ; 1494 (362)          ; 1586 (0)                  ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath                                                                                        ; datapath              ; work         ;
-;       |alu:ALU|                                 ; 182 (182)           ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|alu:ALU                                                                                ; alu                   ; work         ;
-;       |cmp:CMP|                                 ; 49 (49)             ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|cmp:CMP                                                                                ; cmp                   ; work         ;
-;       |control_rom:ctrl_rom|                    ; 12 (12)             ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|control_rom:ctrl_rom                                                                   ; control_rom           ; work         ;
+;    |datapath:datapath|                          ; 1508 (355)          ; 1580 (0)                  ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath                                                                                        ; datapath              ; work         ;
+;       |alu:ALU|                                 ; 331 (331)           ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|alu:ALU                                                                                ; alu                   ; work         ;
+;       |cmp:CMP|                                 ; 57 (57)             ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|cmp:CMP                                                                                ; cmp                   ; work         ;
+;       |control_rom:ctrl_rom|                    ; 13 (13)             ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|control_rom:ctrl_rom                                                                   ; control_rom           ; work         ;
 ;       |forwarding_unit:fu|                      ; 13 (13)             ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|forwarding_unit:fu                                                                     ; forwarding_unit       ; work         ;
-;       |hazard_detection_unit:hdu|               ; 13 (13)             ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|hazard_detection_unit:hdu                                                              ; hazard_detection_unit ; work         ;
-;       |pc_register:pc_reg|                      ; 7 (7)               ; 32 (32)                   ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|pc_register:pc_reg                                                                     ; pc_register           ; work         ;
-;       |pipeline_stage:EX_MEM_stage|             ; 141 (141)           ; 151 (151)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage                                                            ; pipeline_stage        ; work         ;
-;       |pipeline_stage:ID_EX_stage|              ; 653 (653)           ; 168 (168)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|pipeline_stage:ID_EX_stage                                                             ; pipeline_stage        ; work         ;
-;       |pipeline_stage:IF_ID_stage|              ; 17 (17)             ; 104 (104)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|pipeline_stage:IF_ID_stage                                                             ; pipeline_stage        ; work         ;
+;       |hazard_detection_unit:hdu|               ; 10 (10)             ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|hazard_detection_unit:hdu                                                              ; hazard_detection_unit ; work         ;
+;       |pc_register:pc_reg|                      ; 10 (10)             ; 32 (32)                   ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|pc_register:pc_reg                                                                     ; pc_register           ; work         ;
+;       |pipeline_stage:EX_MEM_stage|             ; 11 (11)             ; 145 (145)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage                                                            ; pipeline_stage        ; work         ;
+;       |pipeline_stage:ID_EX_stage|              ; 654 (654)           ; 168 (168)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|pipeline_stage:ID_EX_stage                                                             ; pipeline_stage        ; work         ;
+;       |pipeline_stage:IF_ID_stage|              ; 9 (9)               ; 104 (104)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|pipeline_stage:IF_ID_stage                                                             ; pipeline_stage        ; work         ;
 ;       |pipeline_stage:MEM_WB_stage|             ; 0 (0)               ; 139 (139)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|pipeline_stage:MEM_WB_stage                                                            ; pipeline_stage        ; work         ;
 ;       |regfile:regfile|                         ; 45 (45)             ; 992 (992)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4|datapath:datapath|regfile:regfile                                                                        ; regfile               ; work         ;
 +-------------------------------------------------+---------------------+---------------------------+-------------------+--------------+---------+-----------+-----------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------+-----------------------+--------------+
@@ -373,146 +374,156 @@ Encoding Type:  One-Hot
 +-----------------+------------+----------------+-----------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                ;
-+--------------------------------------------------------------------------+----------------------------------------+
-; Register name                                                            ; Reason for Removal                     ;
-+--------------------------------------------------------------------------+----------------------------------------+
-; datapath:datapath|regfile:regfile|data[0][0]                             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][1]                             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][2]                             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][3]                             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][4]                             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][5]                             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][6]                             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][7]                             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][8]                             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][9]                             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][10]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][11]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][12]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][13]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][14]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][15]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][16]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][17]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][18]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][19]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][20]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][21]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][22]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][23]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][24]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][25]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][26]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][27]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][28]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][29]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][30]                            ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|regfile:regfile|data[0][31]                            ; Stuck at GND due to stuck port data_in ;
-; cache:data_cache|cache_control:control|state~3                           ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~4                           ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~5                           ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~6                           ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~7                           ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~8                           ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~9                           ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~10                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~11                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~12                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~13                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~14                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~15                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~16                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~17                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~18                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~19                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~20                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~21                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~22                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~23                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~24                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~25                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~26                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~27                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~28                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~29                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~30                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~31                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~32                          ; Lost fanout                            ;
-; cache:data_cache|cache_control:control|state~33                          ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~3                          ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~4                          ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~5                          ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~6                          ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~7                          ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~8                          ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~9                          ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~10                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~11                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~12                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~13                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~14                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~15                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~16                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~17                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~18                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~19                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~20                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~21                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~22                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~23                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~24                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~25                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~26                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~27                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~28                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~29                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~30                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~31                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~32                         ; Lost fanout                            ;
-; cache:instr_cache|cache_control:control|state~33                         ; Lost fanout                            ;
-; arbiter:arbiter|state~4                                                  ; Lost fanout                            ;
-; arbiter:arbiter|state~5                                                  ; Lost fanout                            ;
-; arbiter:arbiter|state~6                                                  ; Lost fanout                            ;
-; arbiter:arbiter|state~7                                                  ; Lost fanout                            ;
-; arbiter:arbiter|state~8                                                  ; Lost fanout                            ;
-; arbiter:arbiter|state~9                                                  ; Lost fanout                            ;
-; arbiter:arbiter|state~10                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~11                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~12                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~13                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~14                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~15                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~16                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~17                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~18                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~19                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~20                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~21                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~22                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~23                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~24                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~25                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~26                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~27                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~28                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~29                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~30                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~31                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~32                                                 ; Lost fanout                            ;
-; arbiter:arbiter|state~33                                                 ; Lost fanout                            ;
-; cache:instr_cache|cache_datapath:datapath|array:dirty|data~0             ; Stuck at GND due to stuck port data_in ;
-; cache:instr_cache|cache_datapath:datapath|array:dirty|data~1             ; Stuck at GND due to stuck port data_in ;
-; cache:instr_cache|cache_datapath:datapath|array:dirty|data~2             ; Stuck at GND due to stuck port data_in ;
-; cache:instr_cache|cache_datapath:datapath|array:dirty|data~3             ; Stuck at GND due to stuck port data_in ;
-; cache:instr_cache|cache_datapath:datapath|array:dirty|data~4             ; Stuck at GND due to stuck port data_in ;
-; cache:instr_cache|cache_datapath:datapath|array:dirty|data~5             ; Stuck at GND due to stuck port data_in ;
-; cache:instr_cache|cache_datapath:datapath|array:dirty|data~6             ; Stuck at GND due to stuck port data_in ;
-; cache:instr_cache|cache_datapath:datapath|array:dirty|data~7             ; Stuck at GND due to stuck port data_in ;
-; datapath:datapath|pipeline_stage:EX_MEM_stage|data.ControlWord.opcode[3] ; Lost fanout                            ;
-; Total Number of Removed Registers = 133                                  ;                                        ;
-+--------------------------------------------------------------------------+----------------------------------------+
++-------------------------------------------------------------+
+; Logic Cells Representing Combinational Loops                ;
++---------------------------------------------------------+---+
+; Logic Cell Name                                         ;   ;
++---------------------------------------------------------+---+
+; datapath:datapath|hazard_detection_unit:hdu|inst_read~0 ;   ;
+; Number of logic cells representing combinational loops  ; 1 ;
++---------------------------------------------------------+---+
+Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++-------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                    ;
++--------------------------------------------------------------+----------------------------------------+
+; Register name                                                ; Reason for Removal                     ;
++--------------------------------------------------------------+----------------------------------------+
+; datapath:datapath|regfile:regfile|data[0][0]                 ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][1]                 ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][2]                 ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][3]                 ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][4]                 ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][5]                 ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][6]                 ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][7]                 ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][8]                 ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][9]                 ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][10]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][11]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][12]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][13]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][14]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][15]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][16]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][17]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][18]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][19]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][20]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][21]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][22]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][23]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][24]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][25]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][26]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][27]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][28]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][29]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][30]                ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][31]                ; Stuck at GND due to stuck port data_in ;
+; cache:data_cache|cache_control:control|state~3               ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~4               ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~5               ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~6               ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~7               ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~8               ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~9               ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~10              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~11              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~12              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~13              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~14              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~15              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~16              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~17              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~18              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~19              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~20              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~21              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~22              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~23              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~24              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~25              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~26              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~27              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~28              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~29              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~30              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~31              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~32              ; Lost fanout                            ;
+; cache:data_cache|cache_control:control|state~33              ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~3              ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~4              ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~5              ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~6              ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~7              ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~8              ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~9              ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~10             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~11             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~12             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~13             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~14             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~15             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~16             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~17             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~18             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~19             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~20             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~21             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~22             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~23             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~24             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~25             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~26             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~27             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~28             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~29             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~30             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~31             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~32             ; Lost fanout                            ;
+; cache:instr_cache|cache_control:control|state~33             ; Lost fanout                            ;
+; arbiter:arbiter|state~4                                      ; Lost fanout                            ;
+; arbiter:arbiter|state~5                                      ; Lost fanout                            ;
+; arbiter:arbiter|state~6                                      ; Lost fanout                            ;
+; arbiter:arbiter|state~7                                      ; Lost fanout                            ;
+; arbiter:arbiter|state~8                                      ; Lost fanout                            ;
+; arbiter:arbiter|state~9                                      ; Lost fanout                            ;
+; arbiter:arbiter|state~10                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~11                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~12                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~13                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~14                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~15                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~16                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~17                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~18                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~19                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~20                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~21                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~22                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~23                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~24                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~25                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~26                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~27                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~28                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~29                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~30                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~31                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~32                                     ; Lost fanout                            ;
+; arbiter:arbiter|state~33                                     ; Lost fanout                            ;
+; cache:instr_cache|cache_datapath:datapath|array:dirty|data~0 ; Stuck at GND due to stuck port data_in ;
+; cache:instr_cache|cache_datapath:datapath|array:dirty|data~1 ; Stuck at GND due to stuck port data_in ;
+; cache:instr_cache|cache_datapath:datapath|array:dirty|data~2 ; Stuck at GND due to stuck port data_in ;
+; cache:instr_cache|cache_datapath:datapath|array:dirty|data~3 ; Stuck at GND due to stuck port data_in ;
+; cache:instr_cache|cache_datapath:datapath|array:dirty|data~4 ; Stuck at GND due to stuck port data_in ;
+; cache:instr_cache|cache_datapath:datapath|array:dirty|data~5 ; Stuck at GND due to stuck port data_in ;
+; cache:instr_cache|cache_datapath:datapath|array:dirty|data~6 ; Stuck at GND due to stuck port data_in ;
+; cache:instr_cache|cache_datapath:datapath|array:dirty|data~7 ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 132                      ;                                        ;
++--------------------------------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -520,12 +531,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6114  ;
-; Number of registers using Synchronous Clear  ; 1423  ;
+; Total registers                              ; 6108  ;
+; Number of registers using Synchronous Clear  ; 1448  ;
 ; Number of registers using Synchronous Load   ; 346   ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 5858  ;
+; Number of registers using Clock Enable       ; 5852  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -535,31 +546,30 @@ Encoding Type:  One-Hot
 +---------------------------------------------------------------------------+---------+
 ; Inverted Register                                                         ; Fan out ;
 +---------------------------------------------------------------------------+---------+
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[54]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[42]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[44]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[46]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[48]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[50]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[52]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[30]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[32]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[34]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[36]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[38]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[40]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[8]   ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[10]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[12]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[14]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[16]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[18]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[20]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[22]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[24]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[26]  ; 2       ;
-; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[28]  ; 2       ;
-; cache:instr_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[28] ; 1       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[54]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[42]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[44]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[46]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[48]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[50]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[52]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[30]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[32]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[34]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[36]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[38]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[40]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[8]   ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[10]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[12]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[14]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[16]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[18]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[20]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[22]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[24]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[26]  ; 3       ;
+; cache:data_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[28]  ; 3       ;
 ; cache:instr_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[54] ; 1       ;
 ; cache:instr_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[42] ; 1       ;
 ; cache:instr_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[44] ; 1       ;
@@ -583,6 +593,7 @@ Encoding Type:  One-Hot
 ; cache:instr_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[22] ; 1       ;
 ; cache:instr_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[24] ; 1       ;
 ; cache:instr_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[26] ; 1       ;
+; cache:instr_cache|cache_datapath:datapath|array:tag|data_rtl_0_bypass[28] ; 1       ;
 ; Total number of inverted registers = 48                                   ;         ;
 +---------------------------------------------------------------------------+---------+
 
@@ -710,113 +721,114 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
-; 3:1                ; 90 bits   ; 180 ALUTs     ; 0 ALUTs              ; 180 ALUTs              ; Yes        ; |mp4|datapath:datapath|pipeline_stage:IF_ID_stage|data.DataWord.imm[29]                ;
-; 3:1                ; 104 bits  ; 208 ALUTs     ; 0 ALUTs              ; 208 ALUTs              ; Yes        ; |mp4|datapath:datapath|pipeline_stage:ID_EX_stage|data.DataWord.imm[17]                ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[16][20]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[8][9]                                      ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[24][16]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[4][9]                                      ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[20][0]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[12][22]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[28][12]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[2][14]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[18][16]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[10][20]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[26][9]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[6][25]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[22][5]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[14][31]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[30][25]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[1][22]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[17][0]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[9][9]                                      ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[25][11]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[5][29]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[21][4]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[13][3]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[29][31]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[3][16]                                     ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[19][20]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[11][14]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[27][18]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[7][7]                                      ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[23][20]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[15][17]                                    ;
-; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[31][10]                                    ;
-; 3:1                ; 118 bits  ; 236 ALUTs     ; 0 ALUTs              ; 236 ALUTs              ; Yes        ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data.DataWord.imm[2]                ;
-; 8:1                ; 32 bits   ; 160 ALUTs     ; 160 ALUTs            ; 0 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:MEM_WB_stage|data.DataWord.data_mdr[27]          ;
-; 4:1                ; 6 bits    ; 12 ALUTs      ; 12 ALUTs             ; 0 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:IF_ID_stage|data.DataWord.imm[10]                ;
-; 6:1                ; 27 bits   ; 108 ALUTs     ; 0 ALUTs              ; 108 ALUTs              ; Yes        ; |mp4|datapath:datapath|pc_register:pc_reg|data[21]                                     ;
-; 4:1                ; 6 bits    ; 12 ALUTs      ; 6 ALUTs              ; 6 ALUTs                ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|addressbuf[7]                 ;
+; 3:1                ; 90 bits   ; 180 ALUTs     ; 0 ALUTs              ; 180 ALUTs              ; Yes        ; |mp4|datapath:datapath|pipeline_stage:IF_ID_stage|data.ControlWord.load_regfile        ;
+; 3:1                ; 104 bits  ; 208 ALUTs     ; 0 ALUTs              ; 208 ALUTs              ; Yes        ; |mp4|datapath:datapath|pipeline_stage:ID_EX_stage|data.DataWord.imm[26]                ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[16][12]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[8][1]                                      ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[24][10]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[4][23]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[20][27]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[12][21]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[28][17]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[2][11]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[18][5]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[10][18]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[26][12]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[6][15]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[22][1]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[14][11]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[30][28]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[1][11]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[17][3]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[9][24]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[25][19]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[5][14]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[21][23]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[13][6]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[29][23]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[3][7]                                      ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[19][21]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[11][31]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[27][26]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[7][15]                                     ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[23][14]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[15][28]                                    ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4|datapath:datapath|regfile:regfile|data[31][15]                                    ;
+; 3:1                ; 138 bits  ; 276 ALUTs     ; 0 ALUTs              ; 276 ALUTs              ; Yes        ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data.ControlWord.br_en              ;
+; 8:1                ; 32 bits   ; 160 ALUTs     ; 160 ALUTs            ; 0 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:MEM_WB_stage|data.DataWord.data_mdr[20]          ;
+; 4:1                ; 6 bits    ; 12 ALUTs      ; 12 ALUTs             ; 0 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:IF_ID_stage|data.DataWord.imm[8]                 ;
+; 6:1                ; 27 bits   ; 108 ALUTs     ; 0 ALUTs              ; 108 ALUTs              ; Yes        ; |mp4|datapath:datapath|pc_register:pc_reg|data[2]                                      ;
 ; 10:1               ; 2 bits    ; 12 ALUTs      ; 6 ALUTs              ; 6 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data.ControlWord.mem_byte_enable[3] ;
-; 4:1                ; 24 bits   ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|addressbuf[29]                ;
 ; 6:1                ; 2 bits    ; 8 ALUTs       ; 4 ALUTs              ; 4 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:IF_ID_stage|data.ControlWord.cmpop[2]            ;
+; 5:1                ; 2 bits    ; 6 ALUTs       ; 4 ALUTs              ; 2 ALUTs                ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|addressbuf[0]                 ;
 ; 7:1                ; 2 bits    ; 8 ALUTs       ; 4 ALUTs              ; 4 ALUTs                ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|state.count[0]                ;
-; 8:1                ; 63 bits   ; 315 ALUTs     ; 0 ALUTs              ; 315 ALUTs              ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|linebuf[125]                  ;
-; 8:1                ; 63 bits   ; 315 ALUTs     ; 0 ALUTs              ; 315 ALUTs              ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|linebuf[149]                  ;
-; 8:1                ; 64 bits   ; 320 ALUTs     ; 0 ALUTs              ; 320 ALUTs              ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|linebuf[245]                  ;
-; 35:1               ; 32 bits   ; 736 ALUTs     ; 640 ALUTs            ; 96 ALUTs               ; Yes        ; |mp4|datapath:datapath|pipeline_stage:ID_EX_stage|data.DataWord.rs1_out[23]            ;
-; 35:1               ; 32 bits   ; 736 ALUTs     ; 640 ALUTs            ; 96 ALUTs               ; Yes        ; |mp4|datapath:datapath|pipeline_stage:ID_EX_stage|data.DataWord.rs2_out[9]             ;
-; 9:1                ; 63 bits   ; 378 ALUTs     ; 0 ALUTs              ; 378 ALUTs              ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|linebuf[16]                   ;
-; 15:1               ; 2 bits    ; 20 ALUTs      ; 16 ALUTs             ; 4 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data.DataWord.alu_out[4]            ;
-; 16:1               ; 8 bits    ; 80 ALUTs      ; 64 ALUTs             ; 16 ALUTs               ; Yes        ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data.DataWord.alu_out[19]           ;
+; 8:1                ; 63 bits   ; 315 ALUTs     ; 0 ALUTs              ; 315 ALUTs              ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|linebuf[122]                  ;
+; 8:1                ; 63 bits   ; 315 ALUTs     ; 0 ALUTs              ; 315 ALUTs              ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|linebuf[152]                  ;
+; 8:1                ; 64 bits   ; 320 ALUTs     ; 0 ALUTs              ; 320 ALUTs              ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|linebuf[192]                  ;
+; 35:1               ; 32 bits   ; 736 ALUTs     ; 640 ALUTs            ; 96 ALUTs               ; Yes        ; |mp4|datapath:datapath|pipeline_stage:ID_EX_stage|data.DataWord.rs2_out[2]             ;
+; 35:1               ; 32 bits   ; 736 ALUTs     ; 640 ALUTs            ; 96 ALUTs               ; Yes        ; |mp4|datapath:datapath|pipeline_stage:ID_EX_stage|data.DataWord.rs1_out[17]            ;
+; 8:1                ; 6 bits    ; 30 ALUTs      ; 12 ALUTs             ; 18 ALUTs               ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|addressbuf[3]                 ;
+; 9:1                ; 63 bits   ; 378 ALUTs     ; 0 ALUTs              ; 378 ALUTs              ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|linebuf[6]                    ;
+; 6:1                ; 24 bits   ; 96 ALUTs      ; 48 ALUTs             ; 48 ALUTs               ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|addressbuf[24]                ;
 ; 9:1                ; 2 bits    ; 12 ALUTs      ; 8 ALUTs              ; 4 ALUTs                ; Yes        ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|state.macro[1]                ;
-; 15:1               ; 3 bits    ; 30 ALUTs      ; 24 ALUTs             ; 6 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data.DataWord.alu_out[13]           ;
-; 17:1               ; 2 bits    ; 22 ALUTs      ; 18 ALUTs             ; 4 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data.DataWord.alu_out[9]            ;
-; 18:1               ; 2 bits    ; 24 ALUTs      ; 20 ALUTs             ; 4 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data.DataWord.alu_out[2]            ;
-; 18:1               ; 2 bits    ; 24 ALUTs      ; 20 ALUTs             ; 4 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data.DataWord.alu_out[26]           ;
-; 19:1               ; 3 bits    ; 36 ALUTs      ; 33 ALUTs             ; 3 ALUTs                ; Yes        ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data.DataWord.alu_out[30]           ;
 ; 4:1                ; 64 bits   ; 128 ALUTs     ; 128 ALUTs            ; 0 ALUTs                ; No         ; |mp4|arbiter:arbiter|cacheline_adaptor:cacheline_adaptor|Mux1                          ;
-; 4:1                ; 2 bits    ; 4 ALUTs       ; 4 ALUTs              ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|ShiftLeft0                                              ;
-; 4:1                ; 49 bits   ; 98 ALUTs      ; 98 ALUTs             ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|ShiftRight1                                             ;
+; 4:1                ; 2 bits    ; 4 ALUTs       ; 4 ALUTs              ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|ShiftRight1                                             ;
+; 4:1                ; 49 bits   ; 98 ALUTs      ; 98 ALUTs             ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|ShiftLeft0                                              ;
 ; 4:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|ShiftRight1                                             ;
 ; 4:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|ShiftRight0                                             ;
 ; 4:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|ShiftLeft0                                              ;
 ; 4:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|ShiftLeft0                                              ;
 ; 4:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|ShiftLeft0                                              ;
-; 8:1                ; 32 bits   ; 160 ALUTs     ; 160 ALUTs            ; 0 ALUTs                ; No         ; |mp4|cache:instr_cache|line_adapter:bus|Mux22                                          ;
+; 3:1                ; 3 bits    ; 6 ALUTs       ; 6 ALUTs              ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data                                ;
+; 8:1                ; 32 bits   ; 160 ALUTs     ; 160 ALUTs            ; 0 ALUTs                ; No         ; |mp4|cache:instr_cache|line_adapter:bus|Mux14                                          ;
 ; 5:1                ; 2 bits    ; 6 ALUTs       ; 4 ALUTs              ; 2 ALUTs                ; No         ; |mp4|cache:data_cache|cache_control:control|next_state.read_mem                        ;
 ; 5:1                ; 2 bits    ; 6 ALUTs       ; 4 ALUTs              ; 2 ALUTs                ; No         ; |mp4|cache:instr_cache|cache_control:control|next_state.read_mem                       ;
-; 9:1                ; 256 bits  ; 1536 ALUTs    ; 1536 ALUTs           ; 0 ALUTs                ; No         ; |mp4|cache:instr_cache|cache_datapath:datapath|data_array:DM_cache|dataout[75]         ;
+; 9:1                ; 256 bits  ; 1536 ALUTs    ; 1536 ALUTs           ; 0 ALUTs                ; No         ; |mp4|cache:instr_cache|cache_datapath:datapath|data_array:DM_cache|dataout[220]        ;
 ; 6:1                ; 2 bits    ; 8 ALUTs       ; 4 ALUTs              ; 4 ALUTs                ; No         ; |mp4|datapath:datapath|pc_register:pc_reg|data                                         ;
 ; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[7]           ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[65]          ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[133]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[70]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[128]         ;
 ; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[198]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[15]          ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[78]          ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[140]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[204]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[23]          ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[83]          ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[145]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[209]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[28]          ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[90]          ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[158]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[220]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[38]          ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[97]          ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[160]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[229]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[46]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[11]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[75]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[138]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[205]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[21]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[86]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[147]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[215]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[30]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[92]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[155]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[223]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[36]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[99]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[166]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[225]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[40]          ;
 ; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[110]         ;
 ; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[169]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[238]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[54]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[232]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[49]          ;
 ; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[117]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[183]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[247]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[61]          ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[179]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[241]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[58]          ;
 ; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[124]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[184]         ;
-; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[253]         ;
-; 7:1                ; 16 bits   ; 64 ALUTs      ; 64 ALUTs             ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|Selector32                                                      ;
-; 10:1               ; 7 bits    ; 42 ALUTs      ; 42 ALUTs             ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|Selector45                                                      ;
-; 15:1               ; 3 bits    ; 30 ALUTs      ; 27 ALUTs             ; 3 ALUTs                ; No         ; |mp4|datapath:datapath|pipeline_stage:EX_MEM_stage|data                                ;
-; 17:1               ; 32 bits   ; 352 ALUTs     ; 256 ALUTs            ; 96 ALUTs               ; No         ; |mp4|datapath:datapath|Mux165                                                          ;
-; 15:1               ; 32 bits   ; 320 ALUTs     ; 256 ALUTs            ; 64 ALUTs               ; No         ; |mp4|datapath:datapath|Mux143                                                          ;
-; 13:1               ; 6 bits    ; 48 ALUTs      ; 36 ALUTs             ; 12 ALUTs               ; No         ; |mp4|datapath:datapath|Selector54                                                      ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[187]         ;
+; 10:1               ; 8 bits    ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |mp4|cache:data_cache|cache_datapath:datapath|data_array:DM_cache|dataout[249]         ;
+; 7:1                ; 16 bits   ; 64 ALUTs      ; 64 ALUTs             ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|Selector37                                                      ;
+; 13:1               ; 5 bits    ; 40 ALUTs      ; 40 ALUTs             ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|Selector27                                              ;
+; 14:1               ; 8 bits    ; 72 ALUTs      ; 64 ALUTs             ; 8 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|Selector7                                               ;
+; 13:1               ; 3 bits    ; 24 ALUTs      ; 24 ALUTs             ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|Selector19                                              ;
+; 15:1               ; 2 bits    ; 20 ALUTs      ; 16 ALUTs             ; 4 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|Selector22                                              ;
+; 10:1               ; 7 bits    ; 42 ALUTs      ; 42 ALUTs             ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|Selector47                                                      ;
+; 16:1               ; 3 bits    ; 30 ALUTs      ; 30 ALUTs             ; 0 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|Selector29                                              ;
+; 16:1               ; 2 bits    ; 20 ALUTs      ; 18 ALUTs             ; 2 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|Selector5                                               ;
+; 17:1               ; 3 bits    ; 33 ALUTs      ; 30 ALUTs             ; 3 ALUTs                ; No         ; |mp4|datapath:datapath|alu:ALU|Selector1                                               ;
+; 17:1               ; 32 bits   ; 352 ALUTs     ; 256 ALUTs            ; 96 ALUTs               ; No         ; |mp4|datapath:datapath|Mux161                                                          ;
+; 15:1               ; 32 bits   ; 320 ALUTs     ; 256 ALUTs            ; 64 ALUTs               ; No         ; |mp4|datapath:datapath|Mux129                                                          ;
+; 13:1               ; 6 bits    ; 48 ALUTs      ; 36 ALUTs             ; 12 ALUTs               ; No         ; |mp4|datapath:datapath|Selector52                                                      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
 
 
@@ -1078,7 +1090,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; pmem_wdata          ; Output ; Info     ; Explicitly unconnected ;
 ; pmem_write          ; Output ; Info     ; Explicitly unconnected ;
 ; mem_write           ; Input  ; Info     ; Stuck at GND           ;
-; mem_byte_enable_cpu ; Input  ; Info     ; Stuck at VCC           ;
+; mem_byte_enable_cpu ; Input  ; Info     ; Stuck at GND           ;
 ; mem_wdata_cpu       ; Input  ; Info     ; Stuck at GND           ;
 +---------------------+--------+----------+------------------------+
 
@@ -1143,32 +1155,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriaii_ff            ; 6114                        ;
-;     ENA               ; 4281                        ;
-;     ENA SCLR          ; 1233                        ;
+; arriaii_ff            ; 6108                        ;
+;     ENA               ; 4250                        ;
+;     ENA SCLR          ; 1258                        ;
 ;     ENA SCLR SLD      ; 91                          ;
 ;     ENA SLD           ; 253                         ;
 ;     SCLR              ; 99                          ;
 ;     SLD               ; 2                           ;
 ;     plain             ; 155                         ;
 ; boundary_port         ; 165                         ;
-; stratixiv_lcell_comb  ; 3595                        ;
+; stratixiv_lcell_comb  ; 3630                        ;
 ;     arith             ; 93                          ;
-;         1 data inputs ; 61                          ;
+;         1 data inputs ; 60                          ;
+;         2 data inputs ; 1                           ;
 ;         5 data inputs ; 32                          ;
-;     extend            ; 66                          ;
-;         7 data inputs ; 66                          ;
-;     normal            ; 3436                        ;
-;         1 data inputs ; 1                           ;
-;         2 data inputs ; 58                          ;
-;         3 data inputs ; 178                         ;
-;         4 data inputs ; 160                         ;
-;         5 data inputs ; 593                         ;
-;         6 data inputs ; 2446                        ;
+;     extend            ; 48                          ;
+;         7 data inputs ; 48                          ;
+;     normal            ; 3489                        ;
+;         2 data inputs ; 55                          ;
+;         3 data inputs ; 163                         ;
+;         4 data inputs ; 159                         ;
+;         5 data inputs ; 604                         ;
+;         6 data inputs ; 2508                        ;
 ; stratixiv_ram_block   ; 48                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 11.00                       ;
-; Average LUT depth     ; 4.86                        ;
+; Max LUT depth         ; 10.00                       ;
+; Average LUT depth     ; 4.83                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1177,7 +1189,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:12     ;
+; Top            ; 00:00:11     ;
 +----------------+--------------+
 
 
@@ -1187,7 +1199,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
-    Info: Processing started: Fri Nov  5 18:49:48 2021
+    Info: Processing started: Sat Nov  6 21:16:40 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off mp4 -c mp4
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -1248,7 +1260,7 @@ Info (12128): Elaborating entity "alu" for hierarchy "datapath:datapath|alu:ALU"
 Info (12128): Elaborating entity "cmp" for hierarchy "datapath:datapath|cmp:CMP" File: /home/sphan5/Pied-Piper/mp4/hdl/datapath.sv Line: 188
 Info (12128): Elaborating entity "forwarding_unit" for hierarchy "datapath:datapath|forwarding_unit:fu" File: /home/sphan5/Pied-Piper/mp4/hdl/datapath.sv Line: 196
 Info (12128): Elaborating entity "arbiter" for hierarchy "arbiter:arbiter" File: /home/sphan5/Pied-Piper/mp4/hdl/mp4.sv Line: 64
-Info (12128): Elaborating entity "cacheline_adaptor" for hierarchy "arbiter:arbiter|cacheline_adaptor:cacheline_adaptor" File: /home/sphan5/Pied-Piper/mp4/hdl/arbiter.sv Line: 153
+Info (12128): Elaborating entity "cacheline_adaptor" for hierarchy "arbiter:arbiter|cacheline_adaptor:cacheline_adaptor" File: /home/sphan5/Pied-Piper/mp4/hdl/arbiter.sv Line: 168
 Info (12128): Elaborating entity "cache" for hierarchy "cache:instr_cache" File: /home/sphan5/Pied-Piper/mp4/hdl/mp4.sv Line: 81
 Info (12128): Elaborating entity "cache_control" for hierarchy "cache:instr_cache|cache_control:control" File: /home/sphan5/Pied-Piper/mp4/hdl/given_cache/cache.sv Line: 35
 Info (12128): Elaborating entity "cache_datapath" for hierarchy "cache:instr_cache|cache_datapath:datapath" File: /home/sphan5/Pied-Piper/mp4/hdl/given_cache/cache.sv Line: 36
@@ -1316,18 +1328,18 @@ Info (12133): Instantiated megafunction "cache:data_cache|cache_datapath:datapat
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_5km1.tdf
     Info (12023): Found entity 1: altsyncram_5km1 File: /home/sphan5/Pied-Piper/mp4/db/altsyncram_5km1.tdf Line: 27
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 93 registers lost all their fanouts during netlist optimizations.
+Info (17049): 92 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 9650 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 9709 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 67 input pins
     Info (21059): Implemented 98 output pins
-    Info (21061): Implemented 9437 logic cells
+    Info (21061): Implemented 9496 logic cells
     Info (21064): Implemented 48 RAM segments
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
     Info: Peak virtual memory: 1239 megabytes
-    Info: Processing ended: Fri Nov  5 18:50:21 2021
-    Info: Elapsed time: 00:00:33
+    Info: Processing ended: Sat Nov  6 21:17:06 2021
+    Info: Elapsed time: 00:00:26
     Info: Total CPU time (on all processors): 00:00:34
 
 

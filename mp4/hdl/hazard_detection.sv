@@ -35,38 +35,73 @@ function void set_defaults();
 endfunction
 
 always_comb begin 
-    set_defaults();
-    case({dmem_read, data_resp_dp})
-        2'b00:;
-        2'b01:;
-        2'b10: begin 
-            load_pc = 1'b0; 
-            inst_read = 1'b0; 
-            load_IF_ID = 1'b0; 
-            load_ID_EX = 1'b0; 
-            load_EX_MEM = 1'b0; 
-            load_MEM_WB = 1'b0;
-        end 
-        2'b11: begin 
-            if (dest == src1 || dest == src2) begin 
-                load_pc = 1'b0; 
-                inst_read = 1'b0; 
-                rst_EX_MEM = 1'b1;
-                load_IF_ID = 1'b0; 
-                load_ID_EX = 1'b0; 
-            end
-        end 
-    endcase 
-    case({br_en || jump_en, inst_resp_dp})
-        2'b00: begin 
-            load_pc = 1'b0; 
-            rst_IF_ID = 1'b1; 
-        end 
-        2'b01:;
-        2'b10, 2'b11: begin
-            rst_IF_ID = 1'b1; 
-            rst_ID_EX = 1'b1;
-        end
+    case({jump_en || br_en, inst_resp_dp, dmem_read, data_resp_dp})
+    // NO BRANCHING, INSTRUCTION MISS, NO LOAD, xxxxxxx
+    // example: 9 instructions all adds, misses on 9th instruction 
+    4'b0000: begin 
+        
+    end 
+    // NO BRANCHING, INSTRUCTION MISS, NO LOAD, DATA CACHE HIT?
+    // no example, cannot have data hit and no load instruction 
+    4'b0001: begin 
+    end 
+    // NO BRANCHING, INSTRUCTION MISS, LOAD, DATA CACHE MISS
+    // example: 9 instructions, LOAD on 6th instruction (which becomes data miss on 9th), 9th is instruction miss
+    4'b0010: begin 
+    end 
+    // NO BRANCHING, INSTRUCTION MISS, LOAD, DATA CACHE HIT
+    // example: 9 instructions, LOAD on 6th instruction (which becomes data hit on 9th), 9th is instruction miss
+    4'b0011: begin 
+    end 
+    // NO BRANCHING, INSTRUCTION HIT, NO LOAD, xxxxxxx
+    // example: In 8 instruction window, and there's no load/branches prior to the current instruction (if_id_i)
+    4'b0100: begin 
+    end 
+    // NO BRANCHING, INSTRUCTION HIT, NO LOAD, DATA CACHE HIT?
+    // no example, cannot have data hit and no load instruction 
+    4'b0101: begin 
+    end 
+    // NO BRANCHING, INSTRUCTION HIT, LOAD, DATA CACHE MISS
+    // example: In 8 instruction window, there is a load (which occured within the first 5 instructions)
+    4'b0110: begin 
+    end 
+    // NO BRANCHING, INSTRUCTION HIT, LOAD, DATA CACHE HIT 
+    // example: In an 8 instruction window, there was a load (within the first 5 instructions) which became a hit before the 9th instruction
+    4'b0111: begin 
+    end
+    // BRANCHING, INSTRUCTION MISS, NO LOAD, xxxxxxx
+    // example: 9 instructions, branch on the 6th (which gets evaluated on the 9th)
+    4'b1000: begin 
+    end 
+    // BRANCHING, INSTRUCTION MISS, NO LOAD, DATA CACHE HIT?
+    // no example cannot have data hit and no load instruction 
+    4'b1001: begin 
+    end 
+    // BRANCHING, INSTRUCTION MISS, LOAD, DATA CACHE MISS 
+    // example: 9 instruction window, branch on the 7th (which gets eval on the 9th) load on the 6th (which becomes a miss on the 9th)
+    4'b1010: begin 
+
+    end 
+    // BRANCHING, INSTRUCTION MISS, LOAD, DATA CACHE HIT
+    // example: 9 instruction window, branch on 7th (eval at 9th), load on 6th (which becomes a hit on the 9th)
+    4'b1011: begin 
+    end 
+    // BRANCHING, INSTRUCTION HIT, NO LOAD, xxxxxxx
+    // example: 8 instruction window, branch within the first 6 (which gets eval at the 8th)
+    4'b1100: begin 
+    end 
+    // BRANCHING, INSTRUCTION HIT, NO LOAD, DATA CACHE HIT?
+    // no example
+    4'b1101: begin 
+    end 
+    // BRANCHING, INSTRUCTION HIT, LOAD, DATA CACHE MISS 
+    // example: 8 instruction window, consecutive load/branch (load within the first 5)
+    4'b1110: begin 
+    end 
+    // BRANCHING, INSTRUCTION HIT, LOAD, DATA CACHE HIT
+    // example: 8 instruction window, consecutive load/branch (load within the first 5)
+    4'b1111: begin 
+    end 
     endcase 
 end 
 endmodule : hazard_detection_unit

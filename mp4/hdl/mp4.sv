@@ -73,7 +73,7 @@ cache instr_cache(
   .pmem_write(),
   .mem_read(inst_read_dp),
   .mem_write(1'b0),
-  .mem_byte_enable_cpu(4'b1111),
+  .mem_byte_enable_cpu(4'b0000),
   .mem_address(inst_addr_dp),
   .mem_wdata_cpu(32'd0),
   .mem_resp(inst_resp_dp),

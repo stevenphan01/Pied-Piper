@@ -68,21 +68,36 @@ begin: state_actions
         instr_mem: begin 
             if(resp_o) begin
                 inst_pmem_resp = 1'b1;
+                if(data_pmem_read || data_pmem_write) begin 
+                    address_i = data_pmem_address; 
+                    if (data_pmem_read)
+                        read_i = 1'b1;
+                    else
+                        write_i = 1'b1; 
+                end 
             end
-            read_i = 1'b1;
-            address_i = inst_pmem_address;
+            else begin 
+                read_i = 1'b1;
+                address_i = inst_pmem_address;
+            end 
         end
         data_mem: begin
             if(resp_o) begin
                 data_pmem_resp = 1'b1;
+                if (inst_pmem_read) begin 
+                    read_i = 1'b1; 
+                    address_i = inst_pmem_address; 
+                end 
             end
-            if(data_pmem_read) begin 
-                read_i = 1'b1;
-            end 
             else begin 
-                write_i = 1'b1; 
+                if(data_pmem_read) begin 
+                    read_i = 1'b1;
+                end 
+                else begin 
+                    write_i = 1'b1; 
+                end 
+                address_i = data_pmem_address;
             end 
-            address_i = data_pmem_address;
         end
         default:;
     endcase
@@ -94,11 +109,11 @@ begin: next_state_logic
     next_state = state;
     case(state)
         idle: begin
-            if(data_pmem_read || data_pmem_write) begin
-                next_state = data_mem;
-            end 
-            else if (inst_pmem_read) begin
+            if(inst_pmem_read) begin
                 next_state = instr_mem;
+            end 
+            else if (data_pmem_read || data_pmem_write) begin
+                next_state = data_mem;
             end 
             else begin
                 next_state = idle;

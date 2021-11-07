@@ -87,11 +87,11 @@ always_comb begin : IF_comb
             IF_ID_i.DataWord.imm = 32'd0;
     endcase 
     // Handle Branching 
-    jump_en = (EX_MEM_o.ControlWord.opcode == op_jal || EX_MEM_o.ControlWord.opcode == op_jalr);
-    case({jump_en, EX_MEM_o.ControlWord.br_en})
+    jump_en = (EX_MEM_i.ControlWord.opcode == op_jal || EX_MEM_i.ControlWord.opcode == op_jalr);
+    case({jump_en, EX_MEM_i.ControlWord.br_en})
         2'b00: pcmux_out = pc_out + 4; 
-        2'b01: pcmux_out = EX_MEM_o.DataWord.alu_out; 
-        2'b10: pcmux_out = {EX_MEM_o.DataWord.alu_out[31:1], 1'b0};
+        2'b01: pcmux_out = EX_MEM_i.DataWord.alu_out; 
+        2'b10: pcmux_out = {EX_MEM_i.DataWord.alu_out[31:1], 1'b0};
         2'b11: pcmux_out = pc_out + 4;
     endcase 
 end : IF_comb
@@ -112,7 +112,7 @@ hazard_detection_unit hdu (
     .dest(EX_MEM_o.DataWord.rd),
     .src1(ID_EX_o.DataWord.rs1),
     .src2(ID_EX_o.DataWord.rs2),
-    .br_en(EX_MEM_o.ControlWord.br_en),
+    .br_en(EX_MEM_i.ControlWord.br_en),
     .jump_en(jump_en),
     .inst_read(inst_read_dp),
     .rst_IF_ID(rst_IF_ID),
