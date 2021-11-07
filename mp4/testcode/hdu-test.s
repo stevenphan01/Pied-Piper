@@ -3,7 +3,7 @@
 .section .text
 .globl _start
 _start:
-    addi x1, x0, 0x00000007
+    addi x1, x1, 0x00000007
 	beq x0, x0, halt
 	lw x3, NEGTWO
 	addi x2, x0, 0x00000009 

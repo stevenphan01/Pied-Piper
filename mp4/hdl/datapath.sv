@@ -229,8 +229,8 @@ always_comb begin : EX_comb
         3'b001: alumux1_out = ID_EX_o.DataWord.pc;
         3'b010: alumux1_out = ex_mem_forwarding_out1;  
         3'b011: alumux1_out = ex_mem_forwarding_out1;
-        3'b100: alumux1_out = 32'hbadbad;
-        3'b101: alumux1_out = 32'hbadbad;
+        3'b100: alumux1_out = 32'h391BAD;
+        3'b101: alumux1_out = 32'h391BAD;
         3'b110: alumux1_out = mem_wb_forwarding_out1;
         3'b111: alumux1_out = mem_wb_forwarding_out1;
     endcase
@@ -238,11 +238,11 @@ always_comb begin : EX_comb
     unique case({forwarding_mux2, forwarding_load2, alumux2_sel}) 
         3'b000: alumux2_out = ID_EX_o.DataWord.imm;
         3'b001: alumux2_out = ID_EX_o.DataWord.rs2_out;
-        3'b010: alumux2_out = 32'hbadbad;
+        3'b010: alumux2_out = 32'h391BAD;
         3'b011: alumux2_out = ex_mem_forwarding_out2;
         3'b100: alumux2_out = ID_EX_o.DataWord.imm;
         3'b101: alumux2_out = ID_EX_o.DataWord.rs2_out;
-        3'b110: alumux2_out = 32'hbadbad;
+        3'b110: alumux2_out = 32'h391BAD;
         3'b111: alumux2_out = mem_wb_forwarding_out2;
     endcase  
     // cmpmux
