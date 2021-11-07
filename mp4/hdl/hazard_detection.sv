@@ -2,6 +2,7 @@ import rv32i_types::*;
 
 module hazard_detection_unit (
     input logic dmem_read, 
+    input logic dmem_write,
     input logic data_resp_dp,
     input logic inst_resp_dp,
     input rv32i_reg dest, 

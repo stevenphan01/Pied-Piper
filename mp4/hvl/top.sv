@@ -25,7 +25,7 @@ bit f;
 // This section not required until CP2
 
 assign rvfi.commit = 0; // Set high when a valid instruction is modifying regfile or PC
-assign rvfi.halt = 0;   // Set high when you detect an infinite loop
+assign rvfi.halt = dut.datapath.load_pc & (dut.datapath.pc_out == dut.datapath.EX_MEM_stage.data.DataWord.pc);  // Set high when you detect an infinite loop
 initial rvfi.order = 0;
 always @(posedge itf.clk iff rvfi.commit) rvfi.order <= rvfi.order + 1; // Modify for OoO
 
@@ -114,6 +114,9 @@ mp4 dut(
     .mem_write(itf.mem_write), 
     .mem_read(itf.mem_read), 
     .mem_addr(itf.mem_addr));
+
+
+
 /***************************** End Instantiation *****************************/
 
 endmodule

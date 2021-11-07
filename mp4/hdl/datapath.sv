@@ -116,6 +116,7 @@ regfile regfile (.clk(clk), .rst(rst), .load(MEM_WB_o.ControlWord.load_regfile),
                  .reg_a(ID_EX_i.DataWord.rs1_out), .reg_b(ID_EX_i.DataWord.rs2_out));
 hazard_detection_unit hdu (
     .dmem_read(EX_MEM_o.ControlWord.dmem_read),
+    .dmem_write(EX_MEM_o.ControlWord.dmem_write),
     .data_resp_dp(data_resp_dp),
     .inst_resp_dp(inst_resp_dp),
     .dest(EX_MEM_o.DataWord.rd),
@@ -246,6 +247,7 @@ always_comb begin : EX_comb
         3'b101: alumux1_out = 32'h391BAD;
         3'b110: alumux1_out = mem_wb_forwarding_out1;
         3'b111: alumux1_out = mem_wb_forwarding_out1;
+        default:;
     endcase
     // alumux2
     unique case({forwarding_mux2, forwarding_load2, alumux2_sel}) 
@@ -257,6 +259,7 @@ always_comb begin : EX_comb
         3'b101: alumux2_out = ID_EX_o.DataWord.rs2_out;
         3'b110: alumux2_out = 32'h391BAD;
         3'b111: alumux2_out = mem_wb_forwarding_out2;
+        default:;
     endcase  
     // cmpmux2
     unique case({forwarding_cmp2mux, forwarding_cmp2_load, ID_EX_o.ControlWord.cmpmux_sel})
@@ -268,6 +271,7 @@ always_comb begin : EX_comb
         3'b101: cmpmux2_out = ID_EX_o.DataWord.imm; 
         3'b110: cmpmux2_out = mem_wb_forwarding_cmp2out;
         3'b111: cmpmux2_out = mem_wb_forwarding_cmp2out;
+        default:;
     endcase     
     // cmpmux1
     unique case({forwarding_cmp1mux, forwarding_cmp1_load})
@@ -275,6 +279,7 @@ always_comb begin : EX_comb
         2'b01: cmpmux1_out = ex_mem_forwarding_cmp1out;
         2'b10: cmpmux1_out = ID_EX_o.DataWord.rs1_out;
         2'b11: cmpmux1_out = mem_wb_forwarding_cmp1out;
+        default:;
     endcase
 end : EX_comb
 
