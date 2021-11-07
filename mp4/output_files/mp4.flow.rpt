@@ -1,5 +1,5 @@
 Flow report for mp4
-Sun Nov  7 13:15:44 2021
+Sun Nov  7 15:56:58 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -40,7 +40,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------------+
 ; Flow Summary                                                                        ;
 +-----------------------------------+-------------------------------------------------+
-; Flow Status                       ; Successful - Sun Nov  7 13:15:44 2021           ;
+; Flow Status                       ; Successful - Sun Nov  7 15:56:58 2021           ;
 ; Quartus Prime Version             ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
 ; Revision Name                     ; mp4                                             ;
 ; Top-level Entity Name             ; mp4                                             ;
@@ -48,10 +48,10 @@ refer to the applicable agreement for further details.
 ; Device                            ; EP2AGX45DF25I3                                  ;
 ; Timing Models                     ; Final                                           ;
 ; Logic utilization                 ; N/A                                             ;
-;     Combinational ALUTs           ; 3,731                                           ;
+;     Combinational ALUTs           ; 3,872                                           ;
 ;     Memory ALUTs                  ; 0                                               ;
-;     Dedicated logic registers     ; 6,098                                           ;
-; Total registers                   ; 6098                                            ;
+;     Dedicated logic registers     ; 6,109                                           ;
+; Total registers                   ; 6109                                            ;
 ; Total pins                        ; 165                                             ;
 ; Total virtual pins                ; 0                                               ;
 ; Total block memory bits           ; 384                                             ;
@@ -70,7 +70,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/07/2021 13:15:16 ;
+; Start date & time ; 11/07/2021 15:56:32 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; mp4                 ;
 +-------------------+---------------------+
@@ -81,7 +81,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                      ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +--------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID                ; 26830023891905.163631251602951         ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                ; 26830023891905.163632219104747         ; --            ; --          ; --             ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --          ; mp4_tb         ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; mp4_tb                                 ; --            ; --          ; eda_simulation ;
 ; EDA_OUTPUT_DATA_FORMAT               ; Systemverilog Hdl                      ; --            ; --          ; eda_simulation ;
@@ -114,8 +114,8 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:28     ; 1.0                     ; 1218 MB             ; 00:00:35                           ;
-; Total                ; 00:00:28     ; --                      ; --                  ; 00:00:35                           ;
+; Analysis & Synthesis ; 00:00:26     ; 1.0                     ; 1215 MB             ; 00:00:34                           ;
+; Total                ; 00:00:26     ; --                      ; --                  ; 00:00:34                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

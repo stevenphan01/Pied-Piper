@@ -32,7 +32,7 @@ Z10 8/home/sphan5/Pied-Piper/mp4/hdl/alu.sv
 Z11 F/home/sphan5/Pied-Piper/mp4/hdl/alu.sv
 L0 3
 Z12 OV;L;10.5b;63
-Z13 !s108 1636312570.000000
+Z13 !s108 1636322256.000000
 Z14 !s107 /home/sphan5/Pied-Piper/mp4/hdl/alu.sv|
 Z15 !s90 -reportprogress|300|-sv|-work|work|+incdir+/home/sphan5/Pied-Piper/mp4/hdl|/home/sphan5/Pied-Piper/mp4/hdl/alu.sv|
 !i113 1
@@ -71,7 +71,7 @@ R17
 R18
 Xalumux
 R1
-Z19 !s110 1636312569
+Z19 !s110 1636322255
 !i10b 1
 !s100 `R?HO[I_TJP]3QNCE;?2@2
 IV`Fhb5?Rc^joWKa1U;oD12
@@ -86,7 +86,7 @@ R12
 r1
 !s85 0
 31
-Z23 !s108 1636312569.000000
+Z23 !s108 1636322255.000000
 Z24 !s107 /home/sphan5/Pied-Piper/mp4/hdl/rv32i_mux_types.sv|
 Z25 !s90 -reportprogress|300|-sv|-work|work|+incdir+/home/sphan5/Pied-Piper/mp4/hdl|/home/sphan5/Pied-Piper/mp4/hdl/rv32i_mux_types.sv|
 !i113 1
@@ -272,7 +272,7 @@ R12
 r1
 !s85 0
 31
-!s108 1636312568.000000
+R23
 !s107 /home/sphan5/Pied-Piper/mp4/hdl/cacheline_adaptor.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+/home/sphan5/Pied-Piper/mp4/hdl|/home/sphan5/Pied-Piper/mp4/hdl/cacheline_adaptor.sv|
 !i113 1
@@ -293,12 +293,12 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 ojbW=RoAX]Z=gNDV4e;H]0
-IgOnFSJ>P>L435_35XiUG:0
+!s100 a@@WcZT<Wd=0K2`ALPZ893
+Im2`GoojmcfKRAg>mD9gQ]0
 !s105 cmp_sv_unit
 S1
 R0
-Z33 w1635209609
+Z33 w1636316614
 Z34 8/home/sphan5/Pied-Piper/mp4/hdl/cmp.sv
 Z35 F/home/sphan5/Pied-Piper/mp4/hdl/cmp.sv
 L0 3
@@ -458,18 +458,18 @@ R4
 R5
 R6
 R7
-DXx4 work 16 datapath_sv_unit 0 22 S>EzHW7z?]WPOD2hYac=`1
+DXx4 work 16 datapath_sv_unit 0 22 Z7mB?lfiX3^5dzo<5Ne_O2
 R8
 r1
 !s85 0
 31
 !i10b 1
-!s100 OD17g51nIVod7059VfJ=K3
-I3bcD68BYob8lfU^j?>9>f0
+!s100 ;;H686JR1UMg?Z=9`=82G1
+I@bbcTCgDRa:8V5kE>=Y^>2
 !s105 datapath_sv_unit
 S1
 R0
-Z44 w1636312507
+Z44 w1636322189
 Z45 8/home/sphan5/Pied-Piper/mp4/hdl/datapath.sv
 Z46 F/home/sphan5/Pied-Piper/mp4/hdl/datapath.sv
 L0 3
@@ -489,13 +489,13 @@ R4
 R5
 R6
 R7
-VS>EzHW7z?]WPOD2hYac=`1
+VZ7mB?lfiX3^5dzo<5Ne_O2
 r1
 !s85 0
 31
 !i10b 1
-!s100 GW2>f5XF5eZlUal08Rg@W0
-IS>EzHW7z?]WPOD2hYac=`1
+!s100 edozSXkFi?D9gbEWz;mSh2
+IZ7mB?lfiX3^5dzo<5Ne_O2
 !i103 1
 S1
 R0
@@ -519,23 +519,23 @@ R4
 R5
 R6
 R7
-DXx4 work 23 forwarding_unit_sv_unit 0 22 @AGYBnNSz617UnId=6UkR3
+DXx4 work 23 forwarding_unit_sv_unit 0 22 i05RKk]oEkgEi:_VG;8OT3
 R8
 r1
 !s85 0
 31
 !i10b 1
-!s100 Ck?FzdM2A?^U=ka7_?IC?0
-I54J[>42B1gaKI[;6K2H9c1
+!s100 ;l0oU>bJ]A=HCC=ZC5nFz0
+ILaaVLE5]2zd6FVl_7o^UY1
 !s105 forwarding_unit_sv_unit
 S1
 R0
-Z49 w1636156060
+Z49 w1636321737
 Z50 8/home/sphan5/Pied-Piper/mp4/hdl/forwarding_unit.sv
 Z51 F/home/sphan5/Pied-Piper/mp4/hdl/forwarding_unit.sv
 L0 3
 R12
-R23
+R13
 Z52 !s107 /home/sphan5/Pied-Piper/mp4/hdl/forwarding_unit.sv|
 Z53 !s90 -reportprogress|300|-sv|-work|work|+incdir+/home/sphan5/Pied-Piper/mp4/hdl|/home/sphan5/Pied-Piper/mp4/hdl/forwarding_unit.sv|
 !i113 1
@@ -550,13 +550,13 @@ R4
 R5
 R6
 R7
-V@AGYBnNSz617UnId=6UkR3
+Vi05RKk]oEkgEi:_VG;8OT3
 r1
 !s85 0
 31
 !i10b 1
-!s100 YWXVdCS]<>]f@53<>9K752
-I@AGYBnNSz617UnId=6UkR3
+!s100 Kdg<YF2?]jT^C8C2lIJJ70
+Ii05RKk]oEkgEi:_VG;8OT3
 !i103 1
 S1
 R0
@@ -565,7 +565,7 @@ R50
 R51
 L0 1
 R12
-R23
+R13
 R52
 R53
 !i113 1
@@ -595,7 +595,7 @@ Z55 8/home/sphan5/Pied-Piper/mp4/hdl/hazard_detection.sv
 Z56 F/home/sphan5/Pied-Piper/mp4/hdl/hazard_detection.sv
 L0 1
 R12
-R23
+R13
 Z57 !s107 /home/sphan5/Pied-Piper/mp4/hdl/hazard_detection.sv|
 Z58 !s90 -reportprogress|300|-sv|-work|work|+incdir+/home/sphan5/Pied-Piper/mp4/hdl|/home/sphan5/Pied-Piper/mp4/hdl/hazard_detection.sv|
 !i113 1
@@ -626,7 +626,7 @@ R55
 R56
 L0 3
 R12
-R23
+R13
 R57
 R58
 !i113 1
@@ -660,7 +660,7 @@ R32
 R18
 vmagic_memory_dp
 R1
-Z59 !s110 1636312570
+Z59 !s110 1636322256
 !i10b 1
 !s100 @nOl6:m[3D6XThc7@I`?50
 IKGnP_SmDa[2MzQ16^o0^Y1
@@ -770,7 +770,7 @@ R17
 R18
 vmp4_tb
 R1
-Z66 !s110 1636312571
+Z66 !s110 1636322257
 !i10b 1
 !s100 W7EB93HPjTViINn[1aB]X0
 I:OYzljH>lRA@6BKYnz:W[2
@@ -786,7 +786,7 @@ R12
 r1
 !s85 0
 31
-Z67 !s108 1636312571.000000
+Z67 !s108 1636322257.000000
 !s107 /home/sphan5/Pied-Piper/mp4/hvl/top.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+/home/sphan5/Pied-Piper/mp4/hvl|/home/sphan5/Pied-Piper/mp4/hvl/top.sv|
 !i113 1
@@ -887,7 +887,7 @@ I[GCh6lVB00B48OCzlE_[=1
 !s105 pipeline_stage_sv_unit
 S1
 R0
-Z68 w1635263657
+Z68 w1636320672
 Z69 8/home/sphan5/Pied-Piper/mp4/hdl/pipeline_stage.sv
 Z70 F/home/sphan5/Pied-Piper/mp4/hdl/pipeline_stage.sv
 L0 3
@@ -979,7 +979,7 @@ R16
 R17
 R18
 vriscv_formal_monitor_rv32imc
-R59
+R66
 !i10b 1
 !s100 U?]gj^aHdcEGWFYG8d]0:3
 Ig_N^cZF_0YhSG8RY0WLG50
@@ -993,7 +993,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 Z75 !s107 /home/sphan5/Pied-Piper/mp4/hvl/rvfimon.v|
 Z76 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/sphan5/Pied-Piper/mp4/hvl|/home/sphan5/Pied-Piper/mp4/hvl/rvfimon.v|
 !i113 1
@@ -1015,7 +1015,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1037,7 +1037,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1059,7 +1059,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1081,7 +1081,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1103,7 +1103,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1125,7 +1125,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1147,7 +1147,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1169,7 +1169,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1191,7 +1191,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1213,7 +1213,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1235,7 +1235,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1257,7 +1257,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1279,7 +1279,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1301,7 +1301,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1323,7 +1323,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1345,7 +1345,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1367,7 +1367,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1389,7 +1389,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1411,7 +1411,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1433,7 +1433,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1455,7 +1455,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1477,7 +1477,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1499,7 +1499,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1521,7 +1521,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1543,7 +1543,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1565,7 +1565,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1587,7 +1587,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1609,7 +1609,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1631,7 +1631,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1653,7 +1653,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1675,7 +1675,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1697,7 +1697,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1719,7 +1719,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1741,7 +1741,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1763,7 +1763,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1785,7 +1785,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1807,7 +1807,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1829,7 +1829,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1851,7 +1851,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1873,7 +1873,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1895,7 +1895,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1917,7 +1917,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1939,7 +1939,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1961,7 +1961,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -1983,7 +1983,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2005,7 +2005,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2027,7 +2027,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2049,7 +2049,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2071,7 +2071,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2093,7 +2093,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2115,7 +2115,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2137,7 +2137,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2159,7 +2159,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2181,7 +2181,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2203,7 +2203,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2225,7 +2225,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2247,7 +2247,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2269,7 +2269,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2291,7 +2291,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2313,7 +2313,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2335,7 +2335,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2357,7 +2357,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2379,7 +2379,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2401,7 +2401,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2423,7 +2423,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2445,7 +2445,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2467,7 +2467,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2489,7 +2489,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2511,7 +2511,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2533,7 +2533,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2555,7 +2555,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2563,7 +2563,7 @@ R77
 R78
 R18
 vriscv_formal_monitor_rv32imc_rob
-R59
+R66
 !i10b 1
 !s100 Bad>2S9;RIg2]WlkMbNXT2
 IF9:6`e^RaYdh3`[EYV3K22
@@ -2577,7 +2577,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 R75
 R76
 !i113 1
@@ -2591,7 +2591,7 @@ R3
 R4
 R5
 R6
-R19
+R59
 !i10b 1
 !s100 2OSF:k^LmaOJ63^6H9Dhb0
 IeA4`aEQI6?Rj]1DX[3GF`3
@@ -2615,7 +2615,7 @@ R17
 R18
 Yrvfi_itf
 R1
-R59
+R66
 !i10b 1
 !s100 2b=S1=JJ:=R=::Dj?g9Ee3
 I3_R3gccjE95lAdm`:d=e43
@@ -2631,7 +2631,7 @@ R12
 r1
 !s85 0
 31
-R13
+R67
 !s107 /home/sphan5/Pied-Piper/mp4/hvl/rvfi_itf.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+/home/sphan5/Pied-Piper/mp4/hvl|/home/sphan5/Pied-Piper/mp4/hvl/rvfi_itf.sv|
 !i113 1

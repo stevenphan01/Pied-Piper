@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Sun Nov  7 13:15:44 2021
+Analysis & Synthesis Status : Successful - Sun Nov  7 15:56:58 2021
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 Revision Name : mp4
 Top-level Entity Name : mp4
 Family : Arria II GX
 Logic utilization : N/A
-    Combinational ALUTs : 3,731
+    Combinational ALUTs : 3,872
     Memory ALUTs : 0
-    Dedicated logic registers : 6,098
-Total registers : 6098
+    Dedicated logic registers : 6,109
+Total registers : 6109
 Total pins : 165
 Total virtual pins : 0
 Total block memory bits : 384

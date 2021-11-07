@@ -32,7 +32,8 @@ rv32i_word regfilemux_out;
 logic [1:0] mask_bits; 
 rv32i_word alumux1_out; 
 rv32i_word alumux2_out; 
-rv32i_word cmpmux_out; 
+rv32i_word cmpmux1_out; 
+rv32i_word cmpmux2_out;
 logic br_en_temp;
 logic jump_en; 
 logic load_pc;
@@ -48,10 +49,18 @@ rv32i_word ex_mem_forwarding_out1;
 rv32i_word mem_wb_forwarding_out1;
 rv32i_word ex_mem_forwarding_out2;
 rv32i_word mem_wb_forwarding_out2;
+rv32i_word ex_mem_forwarding_cmp1out;
+rv32i_word mem_wb_forwarding_cmp1out;
+rv32i_word ex_mem_forwarding_cmp2out;
+rv32i_word mem_wb_forwarding_cmp2out; 
 logic forwarding_load1;
 logic forwarding_load2;
+logic forwarding_cmp1_load;
+logic forwarding_cmp2_load;
 logic forwarding_mux1;
 logic forwarding_mux2;
+logic forwarding_cmp1mux;
+logic forwarding_cmp2mux;
 logic alumux2_sel;
 /*********************************************************************************************************************/
 
@@ -185,15 +194,19 @@ pipeline_stage ID_EX_stage (.clk(clk), .rst(rst_ID_EX), .load(load_ID_EX), .stag
 
 /****************************************************** Execute ******************************************************/
 alu ALU (.aluop(ID_EX_o.ControlWord.aluop), .a(alumux1_out), .b(alumux2_out), .f(EX_MEM_i.DataWord.alu_out));
-cmp CMP (.cmpop(ID_EX_o.ControlWord.cmpop), .rs1_out(ID_EX_o.DataWord.rs1_out), .cmpmux_out(cmpmux_out), .br_en(br_en_temp));
+cmp CMP (.cmpop(ID_EX_o.ControlWord.cmpop), .cmpmux1_out(cmpmux1_out), .cmpmux2_out(cmpmux2_out), .br_en(br_en_temp));
 forwarding_unit fu(.dest_ex_mem(EX_MEM_o.DataWord.rd), .dest_mem_wb(MEM_WB_o.DataWord.rd), .src1(ID_EX_o.DataWord.rs1),
-                   .src2(ID_EX_o.DataWord.rs2), .data_ex_mem(EX_MEM_o.DataWord.alu_out), .data_mem_wb(MEM_WB_o.DataWord.alu_out),
-                   .ld_regfile_ex_mem(EX_MEM_o.ControlWord.load_regfile), .ld_regfile_mem_wb(MEM_WB_o.ControlWord.load_regfile),
-                   .alumux1_sel(ID_EX_o.ControlWord.alumux1_sel), .alumux2_sel(alumux2_sel),
+                   .src2(ID_EX_o.DataWord.rs2), .data_ex_mem(EX_MEM_o.DataWord.alu_out), .data_mem_wb(MEM_WB_o.DataWord.alu_out), .data_mdr(MEM_WB_o.DataWord.data_mdr),
+                   .ld_regfile_ex_mem(EX_MEM_o.ControlWord.load_regfile), .ld_regfile_mem_wb(MEM_WB_o.ControlWord.load_regfile), .dmem_read(MEM_WB_o.ControlWord.dmem_read),
+                   .alumux1_sel(ID_EX_o.ControlWord.alumux1_sel), .alumux2_sel(alumux2_sel), .cmpmux2_sel(ID_EX_o.ControlWord.cmpmux_sel),
                    .ex_mem_forwarding_out1(ex_mem_forwarding_out1), .mem_wb_forwarding_out1(mem_wb_forwarding_out1),
                    .ex_mem_forwarding_out2(ex_mem_forwarding_out2), .mem_wb_forwarding_out2(mem_wb_forwarding_out2),
+                   .ex_mem_forwarding_cmp1out(ex_mem_forwarding_cmp1out), .mem_wb_forwarding_cmp1out(mem_wb_forwarding_cmp1out),
+                   .ex_mem_forwarding_cmp2out(ex_mem_forwarding_cmp2out), .mem_wb_forwarding_cmp2out(mem_wb_forwarding_cmp2out),
                    .forwarding_load1(forwarding_load1), .forwarding_load2(forwarding_load2),
-                   .forwarding_mux1(forwarding_mux1), .forwarding_mux2(forwarding_mux2));
+                   .forwarding_cmp1_load(forwarding_cmp1_load), .forwarding_cmp2_load(forwarding_cmp2_load),
+                   .forwarding_mux1(forwarding_mux1), .forwarding_mux2(forwarding_mux2),
+                   .forwarding_cmp1mux(forwarding_cmp1mux), .forwarding_cmp2mux(forwarding_cmp2mux));
 assign alumux2_sel = (ID_EX_o.ControlWord.opcode == op_reg) ? 1'b1 : 1'b0;
 always_comb begin : EX_comb
     // Pass the pipeline data
@@ -245,11 +258,24 @@ always_comb begin : EX_comb
         3'b110: alumux2_out = 32'h391BAD;
         3'b111: alumux2_out = mem_wb_forwarding_out2;
     endcase  
-    // cmpmux
-    unique case(ID_EX_o.ControlWord.cmpmux_sel)
-        cmpmux::rs2_out: cmpmux_out = ID_EX_o.DataWord.rs2_out; 
-        cmpmux::i_imm: cmpmux_out = ID_EX_o.DataWord.imm; 
+    // cmpmux2
+    unique case({forwarding_cmp2mux, forwarding_cmp2_load, ID_EX_o.ControlWord.cmpmux_sel})
+        3'b000: cmpmux2_out = ID_EX_o.DataWord.rs2_out; 
+        3'b001: cmpmux2_out = ID_EX_o.DataWord.imm; 
+        3'b010: cmpmux2_out = ex_mem_forwarding_cmp2out;
+        3'b011: cmpmux2_out = ex_mem_forwarding_cmp2out;
+        3'b100: cmpmux2_out = ID_EX_o.DataWord.rs2_out; 
+        3'b101: cmpmux2_out = ID_EX_o.DataWord.imm; 
+        3'b110: cmpmux2_out = mem_wb_forwarding_cmp2out;
+        3'b111: cmpmux2_out = mem_wb_forwarding_cmp2out;
     endcase     
+    // cmpmux1
+    unique case({forwarding_cmp1mux, forwarding_cmp1_load})
+        2'b00: cmpmux1_out = ID_EX_o.DataWord.rs1_out;
+        2'b01: cmpmux1_out = ex_mem_forwarding_cmp1out;
+        2'b10: cmpmux1_out = ID_EX_o.DataWord.rs1_out;
+        2'b11: cmpmux1_out = mem_wb_forwarding_cmp1out;
+    endcase
 end : EX_comb
 
 /********************************************************EX_MEM*******************************************************/
