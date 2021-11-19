@@ -1,3 +1,4 @@
+import rv32i_types::*; 
 module mp4_tb;
 `timescale 1ns/10ps
 
@@ -25,7 +26,11 @@ bit f;
 // This section not required until CP2
 
 assign rvfi.commit = 0; // Set high when a valid instruction is modifying regfile or PC
-assign rvfi.halt = dut.datapath.load_pc & (dut.datapath.pc_out == dut.datapath.EX_MEM_stage.data.DataWord.pc);  // Set high when you detect an infinite loop
+// Set high when you detect an infinite loop and there's only nop's after the execution stage
+assign rvfi.halt = dut.datapath.load_pc && (dut.datapath.pc_out == dut.datapath.EX_MEM_stage.data.DataWord.pc) &&
+                   (dut.datapath.MEM_WB_stage.data.ControlWord.opcode == 0) && 
+                   (dut.datapath.EX_MEM_stage.data.ControlWord.br_en == 1);
+// assign rvfi.halt = 0;
 initial rvfi.order = 0;
 always @(posedge itf.clk iff rvfi.commit) rvfi.order <= rvfi.order + 1; // Modify for OoO
 

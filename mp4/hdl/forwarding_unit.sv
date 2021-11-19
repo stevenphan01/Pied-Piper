@@ -91,7 +91,7 @@ always_comb begin
                     forwarding_load1 = 1'b1;
                 end
                 else begin
-                    ex_mem_forwarding_out1 = (dmem_read == 1'b1) ? data_mdr : data_ex_mem;
+                    ex_mem_forwarding_out1 = data_ex_mem;
                     forwarding_load1 = 1'b1;
                 end
                 forwarding_mux1 = 1'b0;
@@ -103,7 +103,7 @@ always_comb begin
                     forwarding_load2 = 1'b1;
                 end
                 else begin
-                    ex_mem_forwarding_out2 = (dmem_read == 1'b1) ? data_mdr : data_ex_mem;
+                    ex_mem_forwarding_out2 = data_ex_mem;
                     forwarding_load2 = 1'b1;
                 end
                 forwarding_mux2 = 1'b0;
@@ -118,7 +118,7 @@ always_comb begin
                         forwarding_load1 = 1'b1;
                     end
                     else begin
-                        ex_mem_forwarding_out1 = (dmem_read == 1'b1) ? data_mdr : data_ex_mem;
+                        ex_mem_forwarding_out1 = data_ex_mem;
                         forwarding_load1 = 1'b1;
                     end
                     forwarding_mux1 = 1'b0;
@@ -130,7 +130,7 @@ always_comb begin
                         forwarding_load2 = 1'b1;
                     end
                     else begin
-                        ex_mem_forwarding_out2 = (dmem_read == 1'b1) ? data_mdr : data_ex_mem;
+                        ex_mem_forwarding_out2 = data_ex_mem;
                         forwarding_load2 = 1'b1;
                     end
                     forwarding_mux2 = 1'b0;
@@ -168,7 +168,7 @@ always_comb begin
                         forwarding_load1 = 1'b1;
                     end
                     else begin
-                        ex_mem_forwarding_out1 = (dmem_read == 1'b1) ? data_mdr : data_ex_mem;
+                        ex_mem_forwarding_out1 = data_ex_mem;
                         forwarding_load1 = 1'b1;
                     end
                     forwarding_mux1 = 1'b0;
@@ -180,7 +180,7 @@ always_comb begin
                         forwarding_load2 = 1'b1;
                     end
                     else begin
-                        ex_mem_forwarding_out2 = (dmem_read == 1'b1) ? data_mdr : data_ex_mem;
+                        ex_mem_forwarding_out2 = data_ex_mem;
                         forwarding_load2 = 1'b1;
                     end
                     forwarding_mux2 = 1'b0;
@@ -196,7 +196,7 @@ always_comb begin
             forwarding_cmp1_load = 1'b1;
         end
         else begin
-            ex_mem_forwarding_cmp1out = (dmem_read == 1'b1) ? data_mdr : data_ex_mem;
+            ex_mem_forwarding_cmp1out = data_ex_mem;
             forwarding_cmp1_load = 1'b1;
         end
         forwarding_cmp1mux = 1'b0;
@@ -221,7 +221,7 @@ always_comb begin
             forwarding_cmp2_load = 1'b1;
         end
         else begin
-            ex_mem_forwarding_cmp2out = (dmem_read == 1'b1) ? data_mdr : data_ex_mem;
+            ex_mem_forwarding_cmp2out = data_ex_mem;
             forwarding_cmp2_load = 1'b1;
         end
         forwarding_cmp2mux = 1'b0;

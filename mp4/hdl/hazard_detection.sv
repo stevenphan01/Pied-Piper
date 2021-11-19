@@ -45,10 +45,13 @@ function void load_stall();
 endfunction 
 
 function void load_hit();
-    load_pc = 1'b0;
-    load_IF_ID = 1'b0; 
-    load_ID_EX = 1'b0; 
-    rst_EX_MEM = 1'b1;
+// reset if there is a dependency (forwarding) because we want to ID_EX to grab values from regfile
+    if(dest == src1 || dest == src2) begin
+        load_pc = 1'b0;
+        load_IF_ID = 1'b0; 
+        load_ID_EX = 1'b0; 
+        rst_EX_MEM = 1'b1;
+    end
 endfunction 
 
 always_comb begin 
@@ -73,6 +76,7 @@ always_comb begin
     4'b0011: begin
         if(dmem_read) 
             load_hit();
+        load_pc = 1'b0;
         rst_IF_ID = 1'b1; 
     end 
     // NO BRANCHING, INSTRUCTION HIT, NO LOAD, xxxxxxx
@@ -118,6 +122,8 @@ always_comb begin
     4'b1011: begin 
         if(dmem_read) 
             load_hit();
+        load_pc = 1'b0;
+        load_ID_EX = 1'b0; 
         rst_IF_ID = 1'b1; 
     end 
     // BRANCHING, INSTRUCTION HIT, NO LOAD, xxxxxxx
@@ -142,6 +148,7 @@ always_comb begin
     4'b1111: begin 
         if(dmem_read) 
             load_hit();
+        load_ID_EX = 1'b0; 
         rst_IF_ID = 1'b1; 
     end 
     endcase 

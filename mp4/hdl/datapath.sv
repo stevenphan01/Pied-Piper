@@ -145,46 +145,13 @@ always_comb begin : ID_comb
     ID_EX_i.DataWord.alu_out = IF_ID_o.DataWord.alu_out;
     ID_EX_i.DataWord.imm = IF_ID_o.DataWord.imm;  
     ID_EX_i.DataWord.data_mdr = IF_ID_o.DataWord.data_mdr; 
-    mask_bits = MEM_WB_o.DataWord.alu_out[1:0];
     // Regfilemux that handles writebacks
     unique case(MEM_WB_o.ControlWord.regfilemux_sel)
         regfilemux::alu_out:  regfilemux_out = MEM_WB_o.DataWord.alu_out; 
         regfilemux::br_en:    regfilemux_out = {31'd0, MEM_WB_o.ControlWord.br_en}; 
         regfilemux::u_imm:    regfilemux_out = MEM_WB_o.DataWord.imm; 
-        regfilemux::lw:       regfilemux_out = MEM_WB_o.DataWord.data_mdr; 
+        regfilemux::lw, regfilemux::lb, regfilemux::lbu, regfilemux::lh, regfilemux::lhu: regfilemux_out = MEM_WB_o.DataWord.data_mdr; 
         regfilemux::pc_plus4: regfilemux_out = MEM_WB_o.DataWord.pc + 4;
-        regfilemux::lb: begin 
-            case(mask_bits)
-                2'b00: regfilemux_out = {{24{MEM_WB_o.DataWord.data_mdr[7]}},  MEM_WB_o.DataWord.data_mdr[7:0]}; 
-                2'b01: regfilemux_out = {{24{MEM_WB_o.DataWord.data_mdr[15]}}, MEM_WB_o.DataWord.data_mdr[15:8]};
-                2'b10: regfilemux_out = {{24{MEM_WB_o.DataWord.data_mdr[23]}}, MEM_WB_o.DataWord.data_mdr[23:16]};
-                2'b11: regfilemux_out = {{24{MEM_WB_o.DataWord.data_mdr[31]}}, MEM_WB_o.DataWord.data_mdr[31:24]};                
-            endcase
-        end 
-        regfilemux::lbu: begin 
-            case(mask_bits)
-                2'b00: regfilemux_out = {{24'd0}, MEM_WB_o.DataWord.data_mdr[7:0]}; 
-                2'b01: regfilemux_out = {{24'd0}, MEM_WB_o.DataWord.data_mdr[15:8]};
-                2'b10: regfilemux_out = {{24'd0}, MEM_WB_o.DataWord.data_mdr[23:16]};
-                2'b11: regfilemux_out = {{24'd0}, MEM_WB_o.DataWord.data_mdr[31:24]};
-            endcase              
-        end    
-        regfilemux::lh: begin 
-            case(mask_bits)
-                2'b00: regfilemux_out = {{16{MEM_WB_o.DataWord.data_mdr[15]}}, MEM_WB_o.DataWord.data_mdr[15:0]};
-                2'b01: regfilemux_out = {{16{MEM_WB_o.DataWord.data_mdr[23]}}, MEM_WB_o.DataWord.data_mdr[23:8]};
-                2'b10: regfilemux_out = {{16{MEM_WB_o.DataWord.data_mdr[31]}}, MEM_WB_o.DataWord.data_mdr[31:16]}; 
-                2'b11: regfilemux_out = 32'd0;
-            endcase 
-        end  
-        regfilemux::lhu: begin 
-            case(mask_bits)
-                2'b00: regfilemux_out = {{16'd0}, MEM_WB_o.DataWord.data_mdr[15:0]};
-                2'b01: regfilemux_out = {{16'd0}, MEM_WB_o.DataWord.data_mdr[23:8]};
-                2'b10: regfilemux_out = {{16'd0}, MEM_WB_o.DataWord.data_mdr[31:16]}; 
-                2'b11: regfilemux_out = 32'd0;
-            endcase 
-        end                      
     endcase     
 end : ID_comb
 /*********************************************************************************************************************/
@@ -209,6 +176,7 @@ forwarding_unit fu(.dest_ex_mem(EX_MEM_o.DataWord.rd), .dest_mem_wb(MEM_WB_o.Dat
                    .forwarding_mux1(forwarding_mux1), .forwarding_mux2(forwarding_mux2),
                    .forwarding_cmp1mux(forwarding_cmp1mux), .forwarding_cmp2mux(forwarding_cmp2mux));
 assign alumux2_sel = (ID_EX_o.ControlWord.opcode == op_reg) ? 1'b1 : 1'b0;
+
 always_comb begin : EX_comb
     // Pass the pipeline data
     EX_MEM_i.ControlWord.load_regfile = ID_EX_o.ControlWord.load_regfile;
@@ -292,8 +260,9 @@ pipeline_stage EX_MEM_stage(.clk(clk), .rst(rst_EX_MEM), .load(load_EX_MEM), .st
 assign data_read_dp = EX_MEM_o.ControlWord.dmem_read;
 assign data_write_dp = EX_MEM_o.ControlWord.dmem_write;  
 assign data_mbe_dp = EX_MEM_o.ControlWord.mem_byte_enable;
-assign data_addr_dp = {EX_MEM_o.DataWord.alu_out[31:2], 2'b00};  
-assign data_wdata_dp = EX_MEM_o.DataWord.rs2_out; 
+assign data_addr_dp = {EX_MEM_o.DataWord.alu_out[31:2], 2'b00}; 
+assign mask_bits = EX_MEM_o.DataWord.alu_out[1:0]; 
+assign data_wdata_dp = EX_MEM_o.DataWord.rs2_out << (8 * mask_bits); 
 always_comb begin : MEM_comb
     // Pass the pipeline data
     MEM_WB_i.ControlWord.load_regfile = EX_MEM_o.ControlWord.load_regfile;
@@ -317,6 +286,47 @@ always_comb begin : MEM_comb
     MEM_WB_i.DataWord.alu_out = EX_MEM_o.DataWord.alu_out;
     MEM_WB_i.DataWord.imm = EX_MEM_o.DataWord.imm;  
     MEM_WB_i.DataWord.data_mdr = data_rdata_dp; 
+
+case(MEM_WB_i.ControlWord.regfilemux_sel)
+    regfilemux::lb: begin 
+        case(mask_bits)
+            2'b00: MEM_WB_i.DataWord.data_mdr = {{24{data_rdata_dp[7]}},  data_rdata_dp[7:0]}; 
+            2'b01: MEM_WB_i.DataWord.data_mdr = {{24{data_rdata_dp[15]}}, data_rdata_dp[15:8]};
+            2'b10: MEM_WB_i.DataWord.data_mdr = {{24{data_rdata_dp[23]}}, data_rdata_dp[23:16]};
+            2'b11: MEM_WB_i.DataWord.data_mdr = {{24{data_rdata_dp[31]}}, data_rdata_dp[31:24]};                
+        endcase
+        end 
+    regfilemux::lbu: begin 
+        case(mask_bits)
+            2'b00: MEM_WB_i.DataWord.data_mdr = {{24'd0}, data_rdata_dp[7:0]}; 
+            2'b01: MEM_WB_i.DataWord.data_mdr = {{24'd0}, data_rdata_dp[15:8]};
+            2'b10: MEM_WB_i.DataWord.data_mdr = {{24'd0}, data_rdata_dp[23:16]};
+            2'b11: MEM_WB_i.DataWord.data_mdr = {{24'd0}, data_rdata_dp[31:24]};
+        endcase              
+        end    
+    regfilemux::lh: begin 
+        case(mask_bits)
+            2'b00: MEM_WB_i.DataWord.data_mdr = {{16{data_rdata_dp[15]}}, data_rdata_dp[15:0]};
+            2'b01: MEM_WB_i.DataWord.data_mdr = {{16{data_rdata_dp[23]}}, data_rdata_dp[23:8]};
+            2'b10: MEM_WB_i.DataWord.data_mdr = {{16{data_rdata_dp[31]}}, data_rdata_dp[31:16]}; 
+            2'b11: MEM_WB_i.DataWord.data_mdr = 32'd0;
+        endcase 
+        end  
+    regfilemux::lhu: begin 
+        case(mask_bits)
+            2'b00: MEM_WB_i.DataWord.data_mdr = {{16'd0}, data_rdata_dp[15:0]};
+            2'b01: MEM_WB_i.DataWord.data_mdr = {{16'd0}, data_rdata_dp[23:8]};
+            2'b10: MEM_WB_i.DataWord.data_mdr = {{16'd0}, data_rdata_dp[31:16]}; 
+            2'b11: MEM_WB_i.DataWord.data_mdr = 32'd0;
+        endcase 
+        end   
+    default: ;
+endcase                   
+
+
+
+
+
 end : MEM_comb
 /*********************************************************************************************************************/
 

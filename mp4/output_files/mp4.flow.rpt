@@ -1,5 +1,5 @@
 Flow report for mp4
-Wed Nov 17 17:31:30 2021
+Thu Nov 18 15:53:30 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -40,7 +40,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------------+
 ; Flow Summary                                                                        ;
 +-----------------------------------+-------------------------------------------------+
-; Flow Status                       ; Successful - Wed Nov 17 17:31:30 2021           ;
+; Flow Status                       ; Successful - Thu Nov 18 15:53:30 2021           ;
 ; Quartus Prime Version             ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
 ; Revision Name                     ; mp4                                             ;
 ; Top-level Entity Name             ; mp4                                             ;
@@ -48,7 +48,7 @@ refer to the applicable agreement for further details.
 ; Device                            ; EP2AGX45DF25I3                                  ;
 ; Timing Models                     ; Final                                           ;
 ; Logic utilization                 ; N/A                                             ;
-;     Combinational ALUTs           ; 3,947                                           ;
+;     Combinational ALUTs           ; 3,936                                           ;
 ;     Memory ALUTs                  ; 0                                               ;
 ;     Dedicated logic registers     ; 6,109                                           ;
 ; Total registers                   ; 6109                                            ;
@@ -70,7 +70,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/17/2021 17:30:57 ;
+; Start date & time ; 11/18/2021 15:53:02 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; mp4                 ;
 +-------------------+---------------------+
@@ -81,7 +81,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                      ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +--------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID                ; 26830023663861.163719185715888         ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                ; 26830023626505.163727238230447         ; --            ; --          ; --             ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --          ; mp4_tb         ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; mp4_tb                                 ; --            ; --          ; eda_simulation ;
 ; EDA_OUTPUT_DATA_FORMAT               ; Systemverilog Hdl                      ; --            ; --          ; eda_simulation ;
@@ -114,8 +114,8 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:32     ; 1.0                     ; 1215 MB             ; 00:00:37                           ;
-; Total                ; 00:00:32     ; --                      ; --                  ; 00:00:37                           ;
+; Analysis & Synthesis ; 00:00:27     ; 1.0                     ; 1212 MB             ; 00:00:35                           ;
+; Total                ; 00:00:27     ; --                      ; --                  ; 00:00:35                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -124,7 +124,7 @@ refer to the applicable agreement for further details.
 +----------------------+------------------------------+--------------+--------------+----------------+
 ; Module Name          ; Machine Hostname             ; OS Name      ; OS Version   ; Processor type ;
 +----------------------+------------------------------+--------------+--------------+----------------+
-; Analysis & Synthesis ; gelib-4c-34.ews.illinois.edu ; CentOS Linux ; CentOS Linux ; x86_64         ;
+; Analysis & Synthesis ; gelib-4c-40.ews.illinois.edu ; CentOS Linux ; CentOS Linux ; x86_64         ;
 +----------------------+------------------------------+--------------+--------------+----------------+
 
 
