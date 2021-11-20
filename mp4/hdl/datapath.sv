@@ -53,6 +53,7 @@ rv32i_word ex_mem_forwarding_cmp1out;
 rv32i_word mem_wb_forwarding_cmp1out;
 rv32i_word ex_mem_forwarding_cmp2out;
 rv32i_word mem_wb_forwarding_cmp2out; 
+rv32i_word forwarded_store_data;
 logic forwarding_load1;
 logic forwarding_load2;
 logic forwarding_cmp1_load;
@@ -62,6 +63,7 @@ logic forwarding_mux2;
 logic forwarding_cmp1mux;
 logic forwarding_cmp2mux;
 logic alumux2_sel;
+logic forwarding_store;
 /*********************************************************************************************************************/
 
 /************************************************* Instruction Fetch *************************************************/
@@ -167,14 +169,16 @@ forwarding_unit fu(.dest_ex_mem(EX_MEM_o.DataWord.rd), .dest_mem_wb(MEM_WB_o.Dat
                    .src2(ID_EX_o.DataWord.rs2), .data_ex_mem(EX_MEM_o.DataWord.alu_out), .data_mem_wb(MEM_WB_o.DataWord.alu_out), .data_mdr(MEM_WB_o.DataWord.data_mdr),
                    .ld_regfile_ex_mem(EX_MEM_o.ControlWord.load_regfile), .ld_regfile_mem_wb(MEM_WB_o.ControlWord.load_regfile), .dmem_read(MEM_WB_o.ControlWord.dmem_read),
                    .alumux1_sel(ID_EX_o.ControlWord.alumux1_sel), .alumux2_sel(alumux2_sel), .cmpmux2_sel(ID_EX_o.ControlWord.cmpmux_sel),
+                    .opcode(ID_EX_o.ControlWord.opcode),
                    .ex_mem_forwarding_out1(ex_mem_forwarding_out1), .mem_wb_forwarding_out1(mem_wb_forwarding_out1),
                    .ex_mem_forwarding_out2(ex_mem_forwarding_out2), .mem_wb_forwarding_out2(mem_wb_forwarding_out2),
                    .ex_mem_forwarding_cmp1out(ex_mem_forwarding_cmp1out), .mem_wb_forwarding_cmp1out(mem_wb_forwarding_cmp1out),
                    .ex_mem_forwarding_cmp2out(ex_mem_forwarding_cmp2out), .mem_wb_forwarding_cmp2out(mem_wb_forwarding_cmp2out),
+                    .forwarded_store_data(forwarded_store_data),
                    .forwarding_load1(forwarding_load1), .forwarding_load2(forwarding_load2),
                    .forwarding_cmp1_load(forwarding_cmp1_load), .forwarding_cmp2_load(forwarding_cmp2_load),
                    .forwarding_mux1(forwarding_mux1), .forwarding_mux2(forwarding_mux2),
-                   .forwarding_cmp1mux(forwarding_cmp1mux), .forwarding_cmp2mux(forwarding_cmp2mux));
+                   .forwarding_cmp1mux(forwarding_cmp1mux), .forwarding_cmp2mux(forwarding_cmp2mux), .forwarding_store(forwarding_store)); 
 assign alumux2_sel = (ID_EX_o.ControlWord.opcode == op_reg) ? 1'b1 : 1'b0;
 
 always_comb begin : EX_comb
@@ -195,7 +199,7 @@ always_comb begin : EX_comb
     EX_MEM_i.DataWord.rs2 = ID_EX_o.DataWord.rs2;  
     EX_MEM_i.DataWord.rd = ID_EX_o.DataWord.rd; 
     EX_MEM_i.DataWord.rs1_out = ID_EX_o.DataWord.rs1_out;
-    EX_MEM_i.DataWord.rs2_out = ID_EX_o.DataWord.rs2_out;
+    EX_MEM_i.DataWord.rs2_out = (forwarding_store == 1'b1) ? forwarded_store_data : ID_EX_o.DataWord.rs2_out;
     EX_MEM_i.DataWord.imm = ID_EX_o.DataWord.imm;  
     EX_MEM_i.DataWord.data_mdr = ID_EX_o.DataWord.data_mdr; 
     // Calculate the mem_byte_enable to use in the mem stage to write to memory (store)

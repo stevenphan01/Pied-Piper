@@ -14,6 +14,7 @@ module forwarding_unit (
     input logic alumux1_sel,
     input logic alumux2_sel,
     input logic cmpmux2_sel,
+    input rv32i_opcode opcode,
     output rv32i_word ex_mem_forwarding_out1,
     output rv32i_word mem_wb_forwarding_out1,
     output rv32i_word ex_mem_forwarding_out2,
@@ -21,7 +22,8 @@ module forwarding_unit (
     output rv32i_word ex_mem_forwarding_cmp1out,
     output rv32i_word mem_wb_forwarding_cmp1out,
     output rv32i_word ex_mem_forwarding_cmp2out,
-    output rv32i_word mem_wb_forwarding_cmp2out,  
+    output rv32i_word mem_wb_forwarding_cmp2out,
+    output rv32i_word forwarded_store_data,  
     output logic forwarding_load1,
     output logic forwarding_load2,
     output logic forwarding_cmp1_load,
@@ -29,7 +31,8 @@ module forwarding_unit (
     output logic forwarding_mux1,
     output logic forwarding_mux2,
     output logic forwarding_cmp1mux,
-    output logic forwarding_cmp2mux
+    output logic forwarding_cmp2mux,
+    output logic forwarding_store
 );
 
 function void set_defaults();
@@ -51,6 +54,48 @@ function void set_defaults();
     ex_mem_forwarding_cmp2out = 0;
     mem_wb_forwarding_cmp2out = 0;  
 endfunction
+
+function void set_store_defaults();
+    forwarded_store_data = 0; 
+    forwarding_store = 0;
+endfunction
+
+always_comb begin
+    set_store_defaults();
+    if(opcode == op_store) begin
+        case({ld_regfile_ex_mem, ld_regfile_mem_wb})
+            2'b00: ;
+            2'b01: begin
+                    if(dest_mem_wb == src2) begin
+                        forwarded_store_data = (dmem_read == 1'b1) ? data_mdr : data_mem_wb;
+                        forwarding_store = 1'b1;
+                    end
+                end
+            2'b10: begin
+                    if(dest_ex_mem == src2) begin
+                        forwarded_store_data = data_ex_mem;
+                        forwarding_store = 1'b1;
+                    end
+                end
+            2'b11: begin
+                    if(dest_mem_wb == dest_ex_mem) begin
+                        if(dest_ex_mem == src2) begin
+                            forwarded_store_data = data_ex_mem;
+                            forwarding_store = 1'b1;
+                        end
+                    end
+                    else if(dest_mem_wb == src2) begin
+                        forwarded_store_data = (dmem_read == 1'b1) ? data_mdr : data_mem_wb;
+                        forwarding_store = 1'b1;
+                    end
+                    else if(dest_ex_mem == src2) begin
+                        forwarded_store_data = data_ex_mem;
+                        forwarding_store = 1'b1;                        
+                    end
+                end
+        endcase
+    end
+end
 
 always_comb begin
     set_defaults();
