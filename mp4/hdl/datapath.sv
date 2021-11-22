@@ -64,6 +64,7 @@ logic forwarding_cmp1mux;
 logic forwarding_cmp2mux;
 logic alumux2_sel;
 logic forwarding_store;
+logic br_forwarding;
 /*********************************************************************************************************************/
 
 /************************************************* Instruction Fetch *************************************************/
@@ -99,7 +100,7 @@ always_comb begin : IF_comb
     endcase 
     // Handle Branching 
     jump_en = (EX_MEM_i.ControlWord.opcode == op_jal || EX_MEM_i.ControlWord.opcode == op_jalr);
-    case({jump_en, EX_MEM_i.ControlWord.br_en})
+    case({jump_en, (br_en_temp && EX_MEM_i.ControlWord.opcode == op_br)})
         2'b00: pcmux_out = pc_out + 4; 
         2'b01: pcmux_out = EX_MEM_i.DataWord.alu_out; 
         2'b10: pcmux_out = {EX_MEM_i.DataWord.alu_out[31:1], 1'b0};
@@ -124,8 +125,9 @@ hazard_detection_unit hdu (
     .dest(EX_MEM_o.DataWord.rd),
     .src1(ID_EX_o.DataWord.rs1),
     .src2(ID_EX_o.DataWord.rs2),
-    .br_en(EX_MEM_i.ControlWord.br_en),
+    .br_en(br_forwarding),
     .jump_en(jump_en),
+    .opcode(ID_EX_o.ControlWord.opcode),
     .inst_read(inst_read_dp),
     .rst_IF_ID(rst_IF_ID),
     .rst_ID_EX(rst_ID_EX),
@@ -169,7 +171,9 @@ forwarding_unit fu(.dest_ex_mem(EX_MEM_o.DataWord.rd), .dest_mem_wb(MEM_WB_o.Dat
                    .src2(ID_EX_o.DataWord.rs2), .data_ex_mem(EX_MEM_o.DataWord.alu_out), .data_mem_wb(MEM_WB_o.DataWord.alu_out), .data_mdr(MEM_WB_o.DataWord.data_mdr),
                    .ld_regfile_ex_mem(EX_MEM_o.ControlWord.load_regfile), .ld_regfile_mem_wb(MEM_WB_o.ControlWord.load_regfile), .dmem_read(MEM_WB_o.ControlWord.dmem_read),
                    .alumux1_sel(ID_EX_o.ControlWord.alumux1_sel), .alumux2_sel(alumux2_sel), .cmpmux2_sel(ID_EX_o.ControlWord.cmpmux_sel),
-                    .opcode(ID_EX_o.ControlWord.opcode),
+                   .br_ex_mem(EX_MEM_o.ControlWord.br_en), .br_mem_wb(MEM_WB_o.ControlWord.br_en),
+                   .opcode(ID_EX_o.ControlWord.opcode),
+                   .ex_mem_regfile_mux_sel(EX_MEM_o.ControlWord.regfilemux_sel), .mem_wb_regfile_mux_sel(MEM_WB_o.ControlWord.regfilemux_sel),
                    .ex_mem_forwarding_out1(ex_mem_forwarding_out1), .mem_wb_forwarding_out1(mem_wb_forwarding_out1),
                    .ex_mem_forwarding_out2(ex_mem_forwarding_out2), .mem_wb_forwarding_out2(mem_wb_forwarding_out2),
                    .ex_mem_forwarding_cmp1out(ex_mem_forwarding_cmp1out), .mem_wb_forwarding_cmp1out(mem_wb_forwarding_cmp1out),
@@ -178,8 +182,21 @@ forwarding_unit fu(.dest_ex_mem(EX_MEM_o.DataWord.rd), .dest_mem_wb(MEM_WB_o.Dat
                    .forwarding_load1(forwarding_load1), .forwarding_load2(forwarding_load2),
                    .forwarding_cmp1_load(forwarding_cmp1_load), .forwarding_cmp2_load(forwarding_cmp2_load),
                    .forwarding_mux1(forwarding_mux1), .forwarding_mux2(forwarding_mux2),
-                   .forwarding_cmp1mux(forwarding_cmp1mux), .forwarding_cmp2mux(forwarding_cmp2mux), .forwarding_store(forwarding_store)); 
+                   .forwarding_cmp1mux(forwarding_cmp1mux), .forwarding_cmp2mux(forwarding_cmp2mux), .forwarding_store(forwarding_store));
+        
 assign alumux2_sel = (ID_EX_o.ControlWord.opcode == op_reg) ? 1'b1 : 1'b0;
+
+always_comb begin
+    if(EX_MEM_o.ControlWord.opcode == op_load && !data_resp_dp) begin
+        br_forwarding = 0;
+    end
+    else if(MEM_WB_o.ControlWord.opcode == op_load && EX_MEM_o.ControlWord.opcode == 0) begin
+        br_forwarding = 0;
+    end
+    else begin
+        br_forwarding = (br_en_temp && (ID_EX_o.ControlWord.opcode == op_br || ((ID_EX_o.ControlWord.opcode == op_reg || ID_EX_o.ControlWord.opcode == op_imm) && (ID_EX_o.ControlWord.funct3 == 3'd2 || ID_EX_o.ControlWord.funct3 == 3'd3))));
+    end
+end
 
 always_comb begin : EX_comb
     // Pass the pipeline data
@@ -193,7 +210,7 @@ always_comb begin : EX_comb
     EX_MEM_i.ControlWord.dmem_write = ID_EX_o.ControlWord.dmem_write;
     EX_MEM_i.ControlWord.opcode = ID_EX_o.ControlWord.opcode;
     EX_MEM_i.ControlWord.funct3 = ID_EX_o.ControlWord.funct3;
-    EX_MEM_i.ControlWord.br_en = br_en_temp && (ID_EX_o.ControlWord.opcode == 7'b1100011);
+    EX_MEM_i.ControlWord.br_en = br_forwarding;
     EX_MEM_i.DataWord.pc = ID_EX_o.DataWord.pc; 
     EX_MEM_i.DataWord.rs1 = ID_EX_o.DataWord.rs1;
     EX_MEM_i.DataWord.rs2 = ID_EX_o.DataWord.rs2;  

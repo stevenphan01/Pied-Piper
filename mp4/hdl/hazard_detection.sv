@@ -10,6 +10,7 @@ module hazard_detection_unit (
     input rv32i_reg src2, 
     input logic br_en, 
     input logic jump_en,
+    input rv32i_opcode opcode,
     output logic inst_read,
     output logic rst_IF_ID, 
     output logic rst_ID_EX,
@@ -56,7 +57,7 @@ endfunction
 
 always_comb begin 
     set_defaults();
-    case({jump_en || br_en, inst_resp_dp, dmem_read || dmem_write, data_resp_dp})
+    case({(jump_en || (br_en && opcode == op_br)), inst_resp_dp, dmem_read || dmem_write, data_resp_dp})
     // NO BRANCHING, INSTRUCTION MISS, NO LOAD, xxxxxxx
     // example: 9 instructions all adds, misses on 9th instruction 
     4'b0000: begin 
@@ -106,6 +107,8 @@ always_comb begin
         inst_read = 1'b1; 
         load_ID_EX = 1'b0; 
         rst_IF_ID = 1'b1; 
+        load_EX_MEM = 1'b0;
+        load_MEM_WB = 1'b0;
     end 
     // BRANCHING, INSTRUCTION MISS, NO LOAD, DATA CACHE HIT?
     // no example cannot have data hit and no load instruction 
@@ -124,7 +127,7 @@ always_comb begin
             load_hit();
         load_pc = 1'b0;
         load_ID_EX = 1'b0; 
-        rst_IF_ID = 1'b1; 
+        rst_IF_ID = 1'b1;
     end 
     // BRANCHING, INSTRUCTION HIT, NO LOAD, xxxxxxx
     // example: 8 instruction window, branch within the first 6 (which gets eval at the 8th)

@@ -1,4 +1,4 @@
-import rv32i_types::*; 
+import rv32i_types::*;
 
 module forwarding_unit (
     input rv32i_reg dest_ex_mem,
@@ -14,7 +14,11 @@ module forwarding_unit (
     input logic alumux1_sel,
     input logic alumux2_sel,
     input logic cmpmux2_sel,
+    input logic br_ex_mem,
+    input logic br_mem_wb,
     input rv32i_opcode opcode,
+    input regfilemux::regfilemux_sel_t ex_mem_regfile_mux_sel,
+    input regfilemux::regfilemux_sel_t mem_wb_regfile_mux_sel,
     output rv32i_word ex_mem_forwarding_out1,
     output rv32i_word mem_wb_forwarding_out1,
     output rv32i_word ex_mem_forwarding_out2,
@@ -59,6 +63,7 @@ function void set_store_defaults();
     forwarded_store_data = 0; 
     forwarding_store = 0;
 endfunction
+
 
 always_comb begin
     set_store_defaults();
@@ -109,6 +114,10 @@ always_comb begin
                     mem_wb_forwarding_out1 = 32'd0;
                     forwarding_load1 = 1'b1;
                 end
+                else if(mem_wb_regfile_mux_sel == regfilemux::br_en) begin
+                    mem_wb_forwarding_out1 = br_mem_wb;
+                    forwarding_load1 = 1'b1;
+                end
                 else begin
                     mem_wb_forwarding_out1 = (dmem_read == 1'b1) ? data_mdr : data_mem_wb;
                     forwarding_load1 = 1'b1;
@@ -119,6 +128,10 @@ always_comb begin
                 if(src2 == 0) begin
                     ex_mem_forwarding_out2 = 32'd0;
                     mem_wb_forwarding_out2 = 32'd0;
+                    forwarding_load2 = 1'b1;
+                end
+                else if(mem_wb_regfile_mux_sel == regfilemux::br_en) begin
+                    mem_wb_forwarding_out2 = br_mem_wb;
                     forwarding_load2 = 1'b1;
                 end
                 else begin
@@ -135,6 +148,10 @@ always_comb begin
                     mem_wb_forwarding_out1 = 32'd0;
                     forwarding_load1 = 1'b1;
                 end
+                else if(ex_mem_regfile_mux_sel == regfilemux::br_en) begin
+                    ex_mem_forwarding_out1 = br_ex_mem;
+                    forwarding_load1 = 1'b1;
+                end
                 else begin
                     ex_mem_forwarding_out1 = data_ex_mem;
                     forwarding_load1 = 1'b1;
@@ -145,6 +162,10 @@ always_comb begin
                 if(src2 == 0) begin
                     ex_mem_forwarding_out2 = 32'd0;
                     mem_wb_forwarding_out2 = 32'd0;
+                    forwarding_load2 = 1'b1;
+                end
+                else if(ex_mem_regfile_mux_sel == regfilemux::br_en) begin
+                    ex_mem_forwarding_out2 = br_ex_mem;
                     forwarding_load2 = 1'b1;
                 end
                 else begin
@@ -162,6 +183,10 @@ always_comb begin
                         mem_wb_forwarding_out1 = 32'd0;
                         forwarding_load1 = 1'b1;
                     end
+                    else if(ex_mem_regfile_mux_sel == regfilemux::br_en) begin
+                        ex_mem_forwarding_out1 = br_ex_mem;
+                        forwarding_load1 = 1'b1;
+                    end
                     else begin
                         ex_mem_forwarding_out1 = data_ex_mem;
                         forwarding_load1 = 1'b1;
@@ -172,6 +197,10 @@ always_comb begin
                     if(src2 == 0) begin
                         ex_mem_forwarding_out2 = 32'd0;
                         mem_wb_forwarding_out2 = 32'd0;
+                        forwarding_load2 = 1'b1;
+                    end
+                    else if(ex_mem_regfile_mux_sel == regfilemux::br_en) begin
+                        ex_mem_forwarding_out2 = br_ex_mem;
                         forwarding_load2 = 1'b1;
                     end
                     else begin
@@ -188,6 +217,10 @@ always_comb begin
                         mem_wb_forwarding_out1 = 32'd0;
                         forwarding_load1 = 1'b1;
                     end
+                    else if(mem_wb_regfile_mux_sel == regfilemux::br_en) begin
+                        mem_wb_forwarding_out1 = br_mem_wb;
+                        forwarding_load1 = 1'b1;
+                    end
                     else begin
                         mem_wb_forwarding_out1 = (dmem_read == 1'b1) ? data_mdr : data_mem_wb;
                         forwarding_load1 = 1'b1;
@@ -198,6 +231,10 @@ always_comb begin
                     if(src2 == 0) begin
                         ex_mem_forwarding_out2 = 32'd0;
                         mem_wb_forwarding_out2 = 32'd0;
+                        forwarding_load2 = 1'b1;
+                    end
+                    else if(mem_wb_regfile_mux_sel == regfilemux::br_en) begin
+                        mem_wb_forwarding_out2 = br_mem_wb;
                         forwarding_load2 = 1'b1;
                     end
                     else begin
@@ -212,6 +249,10 @@ always_comb begin
                         mem_wb_forwarding_out1 = 32'd0;
                         forwarding_load1 = 1'b1;
                     end
+                    else if(ex_mem_regfile_mux_sel == regfilemux::br_en) begin
+                        ex_mem_forwarding_out1 = br_ex_mem;
+                        forwarding_load1 = 1'b1;
+                    end
                     else begin
                         ex_mem_forwarding_out1 = data_ex_mem;
                         forwarding_load1 = 1'b1;
@@ -222,6 +263,10 @@ always_comb begin
                     if(src2 == 0) begin
                         ex_mem_forwarding_out2 = 32'd0;
                         mem_wb_forwarding_out2 = 32'd0;
+                        forwarding_load2 = 1'b1;
+                    end
+                    else if(ex_mem_regfile_mux_sel == regfilemux::br_en) begin
+                        ex_mem_forwarding_out2 = br_ex_mem;
                         forwarding_load2 = 1'b1;
                     end
                     else begin
@@ -240,6 +285,10 @@ always_comb begin
             mem_wb_forwarding_cmp1out = 32'd0;
             forwarding_cmp1_load = 1'b1;
         end
+        else if(ex_mem_regfile_mux_sel == regfilemux::br_en) begin
+            ex_mem_forwarding_cmp1out = br_ex_mem;
+            forwarding_cmp1_load = 1'b1;
+        end
         else begin
             ex_mem_forwarding_cmp1out = data_ex_mem;
             forwarding_cmp1_load = 1'b1;
@@ -250,6 +299,10 @@ always_comb begin
         if(src1 == 0) begin
             ex_mem_forwarding_cmp1out = 32'd0;
             mem_wb_forwarding_cmp1out = 32'd0;
+            forwarding_cmp1_load = 1'b1;
+        end
+        else if(mem_wb_regfile_mux_sel == regfilemux::br_en) begin
+            mem_wb_forwarding_cmp1out = br_mem_wb;
             forwarding_cmp1_load = 1'b1;
         end
         else begin
@@ -265,6 +318,10 @@ always_comb begin
             mem_wb_forwarding_cmp2out = 32'd0;
             forwarding_cmp2_load = 1'b1;
         end
+        else if(ex_mem_regfile_mux_sel == regfilemux::br_en) begin
+            ex_mem_forwarding_cmp2out = br_ex_mem;
+            forwarding_cmp2_load = 1'b1;
+        end
         else begin
             ex_mem_forwarding_cmp2out = data_ex_mem;
             forwarding_cmp2_load = 1'b1;
@@ -275,6 +332,10 @@ always_comb begin
         if(src2 == 0) begin
             ex_mem_forwarding_cmp2out = 32'd0;
             mem_wb_forwarding_cmp2out = 32'd0;
+            forwarding_cmp2_load = 1'b1;
+        end
+        else if(mem_wb_regfile_mux_sel == regfilemux::br_en) begin
+            mem_wb_forwarding_cmp2out = br_mem_wb;
             forwarding_cmp2_load = 1'b1;
         end
         else begin
