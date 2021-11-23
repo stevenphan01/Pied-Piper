@@ -54,6 +54,8 @@ rv32i_word mem_wb_forwarding_cmp1out;
 rv32i_word ex_mem_forwarding_cmp2out;
 rv32i_word mem_wb_forwarding_cmp2out; 
 rv32i_word forwarded_store_data;
+rv32i_word alu_out;
+rv32i_word muldiv_out;
 logic forwarding_load1;
 logic forwarding_load2;
 logic forwarding_cmp1_load;
@@ -175,7 +177,8 @@ pipeline_stage ID_EX_stage (.clk(clk), .rst(rst_ID_EX), .load(load_ID_EX), .stag
 /*********************************************************************************************************************/
 
 /****************************************************** Execute ******************************************************/
-alu ALU (.aluop(ID_EX_o.ControlWord.aluop), .a(alumux1_out), .b(alumux2_out), .f(EX_MEM_i.DataWord.alu_out));
+alu ALU (.aluop(ID_EX_o.ControlWord.aluop), .a(alumux1_out), .b(alumux2_out), .f(alu_out));
+muldiv MD (.muldivop(ID_EX_o.ControlWord.funct3), .a(alumux1_out), .b(alumux2_out), .result(muldiv_out));
 cmp CMP (.cmpop(ID_EX_o.ControlWord.cmpop), .cmpmux1_out(cmpmux1_out), .cmpmux2_out(cmpmux2_out), .br_en(br_en_temp));
 forwarding_unit fu(.dest_ex_mem(MEM_WB_i.DataWord.rd), .dest_mem_wb(MEM_WB_o.DataWord.rd), .src1(ID_EX_o.DataWord.rs1),
                    .src2(ID_EX_o.DataWord.rs2), .data_ex_mem(MEM_WB_i.DataWord.alu_out), .data_mem_wb(MEM_WB_o.DataWord.alu_out),
@@ -222,6 +225,7 @@ always_comb begin : EX_comb
     EX_MEM_i.ControlWord.dmem_write = ID_EX_o.ControlWord.dmem_write;
     EX_MEM_i.ControlWord.opcode = ID_EX_o.ControlWord.opcode;
     EX_MEM_i.ControlWord.funct3 = ID_EX_o.ControlWord.funct3;
+    EX_MEM_i.ControlWord.funct7 = ID_EX_o.ControlWord.funct7;
     EX_MEM_i.ControlWord.br_en = br_forwarding;
     EX_MEM_i.DataWord.pc = ID_EX_o.DataWord.pc; 
     EX_MEM_i.DataWord.rs1 = ID_EX_o.DataWord.rs1;
@@ -229,6 +233,7 @@ always_comb begin : EX_comb
     EX_MEM_i.DataWord.rd = ID_EX_o.DataWord.rd; 
     EX_MEM_i.DataWord.rs1_out = ID_EX_o.DataWord.rs1_out;
     EX_MEM_i.DataWord.rs2_out = (forwarding_store == 1'b1) ? forwarded_store_data : ID_EX_o.DataWord.rs2_out;
+    EX_MEM_i.DataWord.alu_out = (ID_EX_o.ControlWord.opcode == op_reg && ID_EX_o.ControlWord.funct7 == 7'd1) ? muldiv_out : alu_out;
     EX_MEM_i.DataWord.imm = ID_EX_o.DataWord.imm;  
     EX_MEM_i.DataWord.data_mdr = ID_EX_o.DataWord.data_mdr; 
     // Calculate the mem_byte_enable to use in the mem stage to write to memory (store)
@@ -309,6 +314,7 @@ always_comb begin : MEM_comb
     MEM_WB_i.ControlWord.mem_byte_enable = EX_MEM_o.ControlWord.mem_byte_enable;
     MEM_WB_i.ControlWord.opcode = EX_MEM_o.ControlWord.opcode;
     MEM_WB_i.ControlWord.funct3 = EX_MEM_o.ControlWord.funct3;
+    MEM_WB_i.ControlWord.funct7 = EX_MEM_o.ControlWord.funct7;
     MEM_WB_i.ControlWord.br_en = EX_MEM_o.ControlWord.br_en;
     MEM_WB_i.DataWord.pc = EX_MEM_o.DataWord.pc; 
     MEM_WB_i.DataWord.rs1 = EX_MEM_o.DataWord.rs1;
