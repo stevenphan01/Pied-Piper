@@ -85,16 +85,26 @@ always_comb begin : IF_comb
     IF_ID_i.DataWord.data_mdr = 32'd0; 
     // Decode the immediate 
     case(IF_ID_i.ControlWord.opcode) 
-        op_jalr, op_load, op_imm:
+        op_jalr, op_load, op_imm: begin
             IF_ID_i.DataWord.imm = {{21{inst_rdata_dp[31]}}, inst_rdata_dp[30:20]};
-        op_store:
+            IF_ID_i.DataWord.rs2 = 0;
+        end
+        op_store: begin
             IF_ID_i.DataWord.imm = {{21{inst_rdata_dp[31]}}, inst_rdata_dp[30:25], inst_rdata_dp[11:7]};
-        op_br:
+        end
+        op_br: begin
             IF_ID_i.DataWord.imm = {{20{inst_rdata_dp[31]}}, inst_rdata_dp[7], inst_rdata_dp[30:25], inst_rdata_dp[11:8], 1'b0};
-        op_lui, op_auipc:
+        end
+        op_lui, op_auipc: begin
             IF_ID_i.DataWord.imm = {inst_rdata_dp[31:12], 12'h000};
-        op_jal:
+            IF_ID_i.DataWord.rs1 = 0; 
+            IF_ID_i.DataWord.rs2 = 0;
+        end
+        op_jal: begin
             IF_ID_i.DataWord.imm = {{12{inst_rdata_dp[31]}}, inst_rdata_dp[19:12], inst_rdata_dp[20], inst_rdata_dp[30:21], 1'b0};
+            IF_ID_i.DataWord.rs1 = 0; 
+            IF_ID_i.DataWord.rs2 = 0;
+        end
         default:
             IF_ID_i.DataWord.imm = 32'd0;
     endcase 

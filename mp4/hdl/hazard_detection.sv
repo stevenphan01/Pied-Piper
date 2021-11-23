@@ -48,10 +48,10 @@ endfunction
 function void load_hit();
 // reset if there is a dependency (forwarding) because we want to ID_EX to grab values from regfile
     if(dest == src1 || dest == src2) begin
+        rst_EX_MEM = 1'b1;
         load_pc = 1'b0;
         load_IF_ID = 1'b0; 
         load_ID_EX = 1'b0; 
-        rst_EX_MEM = 1'b1;
     end
 endfunction 
 
@@ -78,7 +78,10 @@ always_comb begin
         if(dmem_read) 
             load_hit();
         load_pc = 1'b0;
-        rst_IF_ID = 1'b1; 
+        if(dest == src1 || dest == src2)
+            load_IF_ID = 1'b0;
+        else
+            rst_IF_ID = 1'b1; 
     end 
     // NO BRANCHING, INSTRUCTION HIT, NO LOAD, xxxxxxx
     // example: In 8 instruction window, and there's no load/branches prior to the current instruction (if_id_i)
