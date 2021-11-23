@@ -75,13 +75,8 @@ always_comb begin
     // NO BRANCHING, INSTRUCTION MISS, LOAD, DATA CACHE HIT
     // example: 9 instructions, LOAD on 6th instruction (which becomes data hit on 9th), 9th is instruction miss
     4'b0011: begin
-        if(dmem_read) 
-            load_hit();
         load_pc = 1'b0;
-        if(dest == src1 || dest == src2)
-            load_IF_ID = 1'b0;
-        else
-            rst_IF_ID = 1'b1; 
+        rst_IF_ID = 1'b1; 
     end 
     // NO BRANCHING, INSTRUCTION HIT, NO LOAD, xxxxxxx
     // example: In 8 instruction window, and there's no load/branches prior to the current instruction (if_id_i)
@@ -99,19 +94,12 @@ always_comb begin
     end 
     // NO BRANCHING, INSTRUCTION HIT, LOAD, DATA CACHE HIT 
     // example: In an 8 instruction window, there was a load (within the first 5 instructions) which became a hit before the 9th instruction
-    4'b0111: begin 
-        if(dmem_read) 
-            load_hit();
-    end
+    4'b0111:;
     // BRANCHING, INSTRUCTION MISS, NO LOAD, xxxxxxx
     // example: 9 instructions, branch on the 6th (which gets evaluated on the 9th)
     4'b1000: begin 
-        load_pc = 1'b0; 
-        inst_read = 1'b1; 
-        load_ID_EX = 1'b0; 
+        load_stall();
         rst_IF_ID = 1'b1; 
-        load_EX_MEM = 1'b0;
-        load_MEM_WB = 1'b0;
     end 
     // BRANCHING, INSTRUCTION MISS, NO LOAD, DATA CACHE HIT?
     // no example cannot have data hit and no load instruction 
@@ -126,8 +114,6 @@ always_comb begin
     // BRANCHING, INSTRUCTION MISS, LOAD, DATA CACHE HIT
     // example: 9 instruction window, branch on 7th (eval at 9th), load on 6th (which becomes a hit on the 9th)
     4'b1011: begin 
-        if(dmem_read) 
-            load_hit();
         load_pc = 1'b0;
         load_ID_EX = 1'b0; 
         rst_IF_ID = 1'b1;
@@ -152,8 +138,6 @@ always_comb begin
     // BRANCHING, INSTRUCTION HIT, LOAD, DATA CACHE HIT
     // example: 8 instruction window, consecutive load/branch (load within the first 5)
     4'b1111: begin 
-        if(dmem_read) 
-            load_hit();
         load_ID_EX = 1'b0; 
         rst_IF_ID = 1'b1; 
     end 

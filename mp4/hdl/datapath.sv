@@ -177,13 +177,15 @@ pipeline_stage ID_EX_stage (.clk(clk), .rst(rst_ID_EX), .load(load_ID_EX), .stag
 /****************************************************** Execute ******************************************************/
 alu ALU (.aluop(ID_EX_o.ControlWord.aluop), .a(alumux1_out), .b(alumux2_out), .f(EX_MEM_i.DataWord.alu_out));
 cmp CMP (.cmpop(ID_EX_o.ControlWord.cmpop), .cmpmux1_out(cmpmux1_out), .cmpmux2_out(cmpmux2_out), .br_en(br_en_temp));
-forwarding_unit fu(.dest_ex_mem(EX_MEM_o.DataWord.rd), .dest_mem_wb(MEM_WB_o.DataWord.rd), .src1(ID_EX_o.DataWord.rs1),
-                   .src2(ID_EX_o.DataWord.rs2), .data_ex_mem(EX_MEM_o.DataWord.alu_out), .data_mem_wb(MEM_WB_o.DataWord.alu_out), .data_mdr(MEM_WB_o.DataWord.data_mdr),
-                   .ld_regfile_ex_mem(EX_MEM_o.ControlWord.load_regfile), .ld_regfile_mem_wb(MEM_WB_o.ControlWord.load_regfile), .dmem_read(MEM_WB_o.ControlWord.dmem_read),
+forwarding_unit fu(.dest_ex_mem(MEM_WB_i.DataWord.rd), .dest_mem_wb(MEM_WB_o.DataWord.rd), .src1(ID_EX_o.DataWord.rs1),
+                   .src2(ID_EX_o.DataWord.rs2), .data_ex_mem(MEM_WB_i.DataWord.alu_out), .data_mem_wb(MEM_WB_o.DataWord.alu_out),
+                   .data_mdr_in(MEM_WB_i.DataWord.data_mdr), .data_mdr(MEM_WB_o.DataWord.data_mdr),
+                   .ld_regfile_ex_mem(MEM_WB_i.ControlWord.load_regfile), .ld_regfile_mem_wb(MEM_WB_o.ControlWord.load_regfile),
+                   .dmem_read_in(MEM_WB_i.ControlWord.dmem_read), .dmem_read(MEM_WB_o.ControlWord.dmem_read),
                    .alumux1_sel(ID_EX_o.ControlWord.alumux1_sel), .alumux2_sel(alumux2_sel), .cmpmux2_sel(ID_EX_o.ControlWord.cmpmux_sel),
-                   .br_ex_mem(EX_MEM_o.ControlWord.br_en), .br_mem_wb(MEM_WB_o.ControlWord.br_en),
+                   .br_ex_mem(MEM_WB_i.ControlWord.br_en), .br_mem_wb(MEM_WB_o.ControlWord.br_en),
                    .opcode(ID_EX_o.ControlWord.opcode),
-                   .ex_mem_regfile_mux_sel(EX_MEM_o.ControlWord.regfilemux_sel), .mem_wb_regfile_mux_sel(MEM_WB_o.ControlWord.regfilemux_sel),
+                   .ex_mem_regfile_mux_sel(MEM_WB_i.ControlWord.regfilemux_sel), .mem_wb_regfile_mux_sel(MEM_WB_o.ControlWord.regfilemux_sel),
                    .ex_mem_forwarding_out1(ex_mem_forwarding_out1), .mem_wb_forwarding_out1(mem_wb_forwarding_out1),
                    .ex_mem_forwarding_out2(ex_mem_forwarding_out2), .mem_wb_forwarding_out2(mem_wb_forwarding_out2),
                    .ex_mem_forwarding_cmp1out(ex_mem_forwarding_cmp1out), .mem_wb_forwarding_cmp1out(mem_wb_forwarding_cmp1out),
