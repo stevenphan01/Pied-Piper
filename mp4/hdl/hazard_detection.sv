@@ -3,6 +3,8 @@ import rv32i_types::*;
 module hazard_detection_unit (
     input logic dmem_read, 
     input logic dmem_write,
+    input logic muldiv_start,
+    input logic muldiv_resp,
     input logic data_resp_dp,
     input logic inst_resp_dp,
     input rv32i_reg dest, 
@@ -57,7 +59,7 @@ endfunction
 
 always_comb begin 
     set_defaults();
-    case({(jump_en || (br_en && opcode == op_br)), inst_resp_dp, dmem_read || dmem_write, data_resp_dp})
+    case({(jump_en || (br_en && opcode == op_br)), inst_resp_dp, dmem_read || dmem_write || muldiv_start, data_resp_dp || muldiv_resp})
     // NO BRANCHING, INSTRUCTION MISS, NO LOAD, xxxxxxx
     // example: 9 instructions all adds, misses on 9th instruction 
     4'b0000: begin 

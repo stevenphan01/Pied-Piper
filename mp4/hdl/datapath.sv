@@ -67,6 +67,8 @@ logic forwarding_cmp2mux;
 logic alumux2_sel;
 logic forwarding_store;
 logic br_forwarding;
+logic muldiv_start;
+logic muldiv_resp;
 /*********************************************************************************************************************/
 
 /************************************************* Instruction Fetch *************************************************/
@@ -132,6 +134,8 @@ regfile regfile (.clk(clk), .rst(rst), .load(MEM_WB_o.ControlWord.load_regfile),
 hazard_detection_unit hdu (
     .dmem_read(EX_MEM_o.ControlWord.dmem_read),
     .dmem_write(EX_MEM_o.ControlWord.dmem_write),
+    .muldiv_start(muldiv_start),
+    .muldiv_resp(muldiv_resp),
     .data_resp_dp(data_resp_dp),
     .inst_resp_dp(inst_resp_dp),
     .dest(EX_MEM_o.DataWord.rd),
@@ -178,7 +182,7 @@ pipeline_stage ID_EX_stage (.clk(clk), .rst(rst_ID_EX), .load(load_ID_EX), .stag
 
 /****************************************************** Execute ******************************************************/
 alu ALU (.aluop(ID_EX_o.ControlWord.aluop), .a(alumux1_out), .b(alumux2_out), .f(alu_out));
-muldiv MD (.muldivop(ID_EX_o.ControlWord.funct3), .a(alumux1_out), .b(alumux2_out), .result(muldiv_out));
+muldiv MD (.clk(clk), .rst(rst_ID_EX), .start(muldiv_start), .muldivop(ID_EX_o.ControlWord.funct3), .a(alumux1_out), .b(alumux2_out), .muldiv_resp(muldiv_resp), .result(muldiv_out));
 cmp CMP (.cmpop(ID_EX_o.ControlWord.cmpop), .cmpmux1_out(cmpmux1_out), .cmpmux2_out(cmpmux2_out), .br_en(br_en_temp));
 forwarding_unit fu(.dest_ex_mem(MEM_WB_i.DataWord.rd), .dest_mem_wb(MEM_WB_o.DataWord.rd), .src1(ID_EX_o.DataWord.rs1),
                    .src2(ID_EX_o.DataWord.rs2), .data_ex_mem(MEM_WB_i.DataWord.alu_out), .data_mem_wb(MEM_WB_o.DataWord.alu_out),
@@ -198,7 +202,8 @@ forwarding_unit fu(.dest_ex_mem(MEM_WB_i.DataWord.rd), .dest_mem_wb(MEM_WB_o.Dat
                    .forwarding_cmp1_load(forwarding_cmp1_load), .forwarding_cmp2_load(forwarding_cmp2_load),
                    .forwarding_mux1(forwarding_mux1), .forwarding_mux2(forwarding_mux2),
                    .forwarding_cmp1mux(forwarding_cmp1mux), .forwarding_cmp2mux(forwarding_cmp2mux), .forwarding_store(forwarding_store));
-        
+
+assign muldiv_start = (ID_EX_o.ControlWord.opcode == op_reg && ID_EX_o.ControlWord.funct7 == 7'd1);        
 assign alumux2_sel = (ID_EX_o.ControlWord.opcode == op_reg) ? 1'b1 : 1'b0;
 
 always_comb begin
