@@ -24,6 +24,7 @@ begin
         data.ControlWord.mem_byte_enable <= 4'b1111; 
         data.ControlWord.opcode <= rv32i_opcode'(7'd0); 
         data.ControlWord.funct3 <= 3'd0; 
+        data.ControlWord.funct7 <= 7'd0; 
         data.ControlWord.br_en <= 1'b0; 
         data.DataWord.pc <= 32'd0; 
         data.DataWord.rs1 <= 5'd0; 

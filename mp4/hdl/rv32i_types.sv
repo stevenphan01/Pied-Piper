@@ -81,7 +81,8 @@ typedef struct packed {
     logic dmem_write; 
     logic [3:0] mem_byte_enable; 
     rv32i_opcode opcode; 
-    logic [2:0] funct3; 
+    logic [2:0] funct3;
+    logic [6:0] funct7; 
     logic br_en; 
 } rv32i_control_word; 
 

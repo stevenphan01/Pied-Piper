@@ -51,6 +51,7 @@ begin
     ctrl_word.mem_byte_enable = 4'b1111; 
     ctrl_word.opcode = opcode; 
     ctrl_word.funct3 = funct3; 
+    ctrl_word.funct7 = funct7;
     ctrl_word.br_en = 1'b0; 
     /* Assign control signals based on opcode */
     case(opcode)
@@ -112,35 +113,40 @@ begin
                 end 
             endcase 
         end 
-        op_reg: begin 
-            case(arith_funct3)
-                add: begin
-                    loadRegfile(regfilemux::alu_out); 
-                    if(funct7[5])
-                        setALU(alumux::rs1_out, 1'b1, alu_sub);
-                    else
-                        setALU(alumux::rs1_out, 1'b1, alu_add);
-                end 
-                slt: begin 
-                    setCMP(cmpmux::rs2_out, 1'b1, blt);
-                    loadRegfile(regfilemux::br_en);
-                end 
-                sltu: begin 
-                    setCMP(cmpmux::rs2_out, 1'b1, bltu);
-                    loadRegfile(regfilemux::br_en);                    
-                end 
-                sr: begin 
-                    loadRegfile(regfilemux::alu_out);
-                    if(funct7[5])
-                        setALU(alumux::rs1_out, 1'b1, alu_sra);
-                    else
-                        setALU(alumux::rs1_out, 1'b1, alu_srl);                    
-                end 
-                default: begin 
-                    loadRegfile(regfilemux::alu_out);
-                    setALU(alumux::rs1_out, 1'b1, alu_ops'(arith_funct3));
-                end    
-            endcase 
+        op_reg: begin
+            if(funct7 == 7'd1) begin
+                loadRegfile(regfilemux::alu_out);
+            end 
+            else begin
+                case(arith_funct3)
+                    add: begin
+                        loadRegfile(regfilemux::alu_out); 
+                        if(funct7[5])
+                            setALU(alumux::rs1_out, 1'b1, alu_sub);
+                        else
+                            setALU(alumux::rs1_out, 1'b1, alu_add);
+                    end 
+                    slt: begin 
+                        setCMP(cmpmux::rs2_out, 1'b1, blt);
+                        loadRegfile(regfilemux::br_en);
+                    end 
+                    sltu: begin 
+                        setCMP(cmpmux::rs2_out, 1'b1, bltu);
+                        loadRegfile(regfilemux::br_en);                    
+                    end 
+                    sr: begin 
+                        loadRegfile(regfilemux::alu_out);
+                        if(funct7[5])
+                            setALU(alumux::rs1_out, 1'b1, alu_sra);
+                        else
+                            setALU(alumux::rs1_out, 1'b1, alu_srl);                    
+                    end 
+                    default: begin 
+                        loadRegfile(regfilemux::alu_out);
+                        setALU(alumux::rs1_out, 1'b1, alu_ops'(arith_funct3));
+                    end    
+                endcase 
+            end
         end
         default: begin
             ctrl_word.load_regfile = 1'b0;
@@ -154,6 +160,7 @@ begin
             ctrl_word.mem_byte_enable = 4'b1111; 
             ctrl_word.opcode = opcode; 
             ctrl_word.funct3 = funct3; 
+            ctrl_word.funct7 = funct7;
             ctrl_word.br_en = 1'b0;    /* Unknown opcode, set control word to zero */
         end
     endcase
