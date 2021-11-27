@@ -77,6 +77,8 @@ always_comb begin
     // NO BRANCHING, INSTRUCTION MISS, LOAD, DATA CACHE HIT
     // example: 9 instructions, LOAD on 6th instruction (which becomes data hit on 9th), 9th is instruction miss
     4'b0011: begin
+        if((muldiv_start && (dmem_read && !data_resp_dp)) || (dmem_read && (muldiv_start && !muldiv_resp)))
+            load_stall();
         load_pc = 1'b0;
         rst_IF_ID = 1'b1; 
     end 
@@ -96,7 +98,10 @@ always_comb begin
     end 
     // NO BRANCHING, INSTRUCTION HIT, LOAD, DATA CACHE HIT 
     // example: In an 8 instruction window, there was a load (within the first 5 instructions) which became a hit before the 9th instruction
-    4'b0111:;
+    4'b0111: begin 
+        if((muldiv_start && (dmem_read && !data_resp_dp)) || (dmem_read && (muldiv_start && !muldiv_resp)))
+            load_stall();
+    end
     // BRANCHING, INSTRUCTION MISS, NO LOAD, xxxxxxx
     // example: 9 instructions, branch on the 6th (which gets evaluated on the 9th)
     4'b1000: begin 
@@ -116,6 +121,8 @@ always_comb begin
     // BRANCHING, INSTRUCTION MISS, LOAD, DATA CACHE HIT
     // example: 9 instruction window, branch on 7th (eval at 9th), load on 6th (which becomes a hit on the 9th)
     4'b1011: begin 
+        if((muldiv_start && (dmem_read && !data_resp_dp)) || (dmem_read && (muldiv_start && !muldiv_resp)))
+            load_stall();
         load_pc = 1'b0;
         load_ID_EX = 1'b0; 
         rst_IF_ID = 1'b1;
@@ -140,6 +147,8 @@ always_comb begin
     // BRANCHING, INSTRUCTION HIT, LOAD, DATA CACHE HIT
     // example: 8 instruction window, consecutive load/branch (load within the first 5)
     4'b1111: begin 
+        if((muldiv_start && (dmem_read && !data_resp_dp)) || (dmem_read && (muldiv_start && !muldiv_resp)))
+            load_stall();
         load_ID_EX = 1'b0; 
         rst_IF_ID = 1'b1; 
     end 

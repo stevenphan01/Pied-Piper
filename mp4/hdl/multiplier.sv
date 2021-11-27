@@ -10,12 +10,23 @@ module multiplier
 );
 
 // intermediate logic
+logic [31:0] repeated_add;
 logic [31:0] iteration;
 logic [31:0] next_iteration;
 logic [63:0] next_product;
 logic [31:0] stop_case;
 
-assign stop_case = multiplier - 32'd1;
+always_comb begin
+    if(multiplicand > multiplier) begin
+        stop_case = multiplier - 32'd1;
+        repeated_add = multiplicand;
+    end
+    else begin
+        stop_case = multiplicand - 32'd1;
+        repeated_add = multiplier;
+    end
+
+end
 
 // list of states
 enum int unsigned {
@@ -76,7 +87,7 @@ begin : state_output
               end
         
         add_shift: begin
-                    next_product = product + multiplicand;
+                    next_product = product + repeated_add;
                     next_iteration = iteration + 32'd1;
                     mul_resp <= 1'd0;
                    end

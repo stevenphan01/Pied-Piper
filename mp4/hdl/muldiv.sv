@@ -22,7 +22,7 @@ logic neg_bit;
 logic mul_start;
 logic mulh_start;
 logic mulsu_start;
-logic mulu_start;
+logic mulhu_start;
 logic div_start;
 logic divu_start;
 logic rem_start;
