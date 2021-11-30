@@ -26,12 +26,6 @@ logic [3:0] data_mbe_dp;
 rv32i_word data_addr_dp;
 rv32i_word data_wdata_dp;
 
-/* Between arbiter and instr cache */
-rv32i_word inst_pmem_address; 
-logic inst_pmem_read;
-logic inst_pmem_resp; 
-rv32i_line inst_pmem_rdata; 
-
 /* Between ev buffer and data cache */
 rv32i_word data_pmem_address; 
 logic data_pmem_read;
@@ -48,13 +42,25 @@ logic ev_write;
 logic ev_read; 
 rv32i_line ev_wdata; 
 
+/* Between prefetch and instr cache */
+rv32i_word inst_pmem_address; 
+logic inst_pmem_read;
+logic pf_resp; 
+rv32i_line pf_rdata; 
+
+/* Between arbiter and prefetch */
+logic inst_pmem_resp; 
+rv32i_line inst_pmem_rdata; 
+logic pf_read; 
+rv32i_word pf_address; 
+
 /* Declare Datapath */
 datapath datapath(.*);
 arbiter arbiter (
     .clk(clk),
     .rst(rst),
-    .inst_pmem_address(inst_pmem_address),
-    .inst_pmem_read(inst_pmem_read), 
+    .inst_pmem_address(pf_address),
+    .inst_pmem_read(pf_read), 
     .inst_pmem_rdata(inst_pmem_rdata), 
     .inst_pmem_resp(inst_pmem_resp),
     .data_pmem_address(ev_address),
@@ -105,10 +111,23 @@ cache data_cache (
   .mem_rdata_cpu(data_rdata_dp)
 );
 
+prefetch prefetch(
+  .clk(clk),
+  .rst(rst),
+  .inst_pmem_address(inst_pmem_address), 
+  .inst_pmem_read(inst_pmem_read),
+  .pf_resp(pf_resp), 
+  .pf_rdata(pf_rdata), 
+  .inst_pmem_resp(inst_pmem_resp),
+  .inst_pmem_rdata(inst_pmem_rdata), 
+  .pf_read(pf_read),
+  .pf_address(pf_address) 
+);
+
 cache instr_cache(
   .clk(clk),
-  .pmem_resp(inst_pmem_resp),
-  .pmem_rdata(inst_pmem_rdata),
+  .pmem_resp(pf_resp),
+  .pmem_rdata(pf_rdata),
   .pmem_wdata(),
   .pmem_address(inst_pmem_address),
   .pmem_read(inst_pmem_read),
