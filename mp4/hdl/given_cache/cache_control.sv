@@ -12,13 +12,15 @@ module cache_control (
 	output logic pmem_write,
 
   /* Control signals */
-  output logic tag_load,
-  output logic valid_load,
-  output logic dirty_load,
-  output logic dirty_in,
-  input logic dirty_out,
-
+  output logic [1:0] tag_load,
+  output logic [1:0] valid_load,
+  output logic [1:0] dirty_load,
+  output logic lru_load,
+  output logic [1:0] dirty_in,
+  input logic [1:0] dirty_out,
+  input logic [0:0] lru_out,
   input logic hit,
+  input logic [1:0] way_hit,
   output logic [1:0] writing
 );
 
@@ -33,10 +35,11 @@ enum int unsigned
 always_comb begin : state_actions
 
 	/* Defaults */
-  tag_load = 1'b0;
-  valid_load = 1'b0;
-  dirty_load = 1'b0;
-  dirty_in = 1'b0;
+  lru_load = 1'b0;
+  tag_load = 0;
+  valid_load = 0;
+  dirty_load = 0;
+  dirty_in = 0;
   writing = 2'b11;
 
 	mem_resp = 1'b0;
@@ -47,14 +50,16 @@ always_comb begin : state_actions
     check_hit: begin
       if (mem_read || mem_write) begin
         if (hit) begin
+          lru_load = 1'b1;
           mem_resp = 1'b1;
           if (mem_write) begin
-            dirty_load = 1'b1;
-            dirty_in = 1'b1;
+            dirty_load[1] = (way_hit == 2'b10) ? 1'b1 : 1'b0; dirty_load[0] = (way_hit == 2'b01) ? 1'b1 : 1'b0; 
+            dirty_in[1] = (way_hit == 2'b10) ? 1'b1 : 1'b0; dirty_in[0] = (way_hit == 2'b01) ? 1'b1 : 1'b0; 
             writing = 2'b01;
           end
         end else begin
-          if (dirty_out)
+          if ((dirty_out[0] && lru_out == 1'b0 ) || 
+              (dirty_out[1] && lru_out == 1'b1 ))
             pmem_write = 1'b1;
         end
       end
@@ -64,11 +69,19 @@ always_comb begin : state_actions
       pmem_read = 1'b1;
       writing = 2'b00;
       if (pmem_resp) begin
-        tag_load = 1'b1;
-        valid_load = 1'b1;
+        // lru_load = 1'b1;
+        tag_load[0] = lru_out == 1'b0 ? 1'b1 : 1'b0; 
+        tag_load[1] = lru_out == 1'b1 ? 1'b1 : 1'b0;       
+        valid_load[0] = lru_out == 1'b0 ? 1'b1 : 1'b0; 
+        valid_load[1] = lru_out == 1'b1 ? 1'b1 : 1'b0;        
       end
-        dirty_load = 1'b1;
-        dirty_in = 1'b0;
+      else begin 
+        dirty_load[0] = lru_out == 1'b0 ? 1'b1 : 1'b0; 
+        dirty_load[1] = lru_out == 1'b1 ? 1'b1 : 1'b0;
+        dirty_in[0] = lru_out == 1'b0 ? 1'b0 : 1'b1; 
+        dirty_in[1] = lru_out == 1'b1 ? 1'b0 : 1'b1;
+
+      end       
     end
 
 	endcase
@@ -83,12 +96,13 @@ always_comb begin : next_state_logic
 	case(state)
     check_hit: begin
       if ((mem_read || mem_write) && !hit) begin
-        if (dirty_out) begin
+        if ((dirty_out[0] && lru_out == 1'b0 ) || 
+              (dirty_out[1] && lru_out == 1'b1 )) begin
           if (pmem_resp)
             next_state = read_mem;
         end else begin
           next_state = read_mem;
-		  end
+		    end
       end
     end
 

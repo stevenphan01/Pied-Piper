@@ -132,6 +132,10 @@ regfile regfile (.clk(clk), .rst(rst), .load(MEM_WB_o.ControlWord.load_regfile),
                  .src_a(IF_ID_o.DataWord.rs1), .src_b(IF_ID_o.DataWord.rs2), .dest(MEM_WB_o.DataWord.rd),
                  .reg_a(ID_EX_i.DataWord.rs1_out), .reg_b(ID_EX_i.DataWord.rs2_out));
 hazard_detection_unit hdu (
+    // added clk and rst for performance counter -- REMOVE WHEN DONE
+    .clk(clk),
+    .rst(rst),
+    // added clk and rst for performance counter -- REMOVE WHEN DONE
     .dmem_read(EX_MEM_o.ControlWord.dmem_read),
     .dmem_write(EX_MEM_o.ControlWord.dmem_write),
     .muldiv_start(muldiv_start),

@@ -1,6 +1,10 @@
 import rv32i_types::*; 
 
 module hazard_detection_unit (
+    // added clk and rst for performance counter -- REMOVE WHEN DONE
+    input logic clk,
+    input logic rst,
+    // added clk and rst for performance counter -- REMOVE WHEN DONE
     input logic dmem_read, 
     input logic dmem_write,
     input logic muldiv_start,
@@ -56,6 +60,10 @@ function void load_hit();
         load_ID_EX = 1'b0; 
     end
 endfunction 
+
+// performance counter - counts the number of extra stalls due to M extension instructions
+logic [31:0] counter;
+register muldiv_pc (.clk(clk), .rst(rst), .load(muldiv_resp), .in(counter + 32'b1), .out(counter));
 
 always_comb begin 
     set_defaults();

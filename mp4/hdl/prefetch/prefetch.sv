@@ -28,6 +28,10 @@ logic pf_done;
 logic load_pf_done;
 logic rst_pf_done;  
 
+// performance counter - increments the counter each time we prefetch a new instruction
+logic [31:0] counter;
+register prefetch_pc (.clk(clk), .rst(rst), .load(pf_resp), .in(counter + 32'b1), .out(counter));
+
 /* idle: waits for a read request by instr cache */
 /* prefetch miss: the requested address doesn't match the data in the prefetch address buffer */
 /* prefetch_read: currently doing read from phys memory of instr_addr + 256 */

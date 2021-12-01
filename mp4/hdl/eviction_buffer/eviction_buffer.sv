@@ -26,6 +26,11 @@ rv32i_word dirty_address_i;
 rv32i_line dirty_data_o; 
 rv32i_line dirty_data_i;
 
+// performance counter register -- measures number of times the eviction buffer is used to hold dirty data and write back to pmem
+logic [31:0] counter;
+register ev_buffer_pc (.clk(clk), .rst(rst), .load(ev_resp), .in(counter + 32'b1), .out(counter));
+
+
 /* writeback flag */
 logic wb; 
 logic load_wb; 
