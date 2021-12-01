@@ -2,7 +2,7 @@ import rv32i_types::*;
 module mp4 #( parameter s_offset = 5,
   parameter s_index = 3,
   parameter s_offset_l2 = 5,
-  parameter s_index_l2 = 4)(
+  parameter s_index_l2 = 3)(
     input clk,
     input rst,
     input logic [63:0] mem_rdata, 
@@ -65,8 +65,6 @@ rv32i_line data_L2_rdata;
 /*Instr L1 to L2 Interconnect*/
 rv32i_word inst_L2_pmem_address; 
 logic inst_L2_pmem_read;
-logic inst_L2_pmem_write;
-rv32i_line inst_L2_pmem_wdata;
 logic inst_L2_resp; 
 rv32i_line inst_L2_rdata;
 
@@ -161,10 +159,10 @@ cache #(s_offset, s_index) instr_cache(
   .clk(clk),
   .pmem_resp(inst_L2_resp),
   .pmem_rdata(inst_L2_rdata),
-  .pmem_wdata(inst_L2_pmem_wdata),
+  .pmem_wdata(),
   .pmem_address(inst_L2_pmem_address),
   .pmem_read(inst_L2_pmem_read),
-  .pmem_write(inst_L2_pmem_write),
+  .pmem_write(),
   .mem_read(inst_read_dp),
   .mem_write(1'b0),
   .mem_byte_enable_cpu(4'b0000),
@@ -184,10 +182,10 @@ cache_L2 #(s_offset_l2, s_index_l2) L2_instr_cache(
   .pmem_read(inst_pmem_read),
   .pmem_write(),
   .mem_read(inst_L2_pmem_read),
-  .mem_write(inst_L2_pmem_write),
+  .mem_write(1'b0),
   .mem_byte_enable_cpu(4'b0000),
   .mem_address(inst_L2_pmem_address),
-  .mem_wdata(inst_L2_pmem_wdata),
+  .mem_wdata(256'd0),
   .mem_resp(inst_L2_resp),
   .mem_rdata(inst_L2_rdata)
 );
