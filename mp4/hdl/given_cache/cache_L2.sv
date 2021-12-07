@@ -7,7 +7,6 @@ module cache_L2 #(
   parameter num_sets = 2**s_index
 )(
   input clk,
-
   /* Physical memory signals */
   input logic pmem_resp,
   input logic [s_line - 1:0] pmem_rdata,

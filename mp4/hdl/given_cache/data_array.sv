@@ -18,7 +18,7 @@ logic [s_line - 1:0] data [num_sets] = '{default: '0};
 
 always_comb begin
   for (int i = 0; i < 32; i++) begin
-      dataout[8*i +: 8] = (write_en[i] & (rindex == windex)) ? datain[8*i +: 8] : data[rindex][8*i +: 8];
+      dataout[8*i +: 8] = data[rindex][8*i +: 8];
   end
 end
 
@@ -29,3 +29,4 @@ always_ff @(posedge clk) begin
 end
 
 endmodule : data_array
+

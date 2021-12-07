@@ -42,39 +42,33 @@ logic ev_write;
 logic ev_read; 
 rv32i_line ev_wdata; 
 
-/* Between prefetch and instr cache */
+/* Between arbiter and instr cache */
 rv32i_word inst_pmem_address; 
 logic inst_pmem_read;
-logic pf_resp; 
-rv32i_line pf_rdata; 
-
-/* Between arbiter and prefetch */
 logic inst_pmem_resp; 
 rv32i_line inst_pmem_rdata; 
-logic pf_read; 
-rv32i_word pf_address; 
 
 /*Data L1 to L2 Interconnect*/
-rv32i_word data_L2_pmem_address; 
-logic data_L2_pmem_read;
-logic data_L2_pmem_write;
-rv32i_line data_L2_pmem_wdata;
-logic data_L2_resp; 
-rv32i_line data_L2_rdata;
+//rv32i_word data_L2_pmem_address; 
+//logic data_L2_pmem_read;
+//logic data_L2_pmem_write;
+//rv32i_line data_L2_pmem_wdata;
+//logic data_L2_resp; 
+//rv32i_line data_L2_rdata;
 
 /*Instr L1 to L2 Interconnect*/
-rv32i_word inst_L2_pmem_address; 
-logic inst_L2_pmem_read;
-logic inst_L2_resp; 
-rv32i_line inst_L2_rdata;
+//rv32i_word inst_L2_pmem_address; 
+//logic inst_L2_pmem_read;
+//logic inst_L2_resp; 
+//rv32i_line inst_L2_rdata;
 
 /* Declare Datapath */
 datapath datapath(.*);
 arbiter arbiter (
     .clk(clk),
     .rst(rst),
-    .inst_pmem_address(pf_address),
-    .inst_pmem_read(pf_read), 
+    .inst_pmem_address(inst_pmem_address),
+    .inst_pmem_read(inst_pmem_read), 
     .inst_pmem_rdata(inst_pmem_rdata), 
     .inst_pmem_resp(inst_pmem_resp),
     .data_pmem_address(ev_address),
@@ -110,12 +104,12 @@ ev_buffer ev_buffer(
 
 cache #(s_offset,s_index) data_cache (
   .clk(clk),
-  .pmem_resp(data_L2_resp),
-  .pmem_rdata(data_L2_rdata),
-  .pmem_address(data_L2_pmem_address),
-  .pmem_wdata(data_L2_pmem_wdata),
-  .pmem_read(data_L2_pmem_read),
-  .pmem_write(data_L2_pmem_write),
+  .pmem_resp(ev_resp),
+  .pmem_rdata(ev_rdata),
+  .pmem_address(data_pmem_address),
+  .pmem_wdata(data_pmem_wdata),
+  .pmem_read(data_pmem_read),
+  .pmem_write(data_pmem_write),
   .mem_read(data_read_dp),
   .mem_write(data_write_dp),
   .mem_byte_enable_cpu(data_mbe_dp),
@@ -125,43 +119,43 @@ cache #(s_offset,s_index) data_cache (
   .mem_rdata_cpu(data_rdata_dp)
 );
 
-cache_L2 #(s_offset_l2,s_index_l2) L2_data_cache (
-  .clk(clk),
-  .pmem_resp(ev_resp),
-  .pmem_rdata(ev_rdata),
-  .pmem_address(data_pmem_address),
-  .pmem_wdata(data_pmem_wdata),
-  .pmem_read(data_pmem_read),
-  .pmem_write(data_pmem_write),
-  .mem_read(data_L2_pmem_read),
-  .mem_write(data_L2_pmem_write),
-  .mem_byte_enable_cpu(4'hF),
-  .mem_address(data_L2_pmem_address),
-  .mem_wdata(data_L2_pmem_wdata),
-  .mem_resp(data_L2_resp),
-  .mem_rdata(data_L2_rdata)
-);
+//cache_L2 #(s_offset_l2,s_index_l2) L2_data_cache (
+//  .clk(clk),
+//  .pmem_resp(ev_resp),
+//  .pmem_rdata(ev_rdata),
+//  .pmem_address(data_pmem_address),
+//  .pmem_wdata(data_pmem_wdata),
+//  .pmem_read(data_pmem_read),
+//  .pmem_write(data_pmem_write),
+//  .mem_read(data_L2_pmem_read),
+//  .mem_write(data_L2_pmem_write),
+//  .mem_byte_enable_cpu(4'hF),
+//  .mem_address(data_L2_pmem_address),
+//  .mem_wdata(data_L2_pmem_wdata),
+//  .mem_resp(data_L2_resp),
+//  .mem_rdata(data_L2_rdata)
+//);
 
-prefetch prefetch(
-  .clk(clk),
-  .rst(rst),
-  .inst_pmem_address(inst_pmem_address), 
-  .inst_pmem_read(inst_pmem_read),
-  .pf_resp(pf_resp), 
-  .pf_rdata(pf_rdata), 
-  .inst_pmem_resp(inst_pmem_resp),
-  .inst_pmem_rdata(inst_pmem_rdata), 
-  .pf_read(pf_read),
-  .pf_address(pf_address) 
-);
+// prefetch prefetch(
+//   .clk(clk),
+//   .rst(rst),
+//   .inst_pmem_address(inst_pmem_address), 
+//   .inst_pmem_read(inst_pmem_read),
+//   .pf_resp(pf_resp), 
+//   .pf_rdata(pf_rdata), 
+//   .inst_pmem_resp(inst_pmem_resp),
+//   .inst_pmem_rdata(inst_pmem_rdata), 
+//   .pf_read(pf_read),
+//   .pf_address(pf_address) 
+// );
 
 cache #(s_offset, s_index) instr_cache(
   .clk(clk),
-  .pmem_resp(inst_L2_resp),
-  .pmem_rdata(inst_L2_rdata),
+  .pmem_resp(inst_pmem_resp),
+  .pmem_rdata(inst_pmem_rdata),
   .pmem_wdata(),
-  .pmem_address(inst_L2_pmem_address),
-  .pmem_read(inst_L2_pmem_read),
+  .pmem_address(inst_pmem_address),
+  .pmem_read(inst_pmem_read),
   .pmem_write(),
   .mem_read(inst_read_dp),
   .mem_write(1'b0),
@@ -173,21 +167,21 @@ cache #(s_offset, s_index) instr_cache(
 );
 
 
-cache_L2 #(s_offset_l2, s_index_l2) L2_instr_cache(
-  .clk(clk),
-  .pmem_resp(pf_resp),
-  .pmem_rdata(pf_rdata),
-  .pmem_wdata(),
-  .pmem_address(inst_pmem_address),
-  .pmem_read(inst_pmem_read),
-  .pmem_write(),
-  .mem_read(inst_L2_pmem_read),
-  .mem_write(1'b0),
-  .mem_byte_enable_cpu(4'b0000),
-  .mem_address(inst_L2_pmem_address),
-  .mem_wdata(256'd0),
-  .mem_resp(inst_L2_resp),
-  .mem_rdata(inst_L2_rdata)
-);
+//cache_L2 #(s_offset_l2, 2) L2_instr_cache(
+//  .clk(clk),
+//  .pmem_resp(inst_pmem_resp),
+//  .pmem_rdata(inst_pmem_rdata),
+//  .pmem_wdata(),
+//  .pmem_address(inst_pmem_address),
+//  .pmem_read(inst_pmem_read),
+//  .pmem_write(),
+//  .mem_read(inst_L2_pmem_read),
+//  .mem_write(1'b0),
+//  .mem_byte_enable_cpu(4'b0000),
+//  .mem_address(inst_L2_pmem_address),
+//  .mem_wdata(256'd0),
+//  .mem_resp(inst_L2_resp),
+//  .mem_rdata(inst_L2_rdata)
+//);
 
 endmodule : mp4
